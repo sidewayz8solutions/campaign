@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=24, initial-scale=0.5">
+    <title>Frank Scurlock for Mayor | A New Vision for New Orleans</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0f1b3c;
+            --secondary-blue: #1e3a8a;
+            --royal-blue: #1e40af;
+            --accent-blue: #3182ce;
+            --accent-red: #dc2626;
+            --gold: #fbbf24;
+            --purple: #553c9a;
+            --mardi-gras-purple: #7b2d8e;
+            --mardi-gras-gold: #ffd700;
+            --mardi-gras-green: #228b22;
+            --text-dark: #1f2937;
+            --text-light: #f3f4f6;
+            --gradient-1: linear-gradient(135deg, #0f1b3c 0%, #1e3a8a 100%);
+            --gradient-2: linear-gradient(135deg, #1e40af 0%, #3182ce 100%);
+            --mardi-gras-gradient: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--mardi-gras-gold) 50%, var(--mardi-gras-green) 100%);
+        }
+
+        body {
+            font-family: 'Crimson Text', 'Libre Baskerville', Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', 'Crimson Text', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links, .btn-primary, .btn-secondary, .donate-btn {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 27, 99, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        nav.scrolled {
+            background: rgba(15, 27, 60, 0.98);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--mardi-gras-gold);
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #7d0000 0%, #b91b20 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: redGlow 3s ease-in-out infinite alternate;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes redGlow {
+            from {
+                box-shadow: 0 0 5px rgba(139, 21, 56, 0.5);
+            }
+            to {
+                box-shadow: 0 0 15px rgba(165, 15, 22, 0.8), 0 0 25px rgba(255, 215, 0, 0.2);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--mardi-gras-gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .donate-btn {
+            background: linear-gradient(135deg, #8f0011 0%, #a91b47 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 21, 56, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .donate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 139, 34, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .donate-btn:hover::before {
+            left: 100%;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(139, 21, 56, 0.5), 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('/Users/sidewayz8/Desktop/4.JPEG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,138.7C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            max-width: 1100px;
+            padding: 0 2rem;
+            margin-top: 36px;
+            animation: fadeInUp 1s ease;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6.5vw, 5rem);
+            margin-bottom: 1.5rem;
+            margin-top: 36px;
+            font-weight: 400;
+            font-family: 'Great Vibes', cursive;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+            position: relative;
+            line-height: 1.3;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+
+
+        @keyframes continuousTyping {
+            0% { width: 0; opacity: 1; }
+            40% { width: 100%; opacity: 1; }
+            60% { width: 100%; opacity: 1; }
+            90% { width: 100%; opacity: 0; }
+            95% { width: 0; opacity: 0; }
+            100% { width: 0; opacity: 1; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--mardi-gras-gold) }
+        }
+
+        .hero h1.animated {
+            animation: nameGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes nameGlow {
+            from {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.5), 0 0 25px rgba(138, 43, 226, 0.5), 0 0 35px rgba(138, 43, 226, 0.3), 0 0 45px rgba(138, 43, 226, 0.2);
+            }
+            to {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.5), 0 0 40px rgba(138, 43, 226, 0.8), 0 0 60px rgba(138, 43, 226, 0.6), 0 0 80px rgba(138, 43, 226, 0.4), 0 0 100px rgba(138, 43, 226, 0.2);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 400;
+            font-family: 'Crimson Text', serif;
+            letter-spacing: 0.5px;
+            color: #f1f5f9;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            line-height: 1.4;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #550303 0%, #de1515 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(172, 172, 172, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Animated Background Elements */
+        .floating-image {
+            background-image: url('/Users/sidewayz8/Desktop/flag.webp');
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+
+
+        /* Floating Flag Elements */
+        .floating-flag {
+            /* background-image: url('/Users/sidewayz8/Desktop/sss.png'); */
+            position: absolute;
+            opacity: 0.6;
+            animation: flagFloat 20s infinite ease-in-out;
+            font-size: 6rem;
+            filter: none;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .american-flag {
+            top: 20%;
+            right: 5%;
+            animation-delay: 3s;
+            font-size: 8rem;
+        }
+
+        .louisiana-flag {
+            bottom: 25%;
+            left: 8%;
+            animation-delay: 8s;
+            background-image: url('/Users/sidewayz8/Desktop/sss.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 120px;
+            height: 90px;
+            font-size: 0;
+            opacity: 0.6 !important;
+        }
+
+        @keyframes flagFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-40px) rotate(3deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(20px) rotate(-2deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-30px) rotate(2deg) scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(30px) rotate(240deg);
+            }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #4b5563;
+        }
+
+        .highlight-box {
+            background: white;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-red);
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            transform: translateX(10px);
+        }
+
+        /* Issues Section */
+        .issues-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .issue-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .issue-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--mardi-gras-purple), var(--mardi-gras-gold), var(--mardi-gras-green));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .issue-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .issue-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .issue-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--purple) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .issue-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .issue-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Vision Section */
+        .vision-section {
+            padding: 5rem 2rem;
+            background-image: url('/Users/sidewayz8/Desktop/abc.JPEG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vision-content h2 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .vision-content p {
+            font-size: 1.6rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 1;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        .quote-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            opacity: 0.3;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-blue);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--purple) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--purple) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(30, 58, 138, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0f1b3c 0%, #1e3a8a 100%);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--mardi-gras-gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--mardi-gras-gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--mardi-gras-gradient);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(123, 45, 142, 0.3);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--primary-blue);
+                flex-direction: column;
+                align-items: center;
+                justify-content: start;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .donate-btn {
+                display: none;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Jazz-inspired decorative element */
+        .jazz-note {
+            position: absolute;
+            opacity: 0.8;
+            font-size: 4rem;
+            animation: jazzy 10s infinite ease-in-out;
+        }
+
+        .jazz-image {
+            position: absolute;
+            opacity: 0.8;
+            animation: jazzy 10s infinite ease-in-out;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 230px;
+            height: 230px;
+        }
+
+        .mg1-image {
+            background-image: url('/Users/sidewayz8/Downloads/mg1.jpg');
+        }
+
+        .sd-image {
+            background-image: url('/Users/sidewayz8/Desktop/SD.webp');
+        }
+
+        .d-image {
+            width: 120px;
+            height: 90px;
+            opacity: 0.6 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: var(--mardi-gras-gold);
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            animation: gentleFloat 4s infinite ease-in-out;
+        }
+
+        .d-image::before {
+            content: '⚜️';
+        }
+
+        @keyframes jazzy {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Enhanced Scroll Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in-up.visible,
+        .fade-in-left.visible,
+        .fade-in-right.visible,
+        .scale-in.visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0) scale(1);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* Floating Background Elements */
+        .floating-bg-element {
+            position: absolute;
+            opacity: 0.08;
+            pointer-events: none;
+            animation: floatSlow 15s infinite ease-in-out;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Political Badge Animation */
+        .political-badge {
+            display: inline-block;
+            animation: politicalPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes politicalPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-text">Loading New Orleans' Future...</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">⚜️</div>
+                <span>SCURLOCK 2025</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#issues">Issues</a></li>
+                <li><a href="#vision">Vision</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#donate" class="donate-btn">Donate</a>
+            <div class="mobile-menu-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-flag american-flag">🇺🇸</div>
+
+
+        <div class="jazz-image mg1-image" style="top: 20%; left: 10%;"></div>
+        <div class="jazz-image sd-image" style="bottom: 20%; right: 10%;"></div>
+
+        <div class="hero-content">
+            <h1 id="candidateName" class="animated">Frank Scurlock for Mayor</h1>
+            <p class="subtitle fade-in-up">Bringing Innovation, Integrity, and Independence to New Orleans</p>
+            <div class="hero-buttons fade-in-up">
+                <a href="#about" class="btn-primary">Meet Frank</a>
+                <a href="#issues" class="btn-secondary">View Platform</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="floating-bg-element" style="top: 10%; left: 5%; font-size: 3rem; color: var(--mardi-gras-purple);">⚜️</div>
+        <div class="floating-bg-element" style="bottom: 20%; right: 10%; font-size: 2rem; color: var(--mardi-gras-green); animation-delay: 3s;">🎭</div>
+        <div class="floating-flag" style="top: 15%; right: 8%; animation-delay: 10s; font-size: 7rem;">🇺🇸</div>
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in-left">
+                    <div style="background: var(--gradient-1); height: 500px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                        [Frank's Photo]
+                    </div>
+                </div>
+                <div class="about-content fade-in-right">
+                    <h2>Meet Frank Scurlock</h2>
+                    <p>A true son of New Orleans, Frank Mials Scurlock brings a lifetime of business innovation and community service to his campaign for mayor. As a successful entrepreneur who has created over 500 jobs across Louisiana, Frank understands what it takes to revitalize our city's economy.</p>
+
+                    <div class="highlight-box fade-in-up stagger-1">
+                        <h3><span class="political-badge">✨</span> Not a Career Politician</h3>
+                        <p>Frank is running as an independent candidate, free from special interests and political obligations. His campaign is entirely self-funded, ensuring his loyalty is only to the people of New Orleans.</p>
+                    </div>
+
+                    <p>From his family's legacy with Space Walk - the company that brought joy to millions through inflatable entertainment - to his current work renovating facilities in Gert Town for local manufacturing, Frank has always invested in our community's future.</p>
+
+                    <div class="highlight-box fade-in-up stagger-2">
+                        <h3><span class="political-badge">🏭</span> Job Creator & Innovator</h3>
+                        <p>With over 20 businesses incorporated and 500+ retail stores opened, Frank brings proven business acumen and job creation experience that New Orleans desperately needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Issues Section -->
+    <section class="issues-section" id="issues">
+        <div class="floating-bg-element" style="top: 15%; right: 5%; font-size: 2.5rem; color: var(--mardi-gras-gold);">🎺</div>
+        <div class="floating-flag louisiana-flag" style="bottom: 10%; left: 5%; animation-delay: 15s; width: 140px; height: 105px;"></div>
+        <div class="container">
+            <h2 class="section-title fade-in-up">Platform for Progress</h2>
+            <div class="issues-grid">
+                <div class="issue-card">
+                    <div class="issue-icon">💼</div>
+                    <h3>Economic Revitalization</h3>
+                    <p>Create thousands of new jobs through business-friendly policies and support for local entrepreneurs. Leverage Frank's proven track record of opening 500+ successful businesses to transform New Orleans' economy.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">🏠</div>
+                    <h3>Affordable Housing</h3>
+                    <p>Implement innovative solutions to address the housing crisis, ensuring every New Orleanian has access to safe, affordable housing. Work with developers to create mixed-income communities that preserve our neighborhoods.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">🚔</div>
+                    <h3>Public Safety</h3>
+                    <p>Reform and properly fund our police department while investing in community programs that address crime at its roots. Ensure our streets are safe for families and businesses to thrive.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">🌊</div>
+                    <h3>Infrastructure & Flooding</h3>
+                    <p>Fix our streets, upgrade our drainage systems, and implement cutting-edge solutions to protect our city from flooding. No more broken promises - just real action on infrastructure.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">🎓</div>
+                    <h3>Education Excellence</h3>
+                    <p>Partner with schools to provide resources, technology, and opportunities for our youth. Create pathways from education to employment through vocational training and apprenticeship programs.</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-icon">🏥</div>
+                    <h3>Healthcare Access</h3>
+                    <p>Work to lower insurance costs and expand healthcare access for all residents. Support our medical institutions and ensure emergency services are properly funded and equipped.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="vision-section" id="vision">
+        <div class="floating-flag" style="top: 10%; right: 10%; animation-delay: 5s; font-size: 7rem;">🇺🇸</div>
+        <div class="floating-flag d-image" style="bottom: 20%; left: 15%; animation-delay: 12s;"></div>
+        <div class="floating-bg-element" style="top: 20%; left: 8%; font-size: 4rem; color: var(--mardi-gras-purple); opacity: 0.02;">⚜️</div>
+        <div class="floating-bg-element" style="bottom: 15%; right: 12%; font-size: 3rem; color: var(--mardi-gras-green); opacity: 0.02; animation-delay: 2s;">🎭</div>
+        <div class="vision-content">
+            <h2 class="fade-in-up">A New Vision for The Big Easy</h2>
+            <p class="fade-in-up stagger-1">For too long, New Orleans has been held back by the same career politicians making the same empty promises. It's time for real change from someone who has actually created jobs, solved problems, and delivered results.</p>
+
+            <div class="quote-box fade-in-up stagger-2">
+                <p>"The voters of New Orleans are sick and tired of being told to be patient. The economy will improve. Higher-paying jobs are on the horizon. Potholes will be fixed. The pumps will work. The homeless will be housed. Insurance rates will decrease. It's time to stop talking and start doing."</p>
+                <p style="margin-top: 1rem; font-style: italic;">- Frank Scurlock</p>
+            </div>
+
+            <p class="fade-in-up stagger-3">Together, we can build a New Orleans that works for everyone - where businesses thrive, families feel safe, and our unique culture continues to flourish for generations to come.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Campaign Headquarters</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Address</strong><br>
+                        936 N Rampart St.<br>
+                        New Orleans, LA 70116
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <strong>Phone</strong><br>
+                        (504) 840-8493
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        info@scurlockformayor.com
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">📺</a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Get Involved</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone (Optional)</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">How would you like to help?</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Join The Movement</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Campaign</h4>
+                <a href="#about">About Frank</a>
+                <a href="#issues">Issues</a>
+                <a href="#vision">Vision</a>
+                <a href="#events">Events</a>
+            </div>
+            <div class="footer-section">
+                <h4>Get Involved</h4>
+                <a href="#volunteer">Volunteer</a>
+                <a href="#donate">Donate</a>
+                <a href="#yard-signs">Yard Signs</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Media</h4>
+                <a href="#press">Press Releases</a>
+                <a href="#photos">Photos</a>
+                <a href="#videos">Videos</a>
+                <a href="#news">In The News</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p>Stay updated on the campaign</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">📺</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Frank Scurlock for Mayor. All rights reserved. | Paid for by Frank Scurlock</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                // Start typewriter effect after loader
+                setTimeout(() => {
+                    startTypewriterEffect();
+                }, 500);
+            }, 1500);
+        });
+
+        // Title entrance effect
+        function startTypewriterEffect() {
+            const nameElement = document.getElementById('candidateName');
+            // Just add the glow effect immediately
+            nameElement.classList.add('animated');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your support! We will be in touch soon.');
+            e.target.reset();
+        });
+
+        // Enhanced Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in, .issue-card, .highlight-box').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add staggered animation to issue cards
+        document.querySelectorAll('.issue-card').forEach((card, index) => {
+            card.classList.add('fade-in-up', `stagger-${(index % 6) + 1}`);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Dynamic year
+        document.querySelectorAll('.current-year').forEach(el => {
+            el.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
