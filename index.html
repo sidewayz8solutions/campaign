@@ -1026,70 +1026,118 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, rgba(34, 0, 68, 0.9), rgba(18, 0, 36, 0.92));
             z-index: 10000;
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         .popup-content {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border-radius: 15px;
+            background: linear-gradient(135deg, #2d1b69 0%, #1a0f3d 100%);
+            border-radius: 50px;
             padding: 0;
-            max-width: 550px;
+            max-width: 500px;
             width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
+            max-height: 80vh;
+            overflow: hidden;
             position: relative;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-            animation: popupSlideIn 0.6s ease-out;
+            box-shadow: 0 30px 100px rgba(45, 27, 105, 0.6), 0 0 50px rgba(138, 43, 226, 0.3);
+            animation: bubbleSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-align: center;
-            border: 3px solid var(--mardi-gras-gold);
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            backdrop-filter: blur(10px);
         }
 
-        @keyframes popupSlideIn {
-            from {
+        /* Bubble gloss and inner shadow */
+        .popup-content::before {
+            content: '';
+            position: absolute;
+            top: -15%;
+            left: -15%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0.08) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(6px);
+        }
+
+        .popup-content::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle at 70% 70%, rgba(0,0,0,0.25), rgba(0,0,0,0.12) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(8px);
+        }
+
+
+        @keyframes bubbleSlideIn {
+            0% {
                 opacity: 0;
-                transform: translateY(-50px) scale(0.9);
+                transform: translateY(-100px) scale(0.3);
+                filter: blur(10px);
             }
-            to {
+            50% {
+                opacity: 0.8;
+                transform: translateY(-20px) scale(1.05);
+                filter: blur(2px);
+            }
+            100% {
                 opacity: 1;
                 transform: translateY(0) scale(1);
+                filter: blur(0);
             }
         }
 
         .popup-close {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            background: rgba(220, 38, 38, 0.1);
+            top: 20px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            color: var(--accent-red);
-            transition: all 0.3s ease;
-            z-index: 1;
-            width: 35px;
-            height: 35px;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.4s ease;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(10px);
         }
 
         .popup-close:hover {
-            background: var(--accent-red);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(90deg);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .popup-header {
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, #3b2174 0%, #2a1557 100%);
             color: white;
-            padding: 1.5rem 2rem 1rem;
-            border-radius: 12px 12px 0 0;
+            padding: 2rem 2rem 1.5rem;
+            border-radius: 45px 45px 0 0;
             position: relative;
             overflow: hidden;
         }
@@ -1101,16 +1149,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="memorial" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1" fill="rgba(255,255,255,0.08)"/><path d="M10 12.5 L15 12.5 M12.5 10 L12.5 15" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23memorial)"/></svg>');
-            opacity: 0.4;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="memorial" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1" fill="rgba(255,255,255,0.06)"/><path d="M10 12.5 L15 12.5 M12.5 10 L12.5 15" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23memorial)"/></svg>');
+            opacity: 0.15;
         }
 
         .popup-announcement {
             font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-weight: 300;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--mardi-gras-gold);
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
@@ -1118,58 +1166,69 @@
 
         .popup-main-content {
             padding: 2rem;
+            overflow-y: auto;
+            max-height: 60vh;
         }
 
         .popup-image {
             width: 100%;
-            max-width: 350px;
+            max-width: 300px;
             height: auto;
-            border-radius: 10px;
+            border-radius: 25px;
             margin-bottom: 1.5rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            border: 2px solid var(--mardi-gras-gold);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .popup-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-blue);
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: white;
             margin-bottom: 1rem;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Great Vibes', cursive;
             position: relative;
             z-index: 1;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
         }
 
         .popup-subtitle {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--accent-red);
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 1.5rem;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Crimson Text', serif;
             letter-spacing: 1px;
         }
 
         .popup-text {
-            font-size: 1.1rem;
-            color: var(--text-dark);
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 1.5rem;
-            line-height: 1.7;
-            text-align: left;
+            line-height: 1.8;
+            text-align: center;
             padding: 0 1rem;
+            font-weight: 300;
         }
 
         .popup-audio-container {
             margin: 1.5rem 0;
-            padding: 1rem;
-            background: var(--gradient-1);
-            border-radius: 15px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .popup-audio {
             width: 100%;
             margin-bottom: 1rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .popup-audio::-webkit-media-controls-panel {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .audio-controls {
@@ -1180,40 +1239,44 @@
         }
 
         .audio-btn {
-            background: var(--mardi-gras-gold);
-            color: var(--primary-blue);
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            color: white;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: 400;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            font-size: 0.9rem;
         }
 
         .audio-btn:hover {
-            background: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+            background: linear-gradient(135deg, #9370db 0%, #ba55d3 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5);
         }
 
         .popup-cta {
-            background: var(--mardi-gras-gradient);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 400;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-decoration: none;
             display: inline-block;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
         }
 
         .popup-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(123, 45, 142, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.5);
+            background: linear-gradient(135deg, #ee5a24 0%, #ff6b6b 100%);
         }
 
         /* Mobile responsiveness for popup */
@@ -1246,12 +1309,12 @@
 
             <div class="popup-header">
                 <div class="popup-announcement">September 20th • 20th Anniversary</div>
-                <h2 class="popup-title">Remembering Hurricane Katrina</h2>
+                <h2 class="popup-title">Remembering Katrina</h2>
             </div>
 
             <div class="popup-main-content">
                 <!-- Replace 'katrina-memorial.jpg' with your actual image file -->
-                <img src="katrina-memorial.jpg" alt="Hurricane Katrina 20th Anniversary Memorial" class="popup-image">
+                <img src="katrina-memorial.jpg" alt="Remembering Hurricane Katrina" class="popup-image">
 
                 <h3 class="popup-subtitle">Celebrating Our Resilience & Spirit</h3>
                 <div class="popup-text">
@@ -1262,9 +1325,10 @@
                 </div>
 
                 <div class="popup-audio-container">
-                    <audio id="promotionAudio" class="popup-audio" controls>
-                        <source src="katrina.m4a" type="audio/mp4">
-                        <source src="katrina.m4a" type="audio/x-m4a">
+                    <audio id="promotionAudio" class="popup-audio" controls preload="metadata">
+                        <source src="./katrina.m4a" type="audio/mp4">
+                        <source src="./katrina.m4a" type="audio/aac">
+                        <source src="./katrina.m4a" type="audio/x-m4a">
                         Your browser does not support the audio element.
                     </audio>
 
@@ -1611,16 +1675,19 @@
         // Popup Promotion Functionality
         function showPopup() {
             const popup = document.getElementById('promotionPopup');
-            popup.style.display = 'flex';
+            popup.classList.add('show');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
         function closePopup() {
             const popup = document.getElementById('promotionPopup');
             const audio = document.getElementById('promotionAudio');
-            popup.style.display = 'none';
+            popup.classList.remove('show');
             document.body.style.overflow = 'auto'; // Restore scrolling
-            audio.pause(); // Stop audio when closing
+            if (audio) {
+                audio.pause(); // Stop audio when closing
+                audio.currentTime = 0; // Reset to start
+            }
 
             // Set a flag to not show popup again in this session
             sessionStorage.setItem('popupShown', 'true');
@@ -1628,13 +1695,33 @@
 
         function playAudio() {
             const audio = document.getElementById('promotionAudio');
-            audio.play();
+            audio.play().catch(function(error) {
+                console.log('Audio play failed:', error);
+                alert('Unable to play audio. Please check if the audio file exists and try using the built-in controls.');
+            });
         }
 
         function pauseAudio() {
             const audio = document.getElementById('promotionAudio');
             audio.pause();
         }
+
+        // Add audio event listeners for better debugging
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('promotionAudio');
+            if (audio) {
+                audio.addEventListener('loadstart', function() {
+                    console.log('Audio loading started');
+                });
+                audio.addEventListener('canplay', function() {
+                    console.log('Audio can start playing');
+                });
+                audio.addEventListener('error', function(e) {
+                    console.log('Audio error:', e);
+                    console.log('Audio error details:', audio.error);
+                });
+            }
+        });
 
         // Show popup when user starts scrolling
         let hasScrolled = false;
