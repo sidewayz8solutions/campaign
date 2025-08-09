@@ -1296,10 +1296,65 @@
                 font-size: 1rem;
             }
         }
+        /* Toga Party Promo Banner */
+        .promo-banner {
+            position: fixed;
+            top: 70px; /* below fixed nav */
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 0.7rem 1rem;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a0f3d;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.7);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            z-index: 1001;
+            transform: translateY(-120%);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        .promo-banner.show { transform: translateY(0); opacity: 1; }
+        .promo-banner .cta {
+            background: #1a0f3d;
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.9);
+            padding: 0.45rem 0.9rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(26, 15, 61, 0.25);
+        }
+        .promo-banner .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(26, 15, 61, 0.35); }
+        .promo-banner .close {
+            background: transparent;
+            border: none;
+            color: #1a0f3d;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+        }
+        .promo-banner .close:hover { background: rgba(26, 15, 61, 0.08); }
+        @media (max-width: 768px) {
+            .promo-banner { flex-wrap: wrap; text-align: center; top: 70px; }
+        }
+
     </style>
 </head>
 <body>
     <!-- Loader -->
+    <!-- Toga Party Temporary Banner -->
+    <div id="togaBanner" class="promo-banner" role="status" aria-live="polite">
+        <span>🎉 TOGA PARTY • August 28 • 7pm • Bourbon Street</span>
+        <a class="cta" href="#events">Details</a>
+        <button type="button" class="close" aria-label="Dismiss" onclick="dismissTogaBanner()">✖</button>
+    </div>
+
     <div class="loader" id="loader">
         <div class="loader-text">Loading New Orleans' Future...</div>
     </div>
@@ -1693,6 +1748,22 @@
 
             // Set a flag to not show popup again in this session
             sessionStorage.setItem('popupShown', 'true');
+        // Temporary Toga Banner logic
+        function showTogaBanner() {
+            const banner = document.getElementById('togaBanner');
+            if (!banner) return;
+            if (sessionStorage.getItem('togaBannerDismissed') === 'true') return;
+            requestAnimationFrame(() => banner.classList.add('show'));
+        }
+        function dismissTogaBanner() {
+            const banner = document.getElementById('togaBanner');
+            if (!banner) return;
+            banner.classList.remove('show');
+            sessionStorage.setItem('togaBannerDismissed', 'true');
+        }
+        // Show after load with small delay to avoid layout shift
+        window.addEventListener('load', () => setTimeout(showTogaBanner, 900));
+
         }
 
         function playAudio() {
