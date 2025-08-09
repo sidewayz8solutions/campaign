@@ -1053,10 +1053,10 @@
             max-height: 80vh;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 30px 100px rgba(45, 27, 105, 0.6), 0 0 50px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 30px 100px rgba(45, 27, 105, 0.6), 0 0 50px rgba(255, 215, 0, 0.4);
             animation: bubbleSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-align: center;
-            border: 2px solid rgba(138, 43, 226, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.6);
             backdrop-filter: blur(10px);
         }
 
@@ -1158,10 +1158,11 @@
             font-weight: 300;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 215, 0, 0.9);
             margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
+            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
         }
 
         .popup-main-content {
@@ -1183,22 +1184,23 @@
         .popup-title {
             font-size: 2.2rem;
             font-weight: 300;
-            color: white;
+            color: #ffd700;
             margin-bottom: 1rem;
             font-family: 'Great Vibes', cursive;
             position: relative;
             z-index: 1;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
             letter-spacing: 2px;
         }
 
         .popup-subtitle {
             font-size: 1.2rem;
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 215, 0, 0.9);
             margin-bottom: 1.5rem;
             font-family: 'Crimson Text', serif;
             letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
         }
 
         .popup-text {
@@ -1239,22 +1241,22 @@
         }
 
         .audio-btn {
-            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
-            color: white;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a0f3d;
             border: none;
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
             cursor: pointer;
             font-weight: 400;
             transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
             font-size: 0.9rem;
         }
 
         .audio-btn:hover {
-            background: linear-gradient(135deg, #9370db 0%, #ba55d3 100%);
+            background: linear-gradient(135deg, #ffed4e 0%, #fff59d 100%);
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
         }
 
         .popup-cta {
@@ -1313,8 +1315,8 @@
             </div>
 
             <div class="popup-main-content">
-                <!-- Replace 'katrina-memorial.jpg' with your actual image file -->
-                <img src="katrina-memorial.jpg" alt="Remembering Hurricane Katrina" class="popup-image">
+                <!-- Using available campaign image -->
+                <img src="45.webp" alt="Remembering Hurricane Katrina" class="popup-image">
 
                 <h3 class="popup-subtitle">Celebrating Our Resilience & Spirit</h3>
                 <div class="popup-text">
@@ -1326,9 +1328,9 @@
 
                 <div class="popup-audio-container">
                     <audio id="promotionAudio" class="popup-audio" controls preload="metadata">
-                        <source src="./katrina.m4a" type="audio/mp4">
-                        <source src="./katrina.m4a" type="audio/aac">
-                        <source src="./katrina.m4a" type="audio/x-m4a">
+                        <source src="katrina.m4a" type="audio/mp4">
+                        <source src="katrina.m4a" type="audio/aac">
+                        <source src="katrina.m4a" type="audio/x-m4a">
                         Your browser does not support the audio element.
                     </audio>
 
