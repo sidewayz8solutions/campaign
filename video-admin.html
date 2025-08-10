@@ -388,25 +388,69 @@
             color: var(--crimson);
         }
 
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--mardi-gras-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .admin-layout {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
+
             .video-type-selector {
                 flex-direction: column;
             }
-            
+
             .video-item {
                 flex-direction: column;
                 text-align: center;
             }
-            
+
             .video-actions {
                 margin-top: 1rem;
                 justify-content: center;
+            }
+
+            .login-container {
+                padding: 2rem;
+                margin: 1rem;
             }
         }
     </style>
@@ -427,13 +471,35 @@
         </div>
     </nav>
 
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>🔐 Admin Access</h2>
+                <p>Enter password to access video administration</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    🔓 Login
+                </button>
+            </form>
+            <div id="loginError" class="message error" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="main-content" id="adminContent" style="display: none;">
         <div class="container">
             <!-- Page Header -->
             <div class="page-header">
                 <h1>🎬 Video Administration</h1>
                 <p>Manage campaign videos, upload content, and organize your media library</p>
+                <button class="btn btn-secondary" onclick="logout()" style="position: absolute; top: 1rem; right: 2rem;">
+                    🚪 Logout
+                </button>
             </div>
 
             <!-- Admin Layout -->
@@ -530,6 +596,18 @@
                             ➕ Add Video
                         </button>
                     </form>
+
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                        <h3 style="text-align: center; color: var(--mardi-gras-purple); margin-bottom: 1rem;">
+                            📁 Manual Video Entry
+                        </h3>
+                        <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+                            If upload isn't working, you can manually add video file paths
+                        </p>
+                        <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="showManualEntry()">
+                            ✏️ Add Video Manually
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Video List Section -->
@@ -555,6 +633,56 @@
     </div>
 
     <script>
+        // Admin Authentication
+        const ADMIN_PASSWORD = 'Scurlock2025!'; // Change this to your desired password
+
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('adminAuthenticated') === 'true';
+            if (isAuthenticated) {
+                showAdminContent();
+            } else {
+                showLoginScreen();
+            }
+        }
+
+        function showLoginScreen() {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('adminContent').style.display = 'none';
+        }
+
+        function showAdminContent() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminAuthenticated');
+            showLoginScreen();
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // Login form handling
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            const errorEl = document.getElementById('loginError');
+
+            if (password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('adminAuthenticated', 'true');
+                showAdminContent();
+                errorEl.style.display = 'none';
+            } else {
+                errorEl.textContent = 'Incorrect password. Please try again.';
+                errorEl.style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+            }
+        });
+
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+        });
+
         // Video type selection
         document.querySelectorAll('.video-type-option').forEach(option => {
             option.addEventListener('click', function() {
@@ -624,6 +752,11 @@
             submitBtn.textContent = '⏳ Processing...';
 
             try {
+                // Show upload progress for local videos
+                if (activeType === 'local') {
+                    showMessage('Uploading files... Please wait.', 'success');
+                }
+
                 // Handle the form submission (now async)
                 await handleVideoForm(formData);
 
@@ -677,6 +810,59 @@
                     }
                 };
                 reader.readAsText(file);
+            }
+        }
+
+        function showManualEntry() {
+            const manualData = prompt(`Manual Video Entry
+
+Enter video details in this format:
+Title|Description|Category|Type|VideoID/FileName
+
+Examples:
+- YouTube: My Video|Great video|featured|youtube|dQw4w9WgXcQ
+- Vimeo: My Video|Great video|featured|vimeo|123456789
+- Local: My Video|Great video|featured|local|my-video.mp4
+
+Enter your video data:`);
+
+            if (manualData) {
+                try {
+                    const parts = manualData.split('|');
+                    if (parts.length !== 5) {
+                        throw new Error('Invalid format. Please use: Title|Description|Category|Type|VideoID/FileName');
+                    }
+
+                    const [title, description, category, type, videoId] = parts.map(p => p.trim());
+
+                    const videoData = {
+                        title,
+                        description,
+                        category,
+                        type
+                    };
+
+                    switch (type) {
+                        case 'youtube':
+                            videoData.youtubeId = videoId;
+                            break;
+                        case 'vimeo':
+                            videoData.vimeoId = videoId;
+                            break;
+                        case 'local':
+                            videoData.fileName = videoId;
+                            videoData.isManual = true;
+                            break;
+                        default:
+                            throw new Error('Invalid type. Use: youtube, vimeo, or local');
+                    }
+
+                    videoManager.addVideo(videoData);
+                    showMessage('Video added manually!', 'success');
+                    loadVideosForAdmin();
+                } catch (error) {
+                    showMessage('Error: ' + error.message, 'error');
+                }
             }
         }
     </script>

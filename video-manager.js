@@ -153,22 +153,48 @@ class VideoManager {
         formData.append('type', type);
 
         try {
+            console.log('Attempting to upload file:', file.name, 'Type:', type);
+
             const response = await fetch('upload-handler.php', {
                 method: 'POST',
                 body: formData
             });
 
+            console.log('Upload response status:', response.status);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const result = await response.json();
+            console.log('Upload result:', result);
 
             if (result.success) {
                 return result.fileName;
             } else {
-                throw new Error(result.message);
+                throw new Error(result.message || 'Upload failed');
             }
         } catch (error) {
             console.error('Upload error:', error);
+
+            // If PHP upload fails, provide fallback option
+            if (error.message.includes('fetch') || error.message.includes('HTTP error')) {
+                throw new Error('Upload server not available. Please ensure you are running this on a web server with PHP support, or manually add video URLs instead.');
+            }
+
             throw error;
         }
+    }
+
+    // Fallback method for manual video entry
+    addVideoManually(videoData) {
+        // For local videos without upload, generate a placeholder filename
+        if (videoData.type === 'local' && !videoData.fileName) {
+            videoData.fileName = `manual_${Date.now()}.mp4`;
+            videoData.isManual = true; // Flag to indicate this needs manual file placement
+        }
+
+        return this.addVideo(videoData);
     }
 
     // Export videos data (for backup or migration)

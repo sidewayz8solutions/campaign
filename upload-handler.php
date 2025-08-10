@@ -4,19 +4,47 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Create uploads directory if it doesn't exist
 $uploadDir = 'uploads/';
 if (!file_exists($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
+    if (!mkdir($uploadDir, 0755, true)) {
+        $response = ['success' => false, 'message' => 'Failed to create uploads directory', 'fileName' => ''];
+        echo json_encode($response);
+        exit;
+    }
 }
 
-$response = ['success' => false, 'message' => '', 'fileName' => ''];
+$response = ['success' => false, 'message' => '', 'fileName' => '', 'debug' => []];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        // Add debug information
+        $response['debug']['post_max_size'] = ini_get('post_max_size');
+        $response['debug']['upload_max_filesize'] = ini_get('upload_max_filesize');
+        $response['debug']['files_received'] = isset($_FILES['file']);
+
         // Check if file was uploaded
-        if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-            throw new Exception('No file uploaded or upload error occurred');
+        if (!isset($_FILES['file'])) {
+            throw new Exception('No file received. Check if form enctype is multipart/form-data');
+        }
+
+        if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+            $errorMessages = [
+                UPLOAD_ERR_INI_SIZE => 'File exceeds upload_max_filesize directive',
+                UPLOAD_ERR_FORM_SIZE => 'File exceeds MAX_FILE_SIZE directive',
+                UPLOAD_ERR_PARTIAL => 'File was only partially uploaded',
+                UPLOAD_ERR_NO_FILE => 'No file was uploaded',
+                UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder',
+                UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
+                UPLOAD_ERR_EXTENSION => 'File upload stopped by extension'
+            ];
+            $errorCode = $_FILES['file']['error'];
+            $errorMessage = isset($errorMessages[$errorCode]) ? $errorMessages[$errorCode] : 'Unknown upload error';
+            throw new Exception($errorMessage . " (Error code: $errorCode)");
         }
 
         $file = $_FILES['file'];
