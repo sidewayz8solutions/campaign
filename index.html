@@ -1344,6 +1344,99 @@
             .promo-banner { flex-wrap: wrap; text-align: center; top: 70px; }
         }
 
+        /* Toga Party Section Styles */
+        .toga-party-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #1a0f3d 0%, #2d1b69 50%, #1a0f3d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .toga-party-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="columns" x="0" y="0" width="20" height="100" patternUnits="userSpaceOnUse"><rect x="8" y="0" width="4" height="100" fill="rgba(255,215,0,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23columns)"/></svg>');
+            opacity: 0.1;
+        }
+        .toga-party-content { position: relative; z-index: 1; }
+        .toga-party-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .toga-party-header h2 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            font-family: 'Great Vibes', cursive;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+        }
+        .toga-party-header h3 {
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            letter-spacing: 3px;
+        }
+        .toga-subtitle {
+            color: rgba(255, 215, 0, 0.8);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .toga-party-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .flyer-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 3px solid rgba(255, 215, 0, 0.3);
+        }
+        .toga-party-info {
+            color: white;
+        }
+        .event-details, .registration-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .event-details h4, .registration-info h4 {
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .toga-register-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a0f3d;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+        .toga-register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
+        }
+        @media (max-width: 768px) {
+            .toga-party-details { grid-template-columns: 1fr; gap: 2rem; }
+            .toga-party-header h2 { font-size: 2rem; }
+            .toga-party-header h3 { font-size: 2.2rem; }
+        }
+
     </style>
 </head>
 <body>
@@ -1351,7 +1444,7 @@
     <!-- Toga Party Temporary Banner -->
     <div id="togaBanner" class="promo-banner" role="status" aria-live="polite">
         <span>🎉 TOGA PARTY • August 28 • 7pm • Bourbon Street</span>
-        <a class="cta" href="#events">Details</a>
+        <a class="cta" href="#toga-party">Details</a>
         <button type="button" class="close" aria-label="Dismiss" onclick="dismissTogaBanner()">✖</button>
     </div>
 
@@ -1437,6 +1530,50 @@
             <div class="hero-buttons fade-in-up">
                 <a href="#about" class="btn-primary">Meet Frank</a>
                 <a href="#issues" class="btn-secondary">View Platform</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toga Party Section -->
+    <section class="toga-party-section" id="toga-party">
+        <div class="container">
+            <div class="toga-party-content">
+                <div class="toga-party-header">
+                    <h2>🏛️ The Return to 1984 🏛️</h2>
+                    <h3>TOGA PARTY</h3>
+                    <p class="toga-subtitle">Having a party in New Orleans is part of going to college</p>
+                </div>
+
+                <div class="toga-party-details">
+                    <div class="toga-party-flyer">
+                        <!-- Replace with your actual toga party flyer image -->
+                        <img src="toga-party-flyer.jpg" alt="Toga Party Flyer - The Return to 1984" class="flyer-image">
+                    </div>
+
+                    <div class="toga-party-info">
+                        <div class="event-details">
+                            <h4>📅 Event Details</h4>
+                            <p><strong>Date:</strong> Wednesday, August 28th</p>
+                            <p><strong>Time:</strong> 9:00 PM - 1:00 AM</p>
+                            <p><strong>Location:</strong> The Hangar<br>1511 S Rendon St, N.O. LA 70125</p>
+                        </div>
+
+                        <div class="registration-info">
+                            <h4>🎟️ Registration</h4>
+                            <p>Register for <strong>FREE</strong></p>
+                            <p>Live Entertainment</p>
+                            <div class="qr-code">
+                                <p>Scan QR code on flyer or visit website</p>
+                            </div>
+                        </div>
+
+                        <div class="toga-cta">
+                            <a href="https://posh.vip/e/franks-1984-toga-party" class="toga-register-btn" target="_blank" rel="noopener">
+                                🏛️ Register Now - FREE
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
