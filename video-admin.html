@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Admin - Frank Scurlock Campaign</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Video Manager -->
+    <script src="video-manager.js"></script>
+    
+    <style>
+        :root {
+            --mardi-gras-purple: #1a0f3d;
+            --mardi-gras-gold: #ffd700;
+            --mardi-gras-green: #228b22;
+            --deep-purple: #2d1b69;
+            --crimson: #8f0011;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background-light);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 15, 61, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--mardi-gras-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            color: white;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Admin Layout */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .admin-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--mardi-gras-purple);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--mardi-gras-purple);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--mardi-gras-purple);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Video Type Selection */
+        .video-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-type-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-type-option:hover {
+            border-color: var(--mardi-gras-purple);
+        }
+
+        .video-type-option.active {
+            border-color: var(--mardi-gras-purple);
+            background: rgba(26, 15, 61, 0.1);
+        }
+
+        .video-type-option .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-type-option .label {
+            font-weight: 600;
+            color: var(--mardi-gras-purple);
+        }
+
+        /* Dynamic Form Fields */
+        .dynamic-fields {
+            display: none;
+        }
+
+        .dynamic-fields.active {
+            display: block;
+        }
+
+        /* File Upload Styles */
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 2rem;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--mardi-gras-purple);
+            background: rgba(26, 15, 61, 0.05);
+        }
+
+        .file-upload-label.has-file {
+            border-color: var(--mardi-gras-green);
+            background: rgba(34, 139, 34, 0.1);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--mardi-gras-purple), var(--deep-purple));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(26, 15, 61, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-edit {
+            background: var(--mardi-gras-gold);
+            color: var(--mardi-gras-purple);
+        }
+
+        .btn-delete {
+            background: var(--crimson);
+            color: white;
+        }
+
+        /* Video List */
+        .video-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .video-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .video-thumbnail {
+            font-size: 2rem;
+            margin-right: 1rem;
+            width: 60px;
+            text-align: center;
+        }
+
+        .video-info {
+            flex: 1;
+        }
+
+        .video-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--mardi-gras-purple);
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-platform {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .video-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Success/Error Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .message.success {
+            background: rgba(34, 139, 34, 0.1);
+            border: 1px solid var(--mardi-gras-green);
+            color: var(--mardi-gras-green);
+        }
+
+        .message.error {
+            background: rgba(143, 0, 17, 0.1);
+            border: 1px solid var(--crimson);
+            color: var(--crimson);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .video-type-selector {
+                flex-direction: column;
+            }
+            
+            .video-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .video-actions {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚜️</div>
+                <span>SCURLOCK 2025</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="video-admin.html" class="active">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>🎬 Video Administration</h1>
+                <p>Manage campaign videos, upload content, and organize your media library</p>
+            </div>
+
+            <!-- Admin Layout -->
+            <div class="admin-layout">
+                <!-- Add Video Section -->
+                <div class="admin-section">
+                    <h2 class="section-title">Add New Video</h2>
+                    
+                    <div id="message" class="message"></div>
+                    
+                    <form id="videoForm">
+                        <!-- Video Type Selection -->
+                        <div class="video-type-selector">
+                            <div class="video-type-option active" data-type="youtube">
+                                <div class="icon">📺</div>
+                                <div class="label">YouTube</div>
+                            </div>
+                            <div class="video-type-option" data-type="vimeo">
+                                <div class="icon">🎬</div>
+                                <div class="label">Vimeo</div>
+                            </div>
+                            <div class="video-type-option" data-type="local">
+                                <div class="icon">💾</div>
+                                <div class="label">Local Video</div>
+                            </div>
+                        </div>
+
+                        <!-- Common Fields -->
+                        <div class="form-group">
+                            <label for="title">Video Title *</label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description *</label>
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="featured">Featured Videos</option>
+                                <option value="shorts">Short Videos</option>
+                                <option value="interviews">Interviews</option>
+                                <option value="events">Events</option>
+                            </select>
+                        </div>
+
+                        <!-- Dynamic Fields for YouTube -->
+                        <div id="youtubeFields" class="dynamic-fields active">
+                            <div class="form-group">
+                                <label for="youtubeId">YouTube Video ID *</label>
+                                <input type="text" id="youtubeId" name="youtubeId" placeholder="e.g., dQw4w9WgXcQ">
+                                <small style="color: #666;">Extract from URL: https://youtube.com/watch?v=<strong>VIDEO_ID</strong></small>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Fields for Vimeo -->
+                        <div id="vimeoFields" class="dynamic-fields">
+                            <div class="form-group">
+                                <label for="vimeoId">Vimeo Video ID *</label>
+                                <input type="text" id="vimeoId" name="vimeoId" placeholder="e.g., 123456789">
+                                <small style="color: #666;">Extract from URL: https://vimeo.com/<strong>VIDEO_ID</strong></small>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Fields for Local Video -->
+                        <div id="localFields" class="dynamic-fields">
+                            <div class="form-group">
+                                <label for="videoFile">Video File * (MP4, WebM)</label>
+                                <div class="file-upload">
+                                    <input type="file" id="videoFile" name="videoFile" accept="video/*">
+                                    <label for="videoFile" class="file-upload-label">
+                                        <div>📹 Click to select video file</div>
+                                        <small>Supported formats: MP4, WebM, MOV</small>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="thumbnailFile">Thumbnail (Optional)</label>
+                                <div class="file-upload">
+                                    <input type="file" id="thumbnailFile" name="thumbnailFile" accept="image/*">
+                                    <label for="thumbnailFile" class="file-upload-label">
+                                        <div>🖼️ Click to select thumbnail image</div>
+                                        <small>Supported formats: JPG, PNG, WebP</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                            ➕ Add Video
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Video List Section -->
+                <div class="admin-section">
+                    <h2 class="section-title">Current Videos</h2>
+                    
+                    <div class="video-list" id="videoListContainer">
+                        <!-- Videos will be loaded here -->
+                    </div>
+                    
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <button class="btn btn-secondary btn-small" onclick="videoManager.exportVideos()">
+                            📥 Export Videos
+                        </button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(this)">
+                        <button class="btn btn-secondary btn-small" onclick="document.getElementById('importFile').click()">
+                            📤 Import Videos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Video type selection
+        document.querySelectorAll('.video-type-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove active class from all options
+                document.querySelectorAll('.video-type-option').forEach(opt => opt.classList.remove('active'));
+                document.querySelectorAll('.dynamic-fields').forEach(field => field.classList.remove('active'));
+                
+                // Add active class to clicked option
+                this.classList.add('active');
+                
+                // Show corresponding fields
+                const type = this.dataset.type;
+                document.getElementById(type + 'Fields').classList.add('active');
+            });
+        });
+
+        // File upload handling
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.nextElementSibling;
+                if (this.files.length > 0) {
+                    label.classList.add('has-file');
+                    const fileName = this.files[0].name;
+                    label.querySelector('div').textContent = `✅ ${fileName}`;
+                } else {
+                    label.classList.remove('has-file');
+                    // Reset label text based on input type
+                    if (this.accept.includes('video')) {
+                        label.querySelector('div').textContent = '📹 Click to select video file';
+                    } else {
+                        label.querySelector('div').textContent = '🖼️ Click to select thumbnail image';
+                    }
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('videoForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const activeType = document.querySelector('.video-type-option.active').dataset.type;
+            const submitBtn = this.querySelector('button[type="submit"]');
+
+            // Validate required fields based on type
+            let isValid = true;
+            let errorMessage = '';
+
+            if (activeType === 'youtube' && !formData.get('youtubeId')) {
+                isValid = false;
+                errorMessage = 'YouTube Video ID is required';
+            } else if (activeType === 'vimeo' && !formData.get('vimeoId')) {
+                isValid = false;
+                errorMessage = 'Vimeo Video ID is required';
+            } else if (activeType === 'local' && (!formData.get('videoFile') || formData.get('videoFile').size === 0)) {
+                isValid = false;
+                errorMessage = 'Video file is required';
+            }
+
+            if (!isValid) {
+                showMessage(errorMessage, 'error');
+                return;
+            }
+
+            // Disable submit button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Processing...';
+
+            try {
+                // Handle the form submission (now async)
+                await handleVideoForm(formData);
+
+                showMessage('Video added successfully!', 'success');
+                this.reset();
+
+                // Reset file upload labels
+                document.querySelectorAll('.file-upload-label').forEach(label => {
+                    label.classList.remove('has-file');
+                    if (label.querySelector('div').textContent.includes('video')) {
+                        label.querySelector('div').textContent = '📹 Click to select video file';
+                    } else {
+                        label.querySelector('div').textContent = '🖼️ Click to select thumbnail image';
+                    }
+                });
+
+                // Reload video list
+                loadVideosForAdmin();
+
+            } catch (error) {
+                showMessage('Error: ' + error.message, 'error');
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = '➕ Add Video';
+            }
+        });
+
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function handleImport(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const success = videoManager.importVideos(e.target.result);
+                    if (success) {
+                        showMessage('Videos imported successfully!', 'success');
+                        loadVideosForAdmin();
+                    } else {
+                        showMessage('Error importing videos. Please check the file format.', 'error');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+    </script>
+</body>
+</html>

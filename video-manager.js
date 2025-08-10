@@ -146,16 +146,29 @@ class VideoManager {
         container.innerHTML = videos.map(video => this.generateVideoHTML(video)).join('');
     }
 
-    // Method to handle file uploads (would need server-side implementation)
+    // Method to handle file uploads
     async uploadFile(file, type = 'video') {
-        // In a real implementation, this would upload to your server
-        // For now, we'll simulate the upload
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const fileName = `${Date.now()}_${file.name}`;
-                resolve(fileName);
-            }, 1000);
-        });
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('type', type);
+
+        try {
+            const response = await fetch('upload-handler.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                return result.fileName;
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (error) {
+            console.error('Upload error:', error);
+            throw error;
+        }
     }
 
     // Export videos data (for backup or migration)
@@ -268,9 +281,9 @@ function editVideo(id) {
 }
 
 // Form handling for admin page
-function handleVideoForm(formData) {
+async function handleVideoForm(formData) {
     const videoType = document.querySelector('.video-type-option.active').dataset.type;
-    
+
     const videoData = {
         title: formData.get('title'),
         description: formData.get('description'),
@@ -278,20 +291,35 @@ function handleVideoForm(formData) {
         type: videoType
     };
 
-    // Add type-specific data
-    switch (videoType) {
-        case 'youtube':
-            videoData.youtubeId = formData.get('youtubeId');
-            break;
-        case 'vimeo':
-            videoData.vimeoId = formData.get('vimeoId');
-            break;
-        case 'local':
-            videoData.fileName = formData.get('videoFile')?.name || null;
-            videoData.thumbnailName = formData.get('thumbnailFile')?.name || null;
-            break;
-    }
+    try {
+        // Add type-specific data
+        switch (videoType) {
+            case 'youtube':
+                videoData.youtubeId = formData.get('youtubeId');
+                break;
+            case 'vimeo':
+                videoData.vimeoId = formData.get('vimeoId');
+                break;
+            case 'local':
+                const videoFile = formData.get('videoFile');
+                const thumbnailFile = formData.get('thumbnailFile');
 
-    videoManager.addVideo(videoData);
-    return true;
+                if (videoFile && videoFile.size > 0) {
+                    // Upload video file
+                    videoData.fileName = await videoManager.uploadFile(videoFile, 'video');
+                }
+
+                if (thumbnailFile && thumbnailFile.size > 0) {
+                    // Upload thumbnail file
+                    videoData.thumbnailName = await videoManager.uploadFile(thumbnailFile, 'image');
+                }
+                break;
+        }
+
+        videoManager.addVideo(videoData);
+        return true;
+    } catch (error) {
+        console.error('Error handling video form:', error);
+        throw error;
+    }
 }
