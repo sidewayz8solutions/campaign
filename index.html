@@ -1550,7 +1550,7 @@
     <!-- Toga Party Temporary Banner -->
     <div id="togaBanner" class="promo-banner" role="status" aria-live="polite">
         <span>🎉 TOGA PARTY • August 27 • 7pm • Rendon Street</span>
-        <a class="cta" href="#" onclick="showTogaPopup(); return false;">Details</a>
+        <a class="cta" href="#" onclick="showTogaPopup(true); return false;">Details</a>
         <button type="button" class="close" aria-label="Dismiss" onclick="dismissTogaBanner()">✖</button>
     </div>
 
@@ -1583,7 +1583,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#issues">Issues</a></li>
                 <li><a href="#vision">Vision</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="videos.html">Videos</a></li>
             </ul>
             <a href="https://c0b2d403-fd0c-48af-b20b-65dbb67528ae.paylinks.godaddy.com/d49ef5b3-f814-48fc-aaf5-31e" class="donate-btn" target="_blank" rel="noopener">Donate</a>
             <div class="mobile-menu-toggle" id="mobileToggle">
@@ -1913,9 +1913,9 @@
 
 
         // Toga Popup Functionality
-        function showTogaPopup() {
-            // Don't show if already shown in this session
-            if (sessionStorage.getItem('togaPopupShown') === 'true') return;
+        function showTogaPopup(forceShow = false) {
+            // Don't show if already shown in this session (unless forced)
+            if (!forceShow && sessionStorage.getItem('togaPopupShown') === 'true') return;
 
             const popup = document.getElementById('togaPopup');
             popup.classList.add('show');

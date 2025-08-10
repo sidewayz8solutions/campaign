@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Frank Scurlock for Mayor</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --mardi-gras-purple: #1a0f3d;
+            --mardi-gras-gold: #ffd700;
+            --mardi-gras-green: #228b22;
+            --deep-purple: #2d1b69;
+            --crimson: #8f0011;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background-light);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 15, 61, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--mardi-gras-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .donate-btn {
+            background: linear-gradient(135deg, #8f0011 0%, #a91b47 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(139, 21, 56, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            color: white;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Video Sections */
+        .video-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--mardi-gras-purple);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--mardi-gras-gold), var(--mardi-gras-green));
+            border-radius: 2px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--mardi-gras-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* YouTube Channel Section */
+        .youtube-channel {
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .youtube-btn {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .youtube-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,0,0,0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚜️</div>
+                <span>SCURLOCK 2025</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#issues">Issues</a></li>
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="videos.html" class="active">Videos</a></li>
+            </ul>
+            <a href="https://c0b2d403-fd0c-48af-b20b-65dbb67528ae.paylinks.godaddy.com/d49ef5b3-f814-48fc-aaf5-31e" class="donate-btn" target="_blank" rel="noopener">Donate</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>🎬 Campaign Videos</h1>
+                <p>Watch Frank Scurlock's vision for New Orleans in action</p>
+            </div>
+
+            <!-- Featured Videos Section -->
+            <section class="video-section">
+                <h2 class="section-title">Featured Campaign Videos</h2>
+                <div class="video-grid">
+                    <!-- Add your YouTube video embeds here -->
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <!-- Replace with your actual YouTube video embed -->
+                            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Frank's Vision for New Orleans</h3>
+                            <p class="video-description">Learn about Frank Scurlock's comprehensive plan to revitalize our city and bring real change to New Orleans.</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <!-- Replace with your actual YouTube video embed -->
+                            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Economic Development Plan</h3>
+                            <p class="video-description">Discover how Frank's business experience will create jobs and opportunities for all New Orleanians.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Short Videos Section -->
+            <section class="video-section">
+                <h2 class="section-title">Campaign Updates & Short Videos</h2>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <!-- Replace with your actual YouTube Short embed -->
+                            <iframe src="https://www.youtube.com/embed/YOUR_SHORT_ID" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Meet Frank - 60 Second Introduction</h3>
+                            <p class="video-description">A quick introduction to Frank Scurlock and his campaign for mayor.</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <!-- Replace with your actual YouTube Short embed -->
+                            <iframe src="https://www.youtube.com/embed/YOUR_SHORT_ID" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Why I'm Running</h3>
+                            <p class="video-description">Frank explains his motivation for running for mayor of New Orleans.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- YouTube Channel Section -->
+            <section class="youtube-channel">
+                <h2>📺 Subscribe to Our YouTube Channel</h2>
+                <p>Stay updated with the latest campaign videos, interviews, and behind-the-scenes content.</p>
+                <a href="https://youtube.com/@YourChannelName" class="youtube-btn" target="_blank" rel="noopener">
+                    🔔 Subscribe on YouTube
+                </a>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
