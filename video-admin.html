@@ -777,7 +777,13 @@
                 loadVideosForAdmin();
 
             } catch (error) {
+                console.error('Form submission error:', error);
                 showMessage('Error: ' + error.message, 'error');
+
+                // Show detailed error for debugging
+                if (error.stack) {
+                    console.error('Error stack:', error.stack);
+                }
             } finally {
                 // Re-enable submit button
                 submitBtn.disabled = false;

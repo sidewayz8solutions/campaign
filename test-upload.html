@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #007cba;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005a87;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .debug {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            color: #495057;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Video Upload Test</h1>
+    <p>This page tests if PHP video uploads are working correctly.</p>
+    
+    <form id="testForm">
+        <div class="form-group">
+            <label for="testFile">Select a video file to test upload:</label>
+            <input type="file" id="testFile" name="testFile" accept="video/*" required>
+        </div>
+        <button type="submit">🚀 Test Upload</button>
+    </form>
+    
+    <div id="result" class="result"></div>
+    
+    <h2>📋 Debug Information</h2>
+    <div id="debugInfo" class="result debug">
+        <strong>Current URL:</strong> <span id="currentUrl"></span><br>
+        <strong>PHP Upload Handler URL:</strong> <span id="uploadUrl"></span><br>
+        <strong>Browser:</strong> <span id="browserInfo"></span><br>
+    </div>
+
+    <script>
+        // Display debug info
+        document.getElementById('currentUrl').textContent = window.location.href;
+        document.getElementById('uploadUrl').textContent = window.location.origin + window.location.pathname.replace('test-upload.html', 'upload-handler.php');
+        document.getElementById('browserInfo').textContent = navigator.userAgent;
+        document.getElementById('debugInfo').style.display = 'block';
+
+        // Test form submission
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('testFile');
+            const resultDiv = document.getElementById('result');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showResult('Please select a file first.', 'error');
+                return;
+            }
+            
+            // Show loading
+            showResult('Testing upload... Please wait.', 'debug');
+            
+            try {
+                // Test 1: Check if upload-handler.php exists
+                console.log('Testing if upload-handler.php is accessible...');
+                const testResponse = await fetch('upload-handler.php');
+                console.log('Upload handler response status:', testResponse.status);
+                
+                if (!testResponse.ok) {
+                    throw new Error(`Upload handler not accessible. Status: ${testResponse.status}`);
+                }
+                
+                // Test 2: Try actual upload
+                console.log('Testing actual file upload...');
+                const formData = new FormData();
+                formData.append('file', file);
+                
+                const uploadResponse = await fetch('upload-handler.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                console.log('Upload response status:', uploadResponse.status);
+                console.log('Upload response headers:', [...uploadResponse.headers.entries()]);
+                
+                const responseText = await uploadResponse.text();
+                console.log('Upload response text:', responseText);
+                
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (parseError) {
+                    throw new Error(`Invalid JSON response: ${responseText}`);
+                }
+                
+                if (result.success) {
+                    showResult(`✅ Upload successful!\n\nFile: ${result.fileName}\nSize: ${result.fileSize} bytes\nType: ${result.fileType}`, 'success');
+                } else {
+                    showResult(`❌ Upload failed: ${result.message}\n\nDebug info: ${JSON.stringify(result.debug || {}, null, 2)}`, 'error');
+                }
+                
+            } catch (error) {
+                console.error('Upload test error:', error);
+                showResult(`❌ Upload test failed: ${error.message}\n\nCheck the browser console for more details.`, 'error');
+            }
+        });
+        
+        function showResult(message, type) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = message;
+            resultDiv.className = `result ${type}`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

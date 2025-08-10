@@ -26,6 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response['debug']['post_max_size'] = ini_get('post_max_size');
         $response['debug']['upload_max_filesize'] = ini_get('upload_max_filesize');
         $response['debug']['files_received'] = isset($_FILES['file']);
+        $response['debug']['files_keys'] = array_keys($_FILES);
+        $response['debug']['request_method'] = $_SERVER['REQUEST_METHOD'];
+        $response['debug']['content_length'] = $_SERVER['CONTENT_LENGTH'] ?? 'not set';
 
         // Check if file was uploaded
         if (!isset($_FILES['file'])) {
