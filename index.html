@@ -1549,7 +1549,7 @@
     <!-- Loader -->
     <!-- Toga Party Temporary Banner -->
     <div id="togaBanner" class="promo-banner" role="status" aria-live="polite">
-        <span>🎉 TOGA PARTY • August 28 • 7pm • Bourbon Street</span>
+        <span>🎉 TOGA PARTY • August 28 • 7pm • Rendon Street</span>
         <a class="cta" href="#toga-party">Details</a>
         <button type="button" class="close" aria-label="Dismiss" onclick="dismissTogaBanner()">✖</button>
     </div>
@@ -1558,46 +1558,7 @@
         <div class="loader-text">Loading New Orleans' Future...</div>
     </div>
 
-    <!-- Popup Promotion -->
-    <div id="promotionPopup" class="popup-overlay">
-        <div class="popup-content">
-            <button type="button" class="popup-close" onclick="closePopup()">&times;</button>
 
-            <div class="popup-header">
-                <div class="popup-announcement">September 20th • 20th Anniversary</div>
-                <h2 class="popup-title">Remembering Katrina</h2>
-            </div>
-
-            <div class="popup-main-content">
-                <!-- Using available campaign image -->
-                <img src="45.webp" alt="Remembering Hurricane Katrina" class="popup-image">
-
-                <h3 class="popup-subtitle">Celebrating Our Resilience & Spirit</h3>
-                <div class="popup-text">
-                    <p><strong>Fellow New Orleanians,</strong></p>
-                    <p>Today, September 20th, marks 20 years since Hurricane Katrina forever changed our beloved city. As we remember this pivotal moment in our history, we also celebrate the incredible resilience, strength, and unbreakable spirit of New Orleans.</p>
-                    <p>Frank Scurlock invites you to listen to this special message honoring our journey of recovery, rebuilding, and renewal over the past two decades.</p>
-                    <p><em>Together, we have risen stronger. Together, we continue to build a better New Orleans.</em></p>
-                </div>
-
-                <div class="popup-audio-container">
-                    <audio id="promotionAudio" class="popup-audio" controls preload="metadata">
-                        <source src="katrina.m4a" type="audio/mp4">
-                        <source src="katrina.m4a" type="audio/aac">
-                        <source src="katrina.m4a" type="audio/x-m4a">
-                        Your browser does not support the audio element.
-                    </audio>
-
-                    <div class="audio-controls">
-                        <button type="button" class="audio-btn" onclick="playAudio()">▶ Play Memorial Message</button>
-                        <button type="button" class="audio-btn" onclick="pauseAudio()">⏸ Pause</button>
-                    </div>
-                </div>
-
-                <a href="#about" class="popup-cta" onclick="closePopup()">Learn More About Frank's Vision</a>
-            </div>
-        </div>
-    </div>
 
     <!-- Toga Party Popup -->
     <div id="togaPopup" class="popup-overlay" onclick="closeTogaPopup()">
@@ -1949,29 +1910,7 @@
             el.textContent = new Date().getFullYear();
         });
 
-        // Popup Promotion Functionality
-        function showPopup() {
-            const popup = document.getElementById('promotionPopup');
-            popup.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
 
-        function closePopup() {
-            const popup = document.getElementById('promotionPopup');
-            const audio = document.getElementById('promotionAudio');
-            popup.classList.remove('show');
-            document.body.style.overflow = 'auto'; // Restore scrolling
-            if (audio) {
-                audio.pause(); // Stop audio when closing
-                audio.currentTime = 0; // Reset to start
-            }
-
-            // Set a flag to not show popup again in this session
-            sessionStorage.setItem('popupShown', 'true');
-
-            // Show toga popup after Katrina popup is closed
-            setTimeout(showTogaPopup, 1000);
-        }
 
         // Toga Popup Functionality
         function showTogaPopup() {
@@ -2013,58 +1952,15 @@
         // Keyboard support for popups
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                const katrinaPopup = document.getElementById('promotionPopup');
                 const togaPopup = document.getElementById('togaPopup');
 
-                if (katrinaPopup && katrinaPopup.classList.contains('show')) {
-                    closePopup();
-                } else if (togaPopup && togaPopup.classList.contains('show')) {
+                if (togaPopup && togaPopup.classList.contains('show')) {
                     closeTogaPopup();
                 }
             }
         });
 
-        function playAudio() {
-            const audio = document.getElementById('promotionAudio');
-            audio.play().catch(function(error) {
-                console.log('Audio play failed:', error);
-                alert('Unable to play audio. Please check if the audio file exists and try using the built-in controls.');
-            });
-        }
 
-        function pauseAudio() {
-            const audio = document.getElementById('promotionAudio');
-            audio.pause();
-        }
-
-        // Add audio event listeners for better debugging
-        document.addEventListener('DOMContentLoaded', function() {
-            const audio = document.getElementById('promotionAudio');
-            if (audio) {
-                audio.addEventListener('loadstart', function() {
-                    console.log('Audio loading started');
-                });
-                audio.addEventListener('canplay', function() {
-                    console.log('Audio can start playing');
-                });
-                audio.addEventListener('error', function(e) {
-                    console.log('Audio error:', e);
-                    console.log('Audio error details:', audio.error);
-                });
-            }
-        });
-
-        // Show popup when user starts scrolling
-        let hasScrolled = false;
-        window.addEventListener('scroll', function() {
-            // Check if popup was already shown in this session and user hasn't scrolled yet
-            if (!sessionStorage.getItem('popupShown') && !hasScrolled && window.scrollY > 100) {
-                hasScrolled = true;
-                setTimeout(function() {
-                    showPopup();
-                }, 500); // Small delay after scroll starts
-            }
-        });
 
         // Close popup when clicking outside the content
         document.getElementById('promotionPopup').addEventListener('click', function(e) {
