@@ -213,7 +213,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,138.7C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,138.7C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
             background-size: cover;
             opacity: 0.3;
         }
@@ -1914,16 +1914,30 @@
 
         // Toga Popup Functionality
         function showTogaPopup(forceShow = false) {
+            console.log('showTogaPopup called, forceShow:', forceShow);
+
             // Don't show if already shown in this session (unless forced)
             if (!forceShow && sessionStorage.getItem('togaPopupShown') === 'true') {
+                console.log('Popup blocked by session storage');
                 return;
             }
 
             const popup = document.getElementById('togaPopup');
+            console.log('Popup element:', popup);
+
             if (popup) {
                 popup.classList.add('show');
                 document.body.style.overflow = 'hidden';
+                console.log('Popup show class added, classList:', popup.classList);
+            } else {
+                console.log('ERROR: Popup element not found!');
             }
+        }
+
+        // Clear session storage for testing
+        function clearTogaSession() {
+            sessionStorage.removeItem('togaPopupShown');
+            console.log('Session storage cleared');
         }
 
         function closeTogaPopup() {
@@ -1959,10 +1973,18 @@
             // Check if popup was already shown in this session and user hasn't scrolled yet
             if (!sessionStorage.getItem('togaPopupShown') && !hasScrolled && window.scrollY > 100) {
                 hasScrolled = true;
+                console.log('Scroll trigger activated, showing popup in 500ms');
                 setTimeout(function() {
+                    console.log('Calling showTogaPopup from scroll');
                     showTogaPopup();
                 }, 500); // Small delay after scroll starts
             }
+        });
+
+        // Clear session storage on page load to allow scroll trigger to work
+        window.addEventListener('load', function() {
+            sessionStorage.removeItem('togaPopupShown');
+            console.log('Session storage cleared on page load');
         });
 
         // Keyboard support for popups
