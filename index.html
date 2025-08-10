@@ -1600,9 +1600,9 @@
     </div>
 
     <!-- Toga Party Popup -->
-    <div id="togaPopup" class="popup-overlay">
-        <div class="popup-content" style="max-width: 90vw; max-height: 90vh; padding: 20px; background: white; border-radius: 15px;">
-            <button type="button" class="popup-close" onclick="closeTogaPopup()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; z-index: 10;">&times;</button>
+    <div id="togaPopup" class="popup-overlay" onclick="closeTogaPopup()">
+        <div class="popup-content" style="max-width: 90vw; max-height: 90vh; padding: 20px; background: white; border-radius: 15px; position: relative;" onclick="event.stopPropagation()">
+            <button type="button" class="popup-close" onclick="closeTogaPopup()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; z-index: 10; color: #333;">&times;</button>
 
             <div style="text-align: center;">
                 <img src="bdd.JPEG" alt="Toga Party - The Return to 1984" style="max-width: 100%; max-height: 80vh; height: auto; border-radius: 10px;">
