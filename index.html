@@ -1554,6 +1554,11 @@
         <button type="button" class="close" aria-label="Dismiss" onclick="dismissTogaBanner()">✖</button>
     </div>
 
+    <!-- TEST BUTTON - Remove this after testing -->
+    <div style="position: fixed; top: 120px; left: 20px; z-index: 9999;">
+        <button onclick="showTogaPopup(true)" style="background: red; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">TEST TOGA POPUP</button>
+    </div>
+
     <div class="loader" id="loader">
         <div class="loader-text">Loading New Orleans' Future...</div>
     </div>
@@ -1914,12 +1919,24 @@
 
         // Toga Popup Functionality
         function showTogaPopup(forceShow = false) {
+            console.log('showTogaPopup called, forceShow:', forceShow);
+
             // Don't show if already shown in this session (unless forced)
-            if (!forceShow && sessionStorage.getItem('togaPopupShown') === 'true') return;
+            if (!forceShow && sessionStorage.getItem('togaPopupShown') === 'true') {
+                console.log('Popup blocked by session storage');
+                return;
+            }
 
             const popup = document.getElementById('togaPopup');
-            popup.classList.add('show');
-            document.body.style.overflow = 'hidden';
+            console.log('Popup element found:', popup);
+
+            if (popup) {
+                popup.classList.add('show');
+                document.body.style.overflow = 'hidden';
+                console.log('Popup should now be visible');
+            } else {
+                console.log('ERROR: Popup element not found!');
+            }
         }
 
         function closeTogaPopup() {

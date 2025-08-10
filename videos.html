@@ -213,8 +213,16 @@
             border: none;
         }
 
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
         .video-info {
             padding: 1.5rem;
+            position: relative;
         }
 
         .video-title {
@@ -228,6 +236,20 @@
             color: var(--text-dark);
             font-size: 0.9rem;
             line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .video-platform {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--mardi-gras-purple), var(--deep-purple));
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
         }
 
         /* YouTube Channel Section */
@@ -309,26 +331,43 @@
             <section class="video-section">
                 <h2 class="section-title">Featured Campaign Videos</h2>
                 <div class="video-grid">
-                    <!-- Add your YouTube video embeds here -->
+                    <!-- YouTube Video Example -->
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <!-- Replace with your actual YouTube video embed -->
-                            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" title="Frank's Vision for New Orleans" allowfullscreen></iframe>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title">Frank's Vision for New Orleans</h3>
                             <p class="video-description">Learn about Frank Scurlock's comprehensive plan to revitalize our city and bring real change to New Orleans.</p>
+                            <span class="video-platform">📺 YouTube</span>
                         </div>
                     </div>
 
+                    <!-- Vimeo Video Example -->
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <!-- Replace with your actual YouTube video embed -->
-                            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+                            <iframe src="https://player.vimeo.com/video/YOUR_VIMEO_VIDEO_ID" title="Economic Development Plan" allowfullscreen></iframe>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title">Economic Development Plan</h3>
                             <p class="video-description">Discover how Frank's business experience will create jobs and opportunities for all New Orleanians.</p>
+                            <span class="video-platform">🎬 Vimeo</span>
+                        </div>
+                    </div>
+
+                    <!-- Local Video Example -->
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <video controls poster="video-thumbnail.jpg">
+                                <source src="campaign-video.mp4" type="video/mp4">
+                                <source src="campaign-video.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Campaign Launch Event</h3>
+                            <p class="video-description">Highlights from Frank Scurlock's official campaign launch event in New Orleans.</p>
+                            <span class="video-platform">💾 Local Video</span>
                         </div>
                     </div>
                 </div>
@@ -338,37 +377,60 @@
             <section class="video-section">
                 <h2 class="section-title">Campaign Updates & Short Videos</h2>
                 <div class="video-grid">
+                    <!-- YouTube Short -->
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <!-- Replace with your actual YouTube Short embed -->
-                            <iframe src="https://www.youtube.com/embed/YOUR_SHORT_ID" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_SHORT_ID" title="Meet Frank - 60 Second Introduction" allowfullscreen></iframe>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title">Meet Frank - 60 Second Introduction</h3>
                             <p class="video-description">A quick introduction to Frank Scurlock and his campaign for mayor.</p>
+                            <span class="video-platform">📺 YouTube Short</span>
                         </div>
                     </div>
 
+                    <!-- Vimeo Short -->
                     <div class="video-card">
                         <div class="video-wrapper">
-                            <!-- Replace with your actual YouTube Short embed -->
-                            <iframe src="https://www.youtube.com/embed/YOUR_SHORT_ID" allowfullscreen></iframe>
+                            <iframe src="https://player.vimeo.com/video/YOUR_VIMEO_SHORT_ID" title="Why I'm Running" allowfullscreen></iframe>
                         </div>
                         <div class="video-info">
                             <h3 class="video-title">Why I'm Running</h3>
                             <p class="video-description">Frank explains his motivation for running for mayor of New Orleans.</p>
+                            <span class="video-platform">🎬 Vimeo</span>
+                        </div>
+                    </div>
+
+                    <!-- Local Short Video -->
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <video controls poster="community-visit-thumb.jpg">
+                                <source src="community-visit.mp4" type="video/mp4">
+                                <source src="community-visit.webm" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Community Visit Highlights</h3>
+                            <p class="video-description">Frank visiting local neighborhoods and meeting with residents.</p>
+                            <span class="video-platform">💾 Local Video</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- YouTube Channel Section -->
+            <!-- Video Platforms Section -->
             <section class="youtube-channel">
-                <h2>📺 Subscribe to Our YouTube Channel</h2>
-                <p>Stay updated with the latest campaign videos, interviews, and behind-the-scenes content.</p>
-                <a href="https://youtube.com/@YourChannelName" class="youtube-btn" target="_blank" rel="noopener">
-                    🔔 Subscribe on YouTube
-                </a>
+                <h2>📺 Follow Our Video Content</h2>
+                <p>Stay updated with the latest campaign videos, interviews, and behind-the-scenes content across all platforms.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                    <a href="https://youtube.com/@YourChannelName" class="youtube-btn" target="_blank" rel="noopener">
+                        📺 Subscribe on YouTube
+                    </a>
+                    <a href="https://vimeo.com/YourVimeoChannel" class="youtube-btn" target="_blank" rel="noopener" style="background: #1ab7ea;">
+                        🎬 Follow on Vimeo
+                    </a>
+                </div>
             </section>
         </div>
     </div>
