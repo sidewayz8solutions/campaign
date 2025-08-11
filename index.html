@@ -1587,7 +1587,7 @@
       }
 
       .crisis-title {
-        font-size: 3rem;
+        font-size: 4rem;
         font-weight: 700;
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -1595,10 +1595,12 @@
       }
 
       .crisis-subtitle {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
         margin-bottom: 2rem;
         opacity: 0.9;
         font-style: italic;
+        font-weight: 700;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
       }
 
       .crisis-btn {
@@ -1625,10 +1627,10 @@
 
       @media (max-width: 768px) {
         .crisis-title {
-          font-size: 2.2rem;
+          font-size: 2.8rem;
         }
         .crisis-subtitle {
-          font-size: 1.2rem;
+          font-size: 1.8rem;
         }
         .crisis-btn {
           padding: 1rem 2rem;
@@ -2400,7 +2402,7 @@
       <div class="crisis-content">
         <h2 class="crisis-title">🚨 We Have a Crisis!</h2>
         <p class="crisis-subtitle">And Frank Can Fix It</p>
-        <a href="issues.html?playAudio=true" class="crisis-btn">See The Issues</a>
+        <a href="issues.html?playAudio=true" class="crisis-btn" onclick="playCrisisAudio()">See The Issues</a>
       </div>
     </section>
 
@@ -2749,6 +2751,16 @@
         console.log("Session storage cleared on page load");
       });
 
+      // Crisis audio functionality
+      function playCrisisAudio() {
+        const audio = document.getElementById('crisisAudio');
+        if (audio) {
+          audio.play().catch(error => {
+            console.log('Audio play failed:', error);
+          });
+        }
+      }
+
       // Keyboard support for popups
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
@@ -2776,5 +2788,11 @@
         }
       });
     </script>
+
+    <!-- Audio Element for Crisis Button -->
+    <audio id="crisisAudio" preload="auto">
+        <source src="/Users/sidewayz8/Desktop/1111.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
   </body>
 </html>
