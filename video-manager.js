@@ -15,24 +15,6 @@ class VideoManager {
     initializeSampleData() {
         const sampleVideos = [
             {
-                id: 1,
-                title: "Frank's Vision for New Orleans",
-                description: "Learn about Frank Scurlock's comprehensive plan to revitalize our city and bring real change to New Orleans.",
-                category: "featured",
-                type: "youtube",
-                youtubeId: "dQw4w9WgXcQ", // Replace with actual video ID
-                dateAdded: new Date().toISOString()
-            },
-            {
-                id: 2,
-                title: "Economic Development Plan",
-                description: "Discover how Frank's business experience will create jobs and opportunities for all New Orleanians.",
-                category: "featured",
-                type: "vimeo",
-                vimeoId: "123456789", // Replace with actual video ID
-                dateAdded: new Date().toISOString()
-            },
-            {
                 id: 3,
                 title: "Frank Scurlock Campaign Short",
                 description: "A quick introduction to Frank Scurlock and his campaign for mayor.",
@@ -75,15 +57,6 @@ class VideoManager {
                 category: "featured",
                 type: "youtube",
                 youtubeId: "WclRFDaQfbc", // Your full YouTube video
-                dateAdded: new Date().toISOString()
-            },
-            {
-                id: 6,
-                title: "Frank Scurlock Campaign Message",
-                description: "An important message from Frank Scurlock about his campaign for mayor.",
-                category: "shorts",
-                type: "youtube",
-                youtubeId: "VH4xsKWyjps", // Your fourth YouTube Short
                 dateAdded: new Date().toISOString()
             }
         ];
