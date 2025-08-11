@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Frank Scurlock for Mayor</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Crimson+Text:wght@400;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --mardi-gras-purple: #1a0f3d;
+            --mardi-gras-gold: #ffd700;
+            --mardi-gras-green: #228b22;
+            --deep-purple: #2d1b69;
+            --crimson: #8f0011;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', 'Libre Baskerville', Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--background-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', 'Crimson Text', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 27, 99, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--mardi-gras-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            color: white;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Payment Methods Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+            border-color: var(--mardi-gras-gold);
+        }
+
+        .payment-title {
+            font-size: 2rem;
+            color: var(--mardi-gras-purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .qr-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px dashed var(--mardi-gras-gold);
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        .payment-info {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .payment-handle {
+            font-weight: 700;
+            color: var(--crimson);
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .payment-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--mardi-gras-gold) 0%, #ffed4e 100%);
+            color: #1a0f3d;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .payment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Suggested Amounts */
+        .suggested-amounts {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .amount-btn {
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .amount-btn:hover {
+            transform: translateY(-3px);
+            border-color: var(--mardi-gras-gold);
+            box-shadow: 0 8px 25px rgba(26, 15, 61, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .payment-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .payment-card {
+                padding: 2rem;
+            }
+            
+            .qr-code {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚜️</div>
+                <span>SCURLOCK 2025</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="issues.html">Issues</a></li>
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="videos.html">Videos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>💰 Support Frank Scurlock</h1>
+                <p>Your donation helps us build a better New Orleans. Every contribution makes a difference in our fight for transparency, accountability, and real change.</p>
+            </div>
+
+            <!-- Suggested Amounts -->
+            <div class="suggested-amounts">
+                <h2 style="color: var(--mardi-gras-purple); margin-bottom: 1rem;">Suggested Donation Amounts</h2>
+                <p>Choose an amount that works for you, or enter a custom amount on your preferred platform.</p>
+                <div class="amount-grid">
+                    <div class="amount-btn">$25</div>
+                    <div class="amount-btn">$50</div>
+                    <div class="amount-btn">$100</div>
+                    <div class="amount-btn">$250</div>
+                    <div class="amount-btn">$500</div>
+                    <div class="amount-btn">Custom</div>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-grid">
+                <!-- PayPal -->
+                <div class="payment-card">
+                    <h3 class="payment-title">💙 PayPal</h3>
+                    <div class="qr-container">
+                        <div class="qr-code" id="paypal-qr">
+                            PayPal QR Code will appear here
+                        </div>
+                    </div>
+                    <div class="payment-info">
+                        <p>Scan the QR code above or click the button below</p>
+                    </div>
+                    <a href="https://www.paypal.com/qrcodes/p2pqrc/CNWMXS9ZRHTWC" class="payment-btn" target="_blank">Donate via PayPal</a>
+                </div>
+
+                <!-- Venmo -->
+                <div class="payment-card">
+                    <h3 class="payment-title">💜 Venmo</h3>
+                    <div class="qr-container">
+                        <div class="qr-code" id="venmo-qr">
+                            Venmo QR Code will appear here
+                        </div>
+                    </div>
+                    <div class="payment-info">
+                        <div class="payment-handle">@Frank-Scurlock-2</div>
+                        <p>Scan the QR code above or search for the handle</p>
+                    </div>
+                    <a href="https://venmo.com/u/Frank-Scurlock-2" class="payment-btn" target="_blank">Open Venmo</a>
+                </div>
+
+                <!-- CashApp -->
+                <div class="payment-card">
+                    <h3 class="payment-title">💚 Cash App</h3>
+                    <div class="qr-container">
+                        <div class="qr-code" id="cashapp-qr">
+                            Cash App QR Code will appear here
+                        </div>
+                    </div>
+                    <div class="payment-info">
+                        <div class="payment-handle">$frankscurlock44</div>
+                        <p>Scan the QR code above or search for the handle</p>
+                    </div>
+                    <a href="https://cash.app/$frankscurlock44" class="payment-btn" target="_blank">Open Cash App</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate QR codes using QR Server API
+        function generateQRCode(text, elementId) {
+            const qrElement = document.getElementById(elementId);
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
+            qrElement.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width: 100%; height: 100%; object-fit: contain;">`;
+        }
+
+        // Generate QR codes when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            generateQRCode('https://www.paypal.com/qrcodes/p2pqrc/CNWMXS9ZRHTWC', 'paypal-qr');
+            generateQRCode('https://venmo.com/u/Frank-Scurlock-2', 'venmo-qr');
+            generateQRCode('https://cash.app/$frankscurlock44', 'cashapp-qr');
+        });
+    </script>
+</body>
+</html>
