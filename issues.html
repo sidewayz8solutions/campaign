@@ -143,7 +143,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('3.JPG');
+            background-image: url('bdd.JPEG');
             background-size: cover;
             background-position: center;
             filter: brightness(0.4);
@@ -727,23 +727,23 @@
 
                 <div class="pothole-gallery">
                     <div class="pothole-item">
-                        <img src="5.JPG" alt="News coverage of daily pothole crisis">
+                        <img src="abc.JPEG" alt="News coverage of daily pothole crisis">
                         <div class="pothole-caption">
                             <h3>Media Spotlight on Failure</h3>
                             <p>Local news now features a "Pothole of the Day" segment - a shameful testament to our city's infrastructure collapse.</p>
                         </div>
                     </div>
-                    
+
                     <div class="pothole-item">
-                        <img src="6.JPG" alt="Traffic cone stuck in massive pothole">
+                        <img src="as.jpg" alt="Traffic cone stuck in massive pothole">
                         <div class="pothole-caption">
                             <h3>Citizens Take Action</h3>
                             <p>Residents place warning cones in dangerous craters because the city won't. This shouldn't be necessary in 2025.</p>
                         </div>
                     </div>
-                    
+
                     <div class="pothole-item">
-                        <img src="7.JPG" alt="Multiple cones marking street hazards">
+                        <img src="mg1.jpg" alt="Multiple cones marking street hazards">
                         <div class="pothole-caption">
                             <h3>Systematic Neglect</h3>
                             <p>Multiple hazards on a single street. This is what happens when infrastructure isn't a priority.</p>
@@ -758,7 +758,7 @@
                 
                 <div class="evidence-grid">
                     <div class="evidence-photo">
-                        <img src="4.JPG" alt="Parking violation on windshield">
+                        <img src="45.webp" alt="Parking violation on windshield">
                     </div>
                     <div class="evidence-text">
                         <h3>Revenue Over Service</h3>
@@ -782,7 +782,7 @@
                         </div>
                     </div>
                     <div class="evidence-photo">
-                        <img src="1.JPG" alt="Neighborhood street conditions">
+                        <img src="SD.webp" alt="Neighborhood street conditions">
                     </div>
                 </div>
             </div>
@@ -941,6 +941,29 @@
         document.querySelectorAll('.stat-number').forEach(el => {
             statObserver.observe(el);
         });
+
+        // Audio functionality for crisis button
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('playAudio') === 'true') {
+                const audio = document.getElementById('crisisAudio');
+                if (audio) {
+                    // Small delay to ensure page is loaded
+                    setTimeout(() => {
+                        audio.play().catch(error => {
+                            console.log('Audio autoplay prevented:', error);
+                            // Fallback: show a play button or notification
+                        });
+                    }, 500);
+                }
+            }
+        });
     </script>
+
+    <!-- Audio Element -->
+    <audio id="crisisAudio" preload="auto">
+        <source src="1111.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
 </body>
 </html>
