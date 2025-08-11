@@ -8,7 +8,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Crimson+Text:wght@400;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --mardi-gras-purple: #1a0f3d;
@@ -33,6 +33,7 @@
             color: var(--text-dark);
             overflow-x: hidden;
             font-weight: 400;
+            background: var(--background-light);
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -258,6 +259,118 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
+        /* Photo Integration Styles */
+        .photo-section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .photo-container {
+            position: relative;
+            display: inline-block;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            margin: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .photo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .seal-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .seal-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--mardi-gras-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .seal-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .infrastructure-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .infrastructure-photo {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .infrastructure-photo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .infrastructure-photo img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(143, 0, 17, 0.7), rgba(26, 15, 61, 0.7));
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .infrastructure-photo:hover .photo-overlay {
+            opacity: 1;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -371,13 +484,4 @@
                     </ul>
                 </div>
 
-                <div class="issue-card">
-                    <span class="issue-icon">🖼️</span>
-                    <h3 class="issue-title">Your Photo Evidence</h3>
-                    <p class="issue-description">You mentioned a photo showing potholes and related issues. We will feature that image here to highlight the reality residents face every day.</p>
-                    <ul class="issue-points">
-                        <li>We can place your image here once uploaded</li>
-                        <li>Caption will describe location and impact</li>
-                        <li>Use as part of a citywide reporting and tracking campaign</li>
-                    </ul>
-                </div>
+
