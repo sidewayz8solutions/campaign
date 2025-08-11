@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issues - Frank Scurlock for Mayor</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Crimson+Text:wght@400;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --mardi-gras-purple: #1a0f3d;
+            --mardi-gras-gold: #ffd700;
+            --mardi-gras-green: #228b22;
+            --deep-purple: #2d1b69;
+            --crimson: #8f0011;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --background-light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', 'Libre Baskerville', Georgia, serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', 'Crimson Text', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 27, 99, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--mardi-gras-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .donate-btn {
+            background: linear-gradient(135deg, #8f0011 0%, #a91b47 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(139, 21, 56, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            color: white;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Issues Grid */
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .issue-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .issue-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--mardi-gras-gold), var(--mardi-gras-green));
+        }
+
+        .issue-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+            border-color: var(--mardi-gras-gold);
+        }
+
+        .issue-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .issue-title {
+            font-size: 2rem;
+            color: var(--mardi-gras-purple);
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .issue-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .issue-points {
+            list-style: none;
+            padding: 0;
+        }
+
+        .issue-points li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .issue-points li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--mardi-gras-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Critical Issues Section */
+        .critical-section {
+            background: linear-gradient(135deg, rgba(143, 0, 17, 0.1) 0%, rgba(169, 27, 71, 0.1) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 2px solid rgba(143, 0, 17, 0.2);
+        }
+
+        .critical-title {
+            font-size: 2.5rem;
+            color: var(--crimson);
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .issues-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .issue-card {
+                padding: 2rem;
+            }
+            
+            .critical-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚜️</div>
+                <span>SCURLOCK 2025</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="issues.html" class="active">Issues</a></li>
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="videos.html">Videos</a></li>
+            </ul>
+            <a href="https://c0b2d403-fd0c-48af-b20b-65dbb67528ae.paylinks.godaddy.com/d49ef5b3-f814-48fc-aaf5-31e" class="donate-btn" target="_blank" rel="noopener">Donate</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>🏛️ Critical Issues Facing New Orleans</h1>
+                <p>New Orleans deserves better leadership, better infrastructure, and better governance. It's time to address the real problems that have been ignored for too long.</p>
+            </div>
+
+            <!-- Critical Issues Section -->
+            <div class="critical-section">
+                <h2 class="critical-title">🚨 Urgent: Corruption & Incompetence</h2>
+                <div class="issues-grid">
+                    <div class="issue-card">
+                        <span class="issue-icon">🏛️</span>
+                        <h3 class="issue-title">Corruption in City Hall</h3>
+                        <p class="issue-description">For too long, New Orleans has suffered under corrupt leadership that puts personal gain over public service. We need transparency and accountability.</p>
+                        <ul class="issue-points">
+                            <li>Implement strict ethics oversight and transparency measures</li>
+                            <li>End the culture of backroom deals and cronyism</li>
+                            <li>Establish independent auditing of all city contracts</li>
+                            <li>Create citizen oversight committees for major decisions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <span class="issue-icon">⚖️</span>
+                        <h3 class="issue-title">City Council Incompetence</h3>
+                        <p class="issue-description">The current City Council has failed to address basic needs while wasting taxpayer money on ineffective programs and personal agendas.</p>
+                        <ul class="issue-points">
+                            <li>Demand competent leadership focused on results</li>
+                            <li>End wasteful spending on failed initiatives</li>
+                            <li>Prioritize essential services over political theater</li>
+                            <li>Hold council members accountable for their decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Issues Grid -->
+            <div class="issues-grid">
+                <div class="issue-card">
+                    <span class="issue-icon">🕳️</span>
+                    <h3 class="issue-title">Infrastructure Crisis: Potholes</h3>
+                    <p class="issue-description">Our streets are falling apart. Massive potholes damage vehicles, endanger cyclists, and reflect the city's neglect of basic infrastructure maintenance.</p>
+                    <ul class="issue-points">
+                        <li>Emergency pothole repair program within first 100 days</li>
+                        <li>Comprehensive street resurfacing plan</li>
+                        <li>Preventive maintenance to avoid future deterioration</li>
+                        <li>Accountability for contractors and city maintenance crews</li>
+                    </ul>
+                </div>
+
+                <div class="issue-card">
+                    <span class="issue-icon">🚧</span>
+                    <h3 class="issue-title">Neighborhood Infrastructure & Flooding</h3>
+                    <p class="issue-description">Broken drainage systems and poor maintenance have caused unnecessary flooding and property damage. We will modernize our infrastructure with urgency.</p>
+                    <ul class="issue-points">
+                        <li>Repair and upgrade drainage systems citywide</li>
+                        <li>Enforce quality standards for road and utility work</li>
+                        <li>Publish a public, trackable street repair dashboard</li>
+                        <li>Coordinate with state/federal resources for major upgrades</li>
+                    </ul>
+                </div>
+
+                <div class="issue-card">
+                    <span class="issue-icon">🖼️</span>
+                    <h3 class="issue-title">Your Photo Evidence</h3>
+                    <p class="issue-description">You mentioned a photo showing potholes and related issues. We will feature that image here to highlight the reality residents face every day.</p>
+                    <ul class="issue-points">
+                        <li>We can place your image here once uploaded</li>
+                        <li>Caption will describe location and impact</li>
+                        <li>Use as part of a citywide reporting and tracking campaign</li>
+                    </ul>
+                </div>
