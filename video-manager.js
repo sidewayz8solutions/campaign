@@ -34,11 +34,56 @@ class VideoManager {
             },
             {
                 id: 3,
-                title: "Meet Frank - 60 Second Introduction",
+                title: "Frank Scurlock Campaign Short",
                 description: "A quick introduction to Frank Scurlock and his campaign for mayor.",
                 category: "shorts",
                 type: "youtube",
-                youtubeId: "dQw4w9WgXcQ", // Replace with actual video ID
+                youtubeId: "7tySfb89d3o", // Your YouTube Short video
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 4,
+                title: "Frank Scurlock Campaign Update",
+                description: "Latest updates from Frank Scurlock's campaign for mayor of New Orleans.",
+                category: "shorts",
+                type: "youtube",
+                youtubeId: "_fndjD94GIo", // Your second YouTube Short
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 5,
+                title: "Frank Scurlock Vision",
+                description: "Frank Scurlock shares his vision for the future of New Orleans.",
+                category: "shorts",
+                type: "youtube",
+                youtubeId: "R8Zvs30sIuk", // Your third YouTube Short
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 6,
+                title: "Frank Scurlock Campaign Message",
+                description: "An important message from Frank Scurlock about his campaign for mayor.",
+                category: "shorts",
+                type: "youtube",
+                youtubeId: "VH4xsKWyjps", // Your fourth YouTube Short
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 7,
+                title: "Frank Scurlock Full Campaign Video",
+                description: "Watch Frank Scurlock's complete campaign message and vision for New Orleans.",
+                category: "featured",
+                type: "youtube",
+                youtubeId: "WclRFDaQfbc", // Your full YouTube video
+                dateAdded: new Date().toISOString()
+            },
+            {
+                id: 6,
+                title: "Frank Scurlock Campaign Message",
+                description: "An important message from Frank Scurlock about his campaign for mayor.",
+                category: "shorts",
+                type: "youtube",
+                youtubeId: "VH4xsKWyjps", // Your fourth YouTube Short
                 dateAdded: new Date().toISOString()
             }
         ];
@@ -331,13 +376,17 @@ async function handleVideoForm(formData) {
                 const thumbnailFile = formData.get('thumbnailFile');
 
                 if (videoFile && videoFile.size > 0) {
+                    console.log('Uploading video file:', videoFile.name, 'Size:', videoFile.size);
                     // Upload video file
                     videoData.fileName = await videoManager.uploadFile(videoFile, 'video');
+                    console.log('Video uploaded as:', videoData.fileName);
                 }
 
                 if (thumbnailFile && thumbnailFile.size > 0) {
+                    console.log('Uploading thumbnail file:', thumbnailFile.name, 'Size:', thumbnailFile.size);
                     // Upload thumbnail file
                     videoData.thumbnailName = await videoManager.uploadFile(thumbnailFile, 'image');
+                    console.log('Thumbnail uploaded as:', videoData.thumbnailName);
                 }
                 break;
         }

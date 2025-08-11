@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Helper - Frank Scurlock Campaign</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a0f3d;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #1a0f3d;
+        }
+        .btn {
+            background: #1a0f3d;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+        .btn:hover {
+            background: #2a1f5d;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .preview {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #1a0f3d;
+        }
+        .video-preview {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .video-preview iframe {
+            max-width: 100%;
+            height: 315px;
+            border-radius: 6px;
+        }
+        .code-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 YouTube Video Helper</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+            Extract video information from YouTube URLs and add them to your campaign site
+        </p>
+
+        <div class="input-group">
+            <label for="youtubeUrl">YouTube URL:</label>
+            <input type="url" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=VIDEO_ID" onchange="extractVideoInfo()">
+        </div>
+
+        <div class="input-group">
+            <label for="videoTitle">Video Title:</label>
+            <input type="text" id="videoTitle" placeholder="Enter video title">
+        </div>
+
+        <div class="input-group">
+            <label for="videoDescription">Description:</label>
+            <textarea id="videoDescription" rows="3" placeholder="Enter video description"></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="videoCategory">Category:</label>
+            <select id="videoCategory">
+                <option value="featured">Featured Videos</option>
+                <option value="shorts">Short Videos</option>
+                <option value="interviews">Interviews</option>
+                <option value="events">Events</option>
+                <option value="policy">Policy Videos</option>
+            </select>
+        </div>
+
+        <button class="btn" onclick="addToVideoManager()">Add to Video Manager</button>
+        <button class="btn btn-secondary" onclick="generateCode()">Generate Code</button>
+        <button class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+
+        <div id="preview" class="preview" style="display: none;">
+            <h3>Preview:</h3>
+            <div id="videoPreview" class="video-preview"></div>
+            <div id="codeOutput" class="code-output"></div>
+        </div>
+
+        <div id="successMessage" class="success" style="display: none;"></div>
+    </div>
+
+    <script src="video-manager.js"></script>
+    <script>
+        function extractVideoInfo() {
+            const url = document.getElementById('youtubeUrl').value;
+            const videoId = extractYouTubeId(url);
+            
+            if (videoId) {
+                // Show preview
+                showPreview(videoId);
+                
+                // Try to fetch video title (this would require YouTube API in production)
+                // For now, we'll just show the video ID
+                if (!document.getElementById('videoTitle').value) {
+                    document.getElementById('videoTitle').value = `Video ${videoId}`;
+                }
+            }
+        }
+
+        function extractYouTubeId(url) {
+            const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        function showPreview(videoId) {
+            const preview = document.getElementById('preview');
+            const videoPreview = document.getElementById('videoPreview');
+            
+            videoPreview.innerHTML = `
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/${videoId}" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            
+            preview.style.display = 'block';
+        }
+
+        function addToVideoManager() {
+            const url = document.getElementById('youtubeUrl').value;
+            const title = document.getElementById('videoTitle').value;
+            const description = document.getElementById('videoDescription').value;
+            const category = document.getElementById('videoCategory').value;
+            
+            const videoId = extractYouTubeId(url);
+            
+            if (!videoId || !title) {
+                alert('Please enter a valid YouTube URL and title');
+                return;
+            }
+
+            const videoData = {
+                type: 'youtube',
+                title: title,
+                description: description,
+                category: category,
+                videoId: videoId,
+                url: url
+            };
+
+            try {
+                const newVideo = videoManager.addVideo(videoData);
+                document.getElementById('successMessage').innerHTML = `
+                    ✅ Video added successfully!<br>
+                    <strong>Title:</strong> ${title}<br>
+                    <strong>Category:</strong> ${category}<br>
+                    <strong>Video ID:</strong> ${videoId}
+                `;
+                document.getElementById('successMessage').style.display = 'block';
+                
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 5000);
+                
+            } catch (error) {
+                alert('Error adding video: ' + error.message);
+            }
+        }
+
+        function generateCode() {
+            const url = document.getElementById('youtubeUrl').value;
+            const title = document.getElementById('videoTitle').value;
+            const description = document.getElementById('videoDescription').value;
+            
+            const videoId = extractYouTubeId(url);
+            
+            if (!videoId) {
+                alert('Please enter a valid YouTube URL');
+                return;
+            }
+
+            const code = `<!-- YouTube Video: ${title} -->
+<div class="video-card">
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/${videoId}" 
+                title="${title}" 
+                allowfullscreen>
+        </iframe>
+    </div>
+    <div class="video-info">
+        <h3 class="video-title">${title}</h3>
+        <p class="video-description">${description}</p>
+        <span class="video-platform">📺 YouTube</span>
+    </div>
+</div>`;
+
+            document.getElementById('codeOutput').textContent = code;
+            document.getElementById('preview').style.display = 'block';
+        }
+
+        function clearForm() {
+            document.getElementById('youtubeUrl').value = '';
+            document.getElementById('videoTitle').value = '';
+            document.getElementById('videoDescription').value = '';
+            document.getElementById('videoCategory').value = 'featured';
+            document.getElementById('preview').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
