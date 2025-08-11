@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Crimson+Text:wght@400;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Crimson+Text:wght@400;600&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -92,6 +92,7 @@
             padding: 0.5rem 1rem;
             border-radius: 5px;
             transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -107,6 +108,7 @@
             font-weight: 600;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 215, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .donate-btn:hover {
@@ -116,7 +118,7 @@
 
         /* Main Content */
         .main-content {
-            margin-top: 100px;
+            margin-top: 80px;
             padding: 2rem 0;
         }
 
@@ -126,43 +128,152 @@
             padding: 0 2rem;
         }
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
-            color: white;
-            border-radius: 20px;
+        /* Hero Header with City Hall Background */
+        .page-hero {
             position: relative;
+            height: 500px;
+            margin-bottom: 4rem;
+            border-radius: 20px;
             overflow: hidden;
         }
 
-        .page-header::before {
-            content: '';
+        .hero-bg {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
+            width: 100%;
+            height: 100%;
+            background-image: url('3.JPG');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4);
         }
 
-        .page-header h1 {
-            font-size: 3.5rem;
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 15, 61, 0.8) 0%, rgba(143, 0, 17, 0.7) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
             margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease;
         }
 
-        .page-header p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
+        .hero-content p {
+            font-size: 1.4rem;
             max-width: 800px;
-            margin: 0 auto;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Critical Alert Banner */
+        .alert-banner {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+        }
+
+        .alert-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert-icon {
+            font-size: 2.5rem;
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* City Hall Section with Seal */
+        .city-hall-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .seal-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid var(--mardi-gras-gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+
+        .seal-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-header-text h2 {
+            font-size: 2.8rem;
+            color: var(--crimson);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header-text p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            opacity: 0.8;
         }
 
         /* Issues Grid */
@@ -242,133 +353,247 @@
             font-size: 1.2rem;
         }
 
-        /* Critical Issues Section */
-        .critical-section {
-            background: linear-gradient(135deg, rgba(143, 0, 17, 0.1) 0%, rgba(169, 27, 71, 0.1) 100%);
+        /* Infrastructure Crisis Gallery */
+        .infrastructure-crisis {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            padding: 4rem 2rem;
             border-radius: 20px;
-            padding: 3rem;
             margin: 4rem 0;
-            border: 2px solid rgba(143, 0, 17, 0.2);
         }
 
-        .critical-title {
-            font-size: 2.5rem;
+        .crisis-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .crisis-header h2 {
+            font-size: 3rem;
             color: var(--crimson);
-            text-align: center;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
         }
 
-        /* Photo Integration Styles */
-        .photo-section {
+        .crisis-header p {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pothole-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin: 3rem 0;
-            text-align: center;
         }
 
-        .photo-container {
+        .pothole-item {
             position: relative;
-            display: inline-block;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            margin: 1rem;
             transition: all 0.3s ease;
+            background: white;
         }
 
-        .photo-container:hover {
-            transform: translateY(-5px);
+        .pothole-item:hover {
+            transform: scale(1.03);
             box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
 
-        .photo-container img {
+        .pothole-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pothole-caption {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .pothole-caption h3 {
+            color: var(--crimson);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pothole-caption p {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        /* News Style Banner */
+        .news-banner {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+            animation: newsSlide 3s linear infinite;
+        }
+
+        @keyframes newsSlide {
+            from { transform: translateX(-150px); }
+            to { transform: translateX(calc(100% + 150px)); }
+        }
+
+        .news-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-badge {
+            background: var(--crimson);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .news-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .news-content {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Photo Evidence Section */
+        .evidence-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 4rem 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+
+        .evidence-photo {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .evidence-photo img {
             width: 100%;
             height: auto;
             display: block;
         }
 
-        .photo-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 2rem 1rem 1rem;
-            font-size: 1rem;
-            font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        .evidence-text h3 {
+            font-size: 2rem;
+            color: var(--crimson);
+            margin-bottom: 1rem;
         }
 
-        .seal-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
+        .evidence-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 5px solid var(--crimson);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--crimson);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
             margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .seal-container {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--mardi-gras-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .seal-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .infrastructure-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .infrastructure-photo {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        .cta-btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .infrastructure-photo:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        .cta-primary {
+            background: var(--mardi-gras-gold);
+            color: var(--mardi-gras-purple);
         }
 
-        .infrastructure-photo img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
         }
 
-        .photo-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(143, 0, 17, 0.7), rgba(26, 15, 61, 0.7));
-            opacity: 0;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .cta-secondary {
+            background: transparent;
             color: white;
-            font-weight: 600;
-            text-align: center;
-            padding: 1rem;
+            border: 2px solid white;
         }
 
-        .infrastructure-photo:hover .photo-overlay {
-            opacity: 1;
+        .cta-secondary:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         /* Mobile Responsive */
@@ -377,7 +602,7 @@
                 display: none;
             }
             
-            .page-header h1 {
+            .hero-content h1 {
                 font-size: 2.5rem;
             }
             
@@ -386,16 +611,21 @@
                 gap: 2rem;
             }
             
+            .evidence-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .pothole-gallery {
+                grid-template-columns: 1fr;
+            }
+            
             .container {
                 padding: 0 1rem;
-            }
-            
-            .issue-card {
-                padding: 2rem;
-            }
-            
-            .critical-section {
-                padding: 2rem;
             }
         }
     </style>
@@ -421,67 +651,296 @@
 
     <!-- Main Content -->
     <div class="main-content">
+        <!-- Hero Section with City Hall Background -->
+        <div class="page-hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>The Truth About New Orleans</h1>
+                <p>After decades of failed leadership, corruption, and neglect, our city is literally falling apart. These photos show the reality that City Hall wants to ignore.</p>
+            </div>
+        </div>
+
         <div class="container">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1>🏛️ Critical Issues Facing New Orleans</h1>
-                <p>New Orleans deserves better leadership, better infrastructure, and better governance. It's time to address the real problems that have been ignored for too long.</p>
+            <!-- Critical Alert Banner -->
+            <div class="alert-banner">
+                <h2><span class="alert-icon">⚠️</span> URGENT: Our City is in Crisis</h2>
+                <p>While politicians make empty promises, our streets crumble, our infrastructure fails, and our citizens suffer. The evidence is undeniable.</p>
             </div>
 
-            <!-- Critical Issues Section -->
-            <div class="critical-section">
-                <h2 class="critical-title">🚨 Urgent: Corruption & Incompetence</h2>
+            <!-- City Hall Corruption Section -->
+            <div class="city-hall-section">
+                <div class="section-header">
+                    <div class="seal-container">
+                        <img src="2.JPG" alt="New Orleans City Council Seal">
+                    </div>
+                    <div class="section-header-text">
+                        <h2>Corruption & Incompetence at City Hall</h2>
+                        <p>The very institutions meant to serve us have failed us. It's time for accountability.</p>
+                    </div>
+                </div>
+
                 <div class="issues-grid">
                     <div class="issue-card">
                         <span class="issue-icon">🏛️</span>
-                        <h3 class="issue-title">Corruption in City Hall</h3>
-                        <p class="issue-description">For too long, New Orleans has suffered under corrupt leadership that puts personal gain over public service. We need transparency and accountability.</p>
+                        <h3 class="issue-title">Systemic Corruption</h3>
+                        <p class="issue-description">For too long, City Hall has operated as a personal piggy bank for politicians and their cronies while our city deteriorates.</p>
                         <ul class="issue-points">
-                            <li>Implement strict ethics oversight and transparency measures</li>
-                            <li>End the culture of backroom deals and cronyism</li>
-                            <li>Establish independent auditing of all city contracts</li>
-                            <li>Create citizen oversight committees for major decisions</li>
+                            <li>Implement immediate transparency measures for all city contracts</li>
+                            <li>Create independent citizen oversight committees</li>
+                            <li>Prosecute corruption to the fullest extent of the law</li>
+                            <li>End the culture of backroom deals and favoritism</li>
                         </ul>
                     </div>
                     
                     <div class="issue-card">
                         <span class="issue-icon">⚖️</span>
-                        <h3 class="issue-title">City Council Incompetence</h3>
-                        <p class="issue-description">The current City Council has failed to address basic needs while wasting taxpayer money on ineffective programs and personal agendas.</p>
+                        <h3 class="issue-title">City Council Failures</h3>
+                        <p class="issue-description">The City Council has proven incapable of addressing even our most basic needs while wasting millions on vanity projects.</p>
                         <ul class="issue-points">
-                            <li>Demand competent leadership focused on results</li>
-                            <li>End wasteful spending on failed initiatives</li>
-                            <li>Prioritize essential services over political theater</li>
-                            <li>Hold council members accountable for their decisions</li>
+                            <li>Demand accountability for every taxpayer dollar spent</li>
+                            <li>Focus on essential services, not political theater</li>
+                            <li>Replace incompetent leadership with qualified professionals</li>
+                            <li>Institute performance metrics for all council initiatives</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Main Issues Grid -->
-            <div class="issues-grid">
+            <!-- Infrastructure Crisis Section -->
+            <div class="infrastructure-crisis">
+                <div class="crisis-header">
+                    <h2>🚨 The Infrastructure Disaster They Don't Want You to See</h2>
+                    <p>These aren't just potholes - they're monuments to government failure. Every damaged car, every injury, every flooded street is a direct result of leadership that doesn't care.</p>
+                </div>
+
+                <!-- News Banner -->
+                <div class="news-banner">
+                    <div class="news-header">
+                        <span class="news-badge">BREAKING</span>
+                        <span class="news-title">POTHOLE OF THE DAY</span>
+                    </div>
+                    <div class="news-content">
+                        Carrollton: Willow St. & Joseph St. - Another day, another crater in our streets. Citizens resort to placing cones in dangerous potholes because the city won't act.
+                    </div>
+                </div>
+
+                <div class="pothole-gallery">
+                    <div class="pothole-item">
+                        <img src="5.JPG" alt="News coverage of daily pothole crisis">
+                        <div class="pothole-caption">
+                            <h3>Media Spotlight on Failure</h3>
+                            <p>Local news now features a "Pothole of the Day" segment - a shameful testament to our city's infrastructure collapse.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pothole-item">
+                        <img src="6.JPG" alt="Traffic cone stuck in massive pothole">
+                        <div class="pothole-caption">
+                            <h3>Citizens Take Action</h3>
+                            <p>Residents place warning cones in dangerous craters because the city won't. This shouldn't be necessary in 2025.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pothole-item">
+                        <img src="7.JPG" alt="Multiple cones marking street hazards">
+                        <div class="pothole-caption">
+                            <h3>Systematic Neglect</h3>
+                            <p>Multiple hazards on a single street. This is what happens when infrastructure isn't a priority.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evidence Section -->
+            <div class="evidence-section">
+                <h2 style="text-align: center; font-size: 2.5rem; color: var(--crimson); margin-bottom: 3rem;">The Evidence is Overwhelming</h2>
+                
+                <div class="evidence-grid">
+                    <div class="evidence-photo">
+                        <img src="4.JPG" alt="Parking violation on windshield">
+                    </div>
+                    <div class="evidence-text">
+                        <h3>Revenue Over Service</h3>
+                        <p>The city is quick to issue parking tickets and collect fines, but where does that money go? Not to fixing our streets or improving services.</p>
+                        <p>We see aggressive enforcement for revenue generation while basic city services remain neglected. This backwards priority system must end.</p>
+                        <div class="stat-box">
+                            <div class="stat-number">$30+ Million</div>
+                            <div class="stat-label">Collected annually in parking fines while streets crumble</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="evidence-grid" style="margin-top: 4rem;">
+                    <div class="evidence-text">
+                        <h3>Neighborhood Abandonment</h3>
+                        <p>From Carrollton to the Ninth Ward, every neighborhood has been left to deteriorate. Residents joke about "crater tours" and "pothole bingo" - but this is no laughing matter.</p>
+                        <p>Our communities deserve better than makeshift warning signs and DIY road repairs. It's time for real leadership that prioritizes people over politics.</p>
+                        <div class="stat-box">
+                            <div class="stat-number">70%</div>
+                            <div class="stat-label">Of streets rated "poor" or "very poor" condition</div>
+                        </div>
+                    </div>
+                    <div class="evidence-photo">
+                        <img src="1.JPG" alt="Neighborhood street conditions">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issues Grid -->
+            <div class="issues-grid" style="margin-top: 4rem;">
                 <div class="issue-card">
-                    <span class="issue-icon">🕳️</span>
-                    <h3 class="issue-title">Infrastructure Crisis: Potholes</h3>
-                    <p class="issue-description">Our streets are falling apart. Massive potholes damage vehicles, endanger cyclists, and reflect the city's neglect of basic infrastructure maintenance.</p>
+                    <span class="issue-icon">🚗</span>
+                    <h3 class="issue-title">Emergency Street Repair Program</h3>
+                    <p class="issue-description">We will launch an immediate 100-day emergency repair blitz to fix the most dangerous road conditions citywide.</p>
                     <ul class="issue-points">
-                        <li>Emergency pothole repair program within first 100 days</li>
-                        <li>Comprehensive street resurfacing plan</li>
-                        <li>Preventive maintenance to avoid future deterioration</li>
-                        <li>Accountability for contractors and city maintenance crews</li>
+                        <li>Deploy rapid response teams for critical repairs</li>
+                        <li>Create a public tracking system for all repairs</li>
+                        <li>Hold contractors accountable for quality work</li>
+                        <li>Establish preventive maintenance schedules</li>
                     </ul>
                 </div>
 
                 <div class="issue-card">
-                    <span class="issue-icon">🚧</span>
-                    <h3 class="issue-title">Neighborhood Infrastructure & Flooding</h3>
-                    <p class="issue-description">Broken drainage systems and poor maintenance have caused unnecessary flooding and property damage. We will modernize our infrastructure with urgency.</p>
+                    <span class="issue-icon">💰</span>
+                    <h3 class="issue-title">Financial Accountability</h3>
+                    <p class="issue-description">Every dollar collected from citizens must go toward improving their quality of life, not lining politicians' pockets.</p>
                     <ul class="issue-points">
-                        <li>Repair and upgrade drainage systems citywide</li>
-                        <li>Enforce quality standards for road and utility work</li>
-                        <li>Publish a public, trackable street repair dashboard</li>
-                        <li>Coordinate with state/federal resources for major upgrades</li>
+                        <li>Full transparency on all city spending</li>
+                        <li>Redirect parking fine revenue to infrastructure</li>
+                        <li>Audit all city departments for waste and fraud</li>
+                        <li>Implement zero-based budgeting practices</li>
                     </ul>
                 </div>
 
+                <div class="issue-card">
+                    <span class="issue-icon">🏘️</span>
+                    <h3 class="issue-title">Neighborhood Revival</h3>
+                    <p class="issue-description">Every neighborhood deserves equal attention and resources. No more forgotten communities or selective service.</p>
+                    <ul class="issue-points">
+                        <li>Equitable distribution of city resources</li>
+                        <li>Community input on neighborhood priorities</li>
+                        <li>Regular town halls in every district</li>
+                        <li>Measurable improvement goals for each area</li>
+                    </ul>
+                </div>
 
+                <div class="issue-card">
+                    <span class="issue-icon">🌊</span>
+                    <h3 class="issue-title">Flood Prevention</h3>
+                    <p class="issue-description">Fix our drainage systems before the next storm, not after. Proactive infrastructure saves lives and property.</p>
+                    <ul class="issue-points">
+                        <li>Comprehensive drainage system overhaul</li>
+                        <li>Regular pump station maintenance and upgrades</li>
+                        <li>Green infrastructure solutions for water management</li>
+                        <li>Emergency response plans for every neighborhood</li>
+                    </ul>
+                </div>
+
+                <div class="issue-card">
+                    <span class="issue-icon">👮</span>
+                    <h3 class="issue-title">Public Safety Reform</h3>
+                    <p class="issue-description">Safe streets start with well-maintained infrastructure and properly funded public safety.</p>
+                    <ul class="issue-points">
+                        <li>Adequate lighting on all city streets</li>
+                        <li>Support and properly fund NOPD</li>
+                        <li>Community policing initiatives</li>
+                        <li>Address root causes of crime through opportunity</li>
+                    </ul>
+                </div>
+
+                <div class="issue-card">
+                    <span class="issue-icon">🏭</span>
+                    <h3 class="issue-title">Economic Development</h3>
+                    <p class="issue-description">Bring real jobs and opportunities to New Orleans, not just tourism and service positions.</p>
+                    <ul class="issue-points">
+                        <li>Attract manufacturing and tech companies</li>
+                        <li>Support local entrepreneurs with real resources</li>
+                        <li>Create job training programs for residents</li>
+                        <li>Develop abandoned properties for productive use</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Call to Action Section -->
+            <div class="cta-section">
+                <h2>Enough is Enough</h2>
+                <p>These photos tell the story of a city betrayed by its leadership. But together, we can write a new chapter for New Orleans.</p>
+                <div class="cta-buttons">
+                    <a href="https://c0b2d403-fd0c-48af-b20b-65dbb67528ae.paylinks.godaddy.com/d49ef5b3-f814-48fc-aaf5-31e" class="cta-btn cta-primary" target="_blank">Donate to Fix Our City</a>
+                    <a href="#volunteer" class="cta-btn cta-secondary">Join the Movement</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.issue-card, .pothole-item, .evidence-grid').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add dynamic counter animation for stat numbers
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start) + (element.innerHTML.includes('%') ? '%' : element.innerHTML.includes('Million') ? '+ Million' : '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Trigger counter animations when visible
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.animated) {
+                    entry.target.animated = true;
+                    const value = entry.target.innerText;
+                    if (value.includes('30')) {
+                        animateValue(entry.target, 0, 30, 2000);
+                    } else if (value.includes('70')) {
+                        animateValue(entry.target, 0, 70, 2000);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-number').forEach(el => {
+            statObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
