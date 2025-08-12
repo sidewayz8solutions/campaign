@@ -938,8 +938,9 @@
 
             // Helper to try playing once
             let playedOnce = false;
+            let endedOnce = false;
             function tryPlay(label = 'auto') {
-                if (playedOnce) return;
+                if (playedOnce || endedOnce) return;
                 audio.play().then(() => {
                     playedOnce = true;
                     console.log('Audio playing (' + label + ')');
@@ -1000,13 +1001,13 @@
                 }
             });
 
-            // Update button when audio ends
+            // Update state when audio ends (no loop until full page reload)
             audio.addEventListener('ended', function() {
+                endedOnce = true;
                 audioControl.classList.remove('playing');
                 audioIcon.textContent = '🔇';
                 audioControl.style.animation = 'none';
-                playedOnce = false;
-                addGestureListeners();
+                // Do not reset playedOnce or add gesture listeners; require page revisit to play again
             });
 
             // Error handler to surface missing file
