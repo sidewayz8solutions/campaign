@@ -178,7 +178,7 @@
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            filter: brightness(0.3) opacity(0.6);
+            filter: brightness(0.55) opacity(0.9);
         }
 
         .hero-overlay {
@@ -927,53 +927,91 @@
     </audio>
 
     <script>
-        // Auto-play audio when page loads
+        // Robust audio start on load plus first user interaction
         window.addEventListener('DOMContentLoaded', function() {
             const audio = document.getElementById('crisisAudio');
             const audioControl = document.getElementById('audioControl');
             const audioIcon = document.getElementById('audioIcon');
-            
-            // Attempt to play audio automatically
-            if (audio) {
-                // Add a small delay to ensure page is fully loaded
-                setTimeout(() => {
-                    audio.play().then(() => {
-                        console.log('Audio playing successfully');
-                        audioControl.classList.add('playing');
-                        audioIcon.textContent = '🔊';
-                    }).catch(error => {
-                        console.log('Autoplay prevented:', error);
-                        // If autoplay is blocked, show the control button prominently
-                        audioControl.style.animation = 'pulse 1s ease-in-out infinite';
-                        audioIcon.textContent = '🔇';
-                    });
-                }, 500);
-                
-                // Audio control button functionality
-                audioControl.addEventListener('click', function() {
-                    if (audio.paused) {
-                        audio.play().then(() => {
-                            audioControl.classList.add('playing');
-                            audioIcon.textContent = '🔊';
-                            audioControl.style.animation = 'pulse 2s ease-in-out infinite';
-                        }).catch(error => {
-                            console.log('Play failed:', error);
-                        });
-                    } else {
-                        audio.pause();
-                        audioControl.classList.remove('playing');
-                        audioIcon.textContent = '🔇';
-                        audioControl.style.animation = 'none';
+
+            if (!audio) return;
+
+            // Helper to try playing once
+            let playedOnce = false;
+            function tryPlay(label = 'auto') {
+                if (playedOnce) return;
+                audio.play().then(() => {
+                    playedOnce = true;
+                    console.log('Audio playing (' + label + ')');
+                    audioControl.classList.add('playing');
+                    audioIcon.textContent = '🔊';
+                    audioControl.style.animation = 'pulse 2s ease-in-out infinite';
+                    removeGestureListeners();
+                }).catch(err => {
+                    console.log('Play blocked (' + label + '):', err);
+                    audioControl.style.animation = 'pulse 1s ease-in-out infinite';
+                    audioIcon.textContent = '🔇';
+                });
+            }
+
+            // Try immediately after a short delay
+            setTimeout(() => tryPlay('delayed-autoplay'), 400);
+
+            // If user arrived with ?playAudio=true, be more aggressive
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('playAudio') === 'true') {
+                // Also try again after visibility change (Safari sometimes allows then)
+                document.addEventListener('visibilitychange', function onVis() {
+                    if (!document.hidden) {
+                        tryPlay('visibility');
+                        document.removeEventListener('visibilitychange', onVis);
                     }
                 });
-                
-                // Update button when audio ends
-                audio.addEventListener('ended', function() {
+            }
+
+            // Fallbacks: start on first user gesture
+            function onFirstPointer() { tryPlay('pointer'); }
+            function onFirstKey() { tryPlay('key'); }
+            function onFirstScroll() { tryPlay('scroll'); }
+
+            function addGestureListeners() {
+                window.addEventListener('pointerdown', onFirstPointer, { once: true });
+                window.addEventListener('keydown', onFirstKey, { once: true });
+                window.addEventListener('scroll', onFirstScroll, { once: true, passive: true });
+            }
+            function removeGestureListeners() {
+                window.removeEventListener('pointerdown', onFirstPointer);
+                window.removeEventListener('keydown', onFirstKey);
+                window.removeEventListener('scroll', onFirstScroll);
+            }
+            addGestureListeners();
+
+            // Audio control button toggles
+            audioControl.addEventListener('click', function() {
+                if (audio.paused) {
+                    tryPlay('button');
+                } else {
+                    audio.pause();
                     audioControl.classList.remove('playing');
                     audioIcon.textContent = '🔇';
                     audioControl.style.animation = 'none';
-                });
-            }
+                    playedOnce = false; // allow re-play
+                    addGestureListeners();
+                }
+            });
+
+            // Update button when audio ends
+            audio.addEventListener('ended', function() {
+                audioControl.classList.remove('playing');
+                audioIcon.textContent = '🔇';
+                audioControl.style.animation = 'none';
+                playedOnce = false;
+                addGestureListeners();
+            });
+
+            // Error handler to surface missing file
+            audio.addEventListener('error', function(e) {
+                console.warn('Audio file failed to load. Ensure 1111.m4a is in the site folder.');
+            });
         });
 
         // Smooth scroll for anchor links
