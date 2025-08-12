@@ -60,17 +60,48 @@
     </div>
   </section>
 
+  <!--
+    How to add a new event (copy/paste):
+
+    <div class="event-card">
+      <h3>📍 Event Title – Date</h3>
+      <p>Short description (1–2 lines). Include location if helpful.</p>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Event Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div style="display:flex; gap:.75rem; flex-wrap:wrap">
+        <a class="btn btn-dark" href="FLYER_FILE" target="_blank" rel="noopener">View Flyer</a>
+        <a class="btn btn-gold" href="https://youtube.com/shorts/VIDEO_ID?feature=share" target="_blank" rel="noopener">Open Video</a>
+      </div>
+    </div>
+
+    Place inside the appropriate section below (Current Events or Future Events).
+  -->
   <main class="container">
-    <section class="section">
-      <div class="event-card">
-        <h2 style="margin-top:0">🎉 Toga Party – The Return to 1984</h2>
-        <p style="margin:.5rem 0 1rem">Celebrate with us and watch the promo video below.</p>
-        <div class="video-embed" style="margin-bottom:1rem">
-          <iframe src="https://www.youtube.com/embed/LsKsDEa87Aw" title="Toga Party Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <!-- Current Events -->
+    <section class="section" aria-labelledby="current-events">
+      <h2 id="current-events" style="margin:0 0 1rem; font-family:'Cormorant Garamond', serif; color: var(--mardi-gras-purple);">Current Events</h2>
+      <div class="grid">
+        <div class="event-card">
+          <h3 style="margin-top:0">🎉 Toga Party – The Return to 1984</h3>
+          <p style="margin:.5rem 0 1rem">Celebrate with us and watch the promo video below.</p>
+          <div class="video-embed" style="margin-bottom:1rem">
+            <iframe src="https://www.youtube.com/embed/LsKsDEa87Aw" title="Toga Party Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div style="display:flex; gap:.75rem; flex-wrap:wrap">
+            <a class="btn btn-dark" href="toga-party-flyer.jpg" target="_blank" rel="noopener">View Flyer</a>
+            <a class="btn btn-gold" href="https://youtube.com/shorts/LsKsDEa87Aw?feature=share" target="_blank" rel="noopener">Open Promo Video</a>
+          </div>
         </div>
-        <div style="display:flex; gap:.75rem; flex-wrap:wrap">
-          <a class="btn btn-dark" href="toga-party-flyer.jpg" target="_blank" rel="noopener">View Flyer</a>
-          <a class="btn btn-gold" href="https://youtube.com/shorts/LsKsDEa87Aw?feature=share" target="_blank" rel="noopener">Open Promo Video</a>
+      </div>
+    </section>
+
+    <!-- Future Events -->
+    <section class="section" aria-labelledby="future-events">
+      <h2 id="future-events" style="margin:0 0 1rem; font-family:'Cormorant Garamond', serif; color: var(--mardi-gras-purple);">Future Events</h2>
+      <div class="grid">
+        <div class="event-card" style="text-align:center; padding:2rem;">
+          <p style="margin:0; opacity:.8">More events coming soon. Check back for updates and announcements.</p>
         </div>
       </div>
     </section>
