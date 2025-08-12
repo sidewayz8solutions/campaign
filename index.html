@@ -218,6 +218,32 @@
           0 0 20px rgba(255, 215, 0, 0.2);
       }
 
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .phone-number {
+        color: var(--mardi-gras-gold);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        background: rgba(255, 215, 0, 0.1);
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .phone-number:hover {
+        background: rgba(255, 215, 0, 0.2);
+        border-color: var(--mardi-gras-gold);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      }
+
       /* Hero Section */
       .hero {
         height: 100vh;
@@ -1047,6 +1073,15 @@
 
         .donate-btn {
           display: none;
+        }
+
+        .nav-right {
+          gap: 1rem;
+        }
+
+        .phone-number {
+          font-size: 0.9rem;
+          padding: 0.4rem 0.8rem;
         }
       }
 
@@ -2001,11 +2036,14 @@
           <li><a href="#vision">Vision</a></li>
           <li><a href="videos.html">Videos</a></li>
         </ul>
-        <a
-          href="donate.html"
-          class="donate-btn"
-          >Donate</a
-        >
+        <div class="nav-right">
+          <a href="tel:5045142553" class="phone-number">(504) 514-2553</a>
+          <a
+            href="donate.html"
+            class="donate-btn"
+            >Donate</a
+          >
+        </div>
         <div class="mobile-menu-toggle" id="mobileToggle">
           <span></span>
           <span></span>
