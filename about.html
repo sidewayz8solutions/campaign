@@ -5,66 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Frank Scurlock</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
-    :root { --mardi-gras-purple:#1a0f3d; --deep-purple:#2d1b69; --mardi-gras-gold:#ffd700; }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,system-ui,-apple-system,Arial,sans-serif;background:#f7f8fb;color:#1b1b1b}
-    header{position:sticky;top:0;z-index:10;background:rgba(26,15,61,.96);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-    .container{max-width:1100px;margin:0 auto;padding:1rem 1.25rem}
-    .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem}
-    .logo{color:var(--mardi-gras-gold);font-weight:700;text-decoration:none;display:flex;align-items:center;gap:.5rem}
-    .logo .icon{font-size:1.25rem}
-    .nav a{color:#fff;text-decoration:none}
-    .hero{background:linear-gradient(135deg,var(--mardi-gras-purple),var(--deep-purple));color:#fff;padding:3rem 0;text-align:center}
-    .hero h1{font-family:'Cormorant Garamond',serif;font-size:2.6rem;margin:0 0 .5rem}
-    .hero p{margin:0;opacity:.9}
-    main.section{padding:2rem 0}
-    .grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
-    .card{background:#fff;border-radius:16px;padding:1.25rem;box-shadow:0 10px 25px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06)}
-    h2{font-family:'Cormorant Garamond',serif;color:var(--mardi-gras-purple)}
-    ul{margin:0 0 0 1.25rem;padding:0}
-    footer{padding:2rem 0;color:#fff;background:#111;text-align:center}
-    footer a{color:var(--mardi-gras-gold);text-decoration:none}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --primary-blue: #0f1b3c;
+      --secondary-blue: #1e3a8a;
+      --royal-blue: #1e40af;
+      --accent-blue: #3182ce;
+      --accent-red: #dc2626;
+      --gold: #fbbf24;
+      --purple: #553c9a;
+      --mardi-gras-purple: #7b2d8e;
+      --mardi-gras-gold: #ffd700;
+      --mardi-gras-green: #228b22;
+      --text-dark: #1f2937;
+      --text-light: #f3f4f6;
+      --gradient-1: linear-gradient(135deg, #0f1b3c 0%, #1e3a8a 100%);
+      --gradient-2: linear-gradient(135deg, #1e40af 0%, #3182ce 100%);
+      --mardi-gras-gradient: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--mardi-gras-gold) 50%, var(--mardi-gras-green) 100%);
+    }
+    body { font-family: "Crimson Text", "Libre Baskerville", Georgia, serif; line-height: 1.7; color: var(--text-dark); overflow-x: hidden; font-weight: 400; }
+    h1, h2, h3, h4, h5, h6 { font-family: "Cormorant Garamond", "Crimson Text", Georgia, serif; font-weight: 600; letter-spacing: 0.5px; }
+    .nav-links, .btn-primary, .btn-secondary, .donate-btn { font-family: "Montserrat", "Helvetica Neue", sans-serif; font-weight: 500; letter-spacing: 0.5px; }
+
+    /* Navigation */
+    nav { position: fixed; top: 0; width: 100%; background: rgba(0, 27, 99, 0.95); backdrop-filter: blur(10px); z-index: 1000; transition: all 0.3s ease; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3); }
+    nav.scrolled { background: rgba(15, 27, 60, 0.98); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); }
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { display: flex; align-items: center; gap: 12px; color: var(--mardi-gras-gold); text-decoration: none; font-size: 1.4rem; font-family: "Cormorant Garamond", serif; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+    .logo:hover { transform: scale(1.05); color: #ffffff; text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
+    .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #7d0000 0%, #b91b20 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; animation: redGlow 3s ease-in-out infinite alternate; border: 2px solid rgba(255, 215, 0, 0.3); }
+    @keyframes redGlow { from { box-shadow: 0 0 5px rgba(139, 21, 56, 0.5); } to { box-shadow: 0 0 15px rgba(165, 15, 22, 0.8), 0 0 25px rgba(255, 215, 0, 0.2); } }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: white; text-decoration: none; transition: all 0.3s ease; position: relative; padding: 0.5rem 1rem; border-radius: 25px; }
+    .nav-links a::after { content: ""; position: absolute; bottom: -5px; left: 50%; width: 0; height: 2px; background: var(--mardi-gras-gold); transition: all 0.3s ease; transform: translateX(-50%); }
+    .nav-links a:hover::after { width: 80%; }
+    .nav-links a:hover { background: rgba(255, 255, 255, 0.1); }
+    .donate-btn { background: linear-gradient(135deg, #8f0011 0%, #a91b47 100%); color: white; padding: 0.75rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139, 21, 56, 0.4); position: relative; overflow: hidden; border: 1px solid rgba(255, 215, 0, 0.3); }
+
+    /* Hero Section */
+    .hero-section { background: linear-gradient(135deg, #0f1b3c 0%, #1e3a8a 50%, #0f1b3c 100%); color: white; padding: 8rem 0 4rem; position: relative; overflow: hidden; }
+    .hero-section::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>'); opacity: 0.3; }
+    .hero-content { position: relative; z-index: 1; text-align: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; font-family: "Cormorant Garamond", serif; font-weight: 700; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+    .hero-content .subtitle { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9; font-family: "Crimson Text", serif; }
+
+    /* Main Content */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 4rem 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+    .about-card { background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.05); transition: all 0.3s ease; }
+    .about-card:hover { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15); }
+    .about-card h2 { color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 1.5rem; font-family: "Cormorant Garamond", serif; }
+    .about-card p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .about-card ul { margin-left: 1.5rem; }
+    .about-card li { font-size: 1.1rem; line-height: 1.8; margin-bottom: 0.8rem; }
 
     /* Timeline */
-    .timeline { margin-top: 1rem; position: relative; }
-    .timeline::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: rgba(0,0,0,.08); }
-    .timeline-item { position: relative; padding-left: 56px; margin: 1rem 0; }
-    .timeline-year { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--mardi-gras-gold); color: #1a0f3d; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid rgba(0,0,0,.06); }
-    .timeline-content { background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 12px; padding: .75rem 1rem; box-shadow: 0 8px 20px rgba(0,0,0,.06); }
-    .timeline-content h3 { margin: 0 0 .25rem; font-family: 'Cormorant Garamond', serif; color: var(--mardi-gras-purple); font-size: 1.2rem; }
-    .timeline-content p { margin: 0; }
+    .timeline { margin-top: 2rem; position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 25px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--mardi-gras-gold), var(--primary-blue)); }
+    .timeline-item { position: relative; padding-left: 80px; margin: 2rem 0; }
+    .timeline-year { position: absolute; left: 0; top: 0; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--mardi-gras-gold), #ffed4e); color: var(--primary-blue); display: flex; align-items: center; justify-content: center; font-weight: 700; border: 3px solid white; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); font-size: 0.9rem; }
+    .timeline-content { background: white; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 15px; padding: 1.5rem 2rem; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; }
+    .timeline-content:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); }
+    .timeline-content h3 { margin: 0 0 0.5rem; font-family: 'Cormorant Garamond', serif; color: var(--primary-blue); font-size: 1.4rem; }
+    .timeline-content p { margin: 0; font-size: 1.1rem; line-height: 1.7; }
+
+    /* Footer */
+    footer { background: linear-gradient(135deg, #0f1b3c 0%, #1e3a8a 100%); color: white; padding: 3rem 0 2rem; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+    .footer-section h4 { margin-bottom: 1rem; color: var(--mardi-gras-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+    .footer-section a { color: white; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s ease; }
+    .footer-section a:hover { color: var(--mardi-gras-gold); }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2.5rem; }
+      .nav-container { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+      .timeline-item { padding-left: 60px; }
+      .timeline-year { width: 40px; height: 40px; font-size: 0.8rem; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="logo" href="index.html"><span class="icon">⚜️</span> SCURLOCK 2025</a>
-      <nav style="display:flex; gap:1rem; align-items:center">
-        <a href="index.html">Home</a>
-        <a href="issues.html">Issues</a>
-        <a href="videos.html">Videos</a>
-        <a href="donate.html" style="color:var(--mardi-gras-gold);font-weight:700">Donate</a>
-      </nav>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">⚜️</div>
+        <span>SCURLOCK 2025</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="issues.html">Issues</a></li>
+        <li><a href="#vision">Vision</a></li>
+        <li><a href="videos.html">Videos</a></li>
+      </ul>
+      <a href="donate.html" class="donate-btn">Donate</a>
     </div>
-  </header>
+  </nav>
 
-  <section class="hero">
-    <div class="container">
+  <section class="hero-section">
+    <div class="hero-content">
       <h1>About Frank Scurlock</h1>
-      <p>Innovation, Integrity, and Independence for New Orleans</p>
+      <p class="subtitle">Innovation, Integrity, and Independence for New Orleans</p>
     </div>
   </section>
 
   <main class="container section">
-    <div class="grid">
-      <div class="card">
+    <div class="about-grid">
+      <div class="about-card">
         <h2>Who is Frank?</h2>
         <p>A true son of New Orleans, Frank Mials Scurlock brings a lifetime of business innovation and community service to his campaign for mayor. As a successful entrepreneur who has created over 500 jobs across Louisiana, Frank understands what it takes to revitalize our city's economy.</p>
         <p>From his family's legacy with Space Walk — the company that brought joy to millions through inflatable entertainment — to his current work renovating facilities in Gert Town for local manufacturing, Frank has always invested in our community's future.</p>
       </div>
-      <div class="card">
+      <div class="about-card">
         <h2>Experience & Focus</h2>
         <ul>
           <li>Job creator and innovator — 20+ businesses incorporated; 500+ retail stores opened</li>
@@ -74,11 +135,11 @@
           <li>Focused on public safety, quality of life, and economic growth</li>
         </ul>
       </div>
-      <div class="card">
+      <div class="about-card">
         <h2>Why Frank is Running</h2>
         <p>New Orleans is in a crisis of leadership and services. Frank is running to restore trust and deliver results. He will marshal resources, cut through bureaucracy, and hold city hall accountable so neighborhoods can thrive.</p>
       </div>
-      <div class="card">
+      <div class="about-card">
         <h2>Priorities</h2>
         <ul>
           <li>Fix the streets and drainage with transparent timelines</li>
@@ -88,7 +149,7 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="about-card">
         <h2>Timeline</h2>
         <div class="timeline">
           <div class="timeline-item">
@@ -133,7 +194,32 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2025 Frank Scurlock for Mayor • <a href="events.html">Events</a> • <a href="donate.html">Donate</a> • <a href="videos.html">Videos</a></p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Campaign</h4>
+          <a href="about.html">About Frank</a>
+          <a href="issues.html">Issues</a>
+          <a href="#vision">Vision</a>
+          <a href="events.html">Events</a>
+        </div>
+        <div class="footer-section">
+          <h4>Get Involved</h4>
+          <a href="#volunteer">Volunteer</a>
+          <a href="donate.html">Donate</a>
+          <a href="yard-signs.html">Yard Signs</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-section">
+          <h4>Media</h4>
+          <a href="press.html">Press Releases</a>
+          <a href="photos.html">Photos</a>
+          <a href="videos.html">Videos</a>
+          <a href="#news">In The News</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Frank Scurlock for Mayor. All rights reserved. | Paid for by Frank Scurlock</p>
+      </div>
     </div>
   </footer>
 </body>

@@ -5,77 +5,311 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Photos - Frank Scurlock for Mayor</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
-    :root { --mardi-gras-purple:#1a0f3d; --deep-purple:#2d1b69; --mardi-gras-gold:#ffd700; }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,system-ui,-apple-system,Arial,sans-serif;background:#f7f8fb;color:#1b1b1b}
-    header{position:sticky;top:0;z-index:10;background:rgba(26,15,61,.96);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-    .container{max-width:1100px;margin:0 auto;padding:1rem 1.25rem}
-    .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem}
-    .logo{color:var(--mardi-gras-gold);font-weight:700;text-decoration:none;display:flex;align-items:center;gap:.5rem}
-    .logo .icon{font-size:1.25rem}
-    .nav a{color:#fff;text-decoration:none}
-    .hero{background:linear-gradient(135deg,var(--mardi-gras-purple),var(--deep-purple));color:#fff;padding:3rem 0;text-align:center}
-    .hero h1{font-family:'Cormorant Garamond',serif;font-size:2.6rem;margin:0 0 .5rem}
-    .hero p{margin:0;opacity:.9}
-    .section{padding:2rem 0}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
-    .photo{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06);background:#fff;cursor:pointer}
-    .photo img{display:block;width:100%;height:220px;object-fit:cover}
-    .caption{padding:.5rem .75rem;font-size:.95rem}
-    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:1000}
-    .lightbox img{max-width:90vw;max-height:85vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-    .lightbox:target{display:flex}
-    .lightbox a.close{position:absolute;top:1rem;right:1rem;color:#fff;font-size:2rem;text-decoration:none}
-    footer{padding:2rem 0;color:#fff;background:#111;text-align:center}
-    footer a{color:var(--mardi-gras-gold);text-decoration:none}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --primary-blue: #0f1b3c;
+      --secondary-blue: #1e3a8a;
+      --mardi-gras-purple: #7b2d8e;
+      --mardi-gras-gold: #ffd700;
+      --mardi-gras-green: #228b22;
+      --text-dark: #1f2937;
+    }
+    body { font-family: "Crimson Text", "Libre Baskerville", Georgia, serif; line-height: 1.7; color: var(--text-dark); overflow-x: hidden; font-weight: 400; }
+    h1, h2, h3, h4, h5, h6 { font-family: "Cormorant Garamond", "Crimson Text", Georgia, serif; font-weight: 600; letter-spacing: 0.5px; }
+
+    /* Navigation */
+    nav { position: fixed; top: 0; width: 100%; background: rgba(0, 27, 99, 0.95); backdrop-filter: blur(10px); z-index: 1000; transition: all 0.3s ease; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3); }
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { display: flex; align-items: center; gap: 12px; color: var(--mardi-gras-gold); text-decoration: none; font-size: 1.4rem; font-family: "Cormorant Garamond", serif; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+    .logo:hover { transform: scale(1.05); color: #ffffff; text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
+    .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #7d0000 0%, #b91b20 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; animation: redGlow 3s ease-in-out infinite alternate; border: 2px solid rgba(255, 215, 0, 0.3); }
+    @keyframes redGlow { from { box-shadow: 0 0 5px rgba(139, 21, 56, 0.5); } to { box-shadow: 0 0 15px rgba(165, 15, 22, 0.8), 0 0 25px rgba(255, 215, 0, 0.2); } }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: white; text-decoration: none; transition: all 0.3s ease; position: relative; padding: 0.5rem 1rem; border-radius: 25px; }
+    .nav-links a::after { content: ""; position: absolute; bottom: -5px; left: 50%; width: 0; height: 2px; background: var(--mardi-gras-gold); transition: all 0.3s ease; transform: translateX(-50%); }
+    .nav-links a:hover::after { width: 80%; }
+    .nav-links a:hover { background: rgba(255, 255, 255, 0.1); }
+    .donate-btn { background: linear-gradient(135deg, #8f0011 0%, #a91b47 100%); color: white; padding: 0.75rem 2rem; border-radius: 30px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139, 21, 56, 0.4); border: 1px solid rgba(255, 215, 0, 0.3); }
+
+    /* Hero Section */
+    .hero-section { background: linear-gradient(135deg, #0f1b3c 0%, #1e3a8a 50%, #0f1b3c 100%); color: white; padding: 8rem 0 4rem; position: relative; overflow: hidden; }
+    .hero-section::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>'); opacity: 0.3; }
+    .hero-content { position: relative; z-index: 1; text-align: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; font-family: "Cormorant Garamond", serif; font-weight: 700; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+    .hero-content .subtitle { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9; font-family: "Crimson Text", serif; }
+
+    /* Main Content */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 4rem 0; }
+
+    /* Modern Photo Gallery */
+    .gallery-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .filter-btn { padding: 0.75rem 1.5rem; border: 2px solid var(--primary-blue); background: transparent; color: var(--primary-blue); border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-family: "Montserrat", sans-serif; font-weight: 600; }
+    .filter-btn:hover, .filter-btn.active { background: var(--primary-blue); color: white; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15, 27, 60, 0.3); }
+
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .photo-card { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; cursor: pointer; background: white; }
+    .photo-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2); }
+    .photo-card img { display: block; width: 100%; height: 280px; object-fit: cover; transition: transform 0.4s ease; }
+    .photo-card:hover img { transform: scale(1.05); }
+    .photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)); color: white; padding: 2rem 1.5rem 1.5rem; transform: translateY(100%); transition: transform 0.4s ease; }
+    .photo-card:hover .photo-overlay { transform: translateY(0); }
+    .photo-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; font-family: "Cormorant Garamond", serif; }
+    .photo-description { font-size: 0.9rem; opacity: 0.9; }
+    .photo-date { position: absolute; top: 1rem; right: 1rem; background: rgba(255, 215, 0, 0.9); color: var(--primary-blue); padding: 0.5rem 1rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; }
+
+    /* Modern Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: none; align-items: center; justify-content: center; z-index: 2000; backdrop-filter: blur(10px); }
+    .lightbox:target { display: flex; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .lightbox-content { position: relative; max-width: 90vw; max-height: 90vh; }
+    .lightbox img { max-width: 100%; max-height: 85vh; border-radius: 15px; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8); }
+    .lightbox-close { position: absolute; top: -3rem; right: 0; color: white; font-size: 2rem; text-decoration: none; background: rgba(255, 255, 255, 0.1); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+    .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
+    .lightbox-info { position: absolute; bottom: -4rem; left: 0; right: 0; color: white; text-align: center; }
+    .lightbox-info h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .lightbox-info p { opacity: 0.8; }
+
+    /* Footer */
+    footer { background: linear-gradient(135deg, #0f1b3c 0%, #1e3a8a 100%); color: white; padding: 3rem 0 2rem; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+    .footer-section h4 { margin-bottom: 1rem; color: var(--mardi-gras-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+    .footer-section a { color: white; text-decoration: none; display: block; margin-bottom: 0.5rem; transition: color 0.3s ease; }
+    .footer-section a:hover { color: var(--mardi-gras-gold); }
+    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2.5rem; }
+      .nav-container { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+      .photo-grid { grid-template-columns: 1fr; }
+      .gallery-filters { gap: 0.5rem; }
+      .filter-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="logo" href="index.html"><span class="icon">⚜️</span> SCURLOCK 2025</a>
-      <nav style="display:flex; gap:1rem; align-items:center">
-        <a href="index.html">Home</a>
-        <a href="issues.html">Issues</a>
-        <a href="videos.html">Videos</a>
-        <a href="donate.html" style="color:var(--mardi-gras-gold);font-weight:700">Donate</a>
-      </nav>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">⚜️</div>
+        <span>SCURLOCK 2025</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="issues.html">Issues</a></li>
+        <li><a href="videos.html">Videos</a></li>
+        <li><a href="photos.html">Photos</a></li>
+      </ul>
+      <a href="donate.html" class="donate-btn">Donate</a>
     </div>
-  </header>
+  </nav>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Photos</h1>
-      <p>Scenes from the campaign trail and across New Orleans.</p>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Campaign Photos</h1>
+      <p class="subtitle">Capturing moments from the campaign trail and across New Orleans</p>
     </div>
   </section>
 
   <main class="container section">
-    <div class="grid">
-      <!-- Example photos (replace with your actual filenames) -->
-      <a class="photo" href="#lb-11"><img src="11.png" alt="Campaign moment"><div class="caption">City Hall outreach</div></a>
-      <a class="photo" href="#lb-12"><img src="12.png" alt="Community meeting"><div class="caption">Neighborhood listening session</div></a>
-      <a class="photo" href="#lb-13"><img src="13.png" alt="Infrastructure focus"><div class="caption">Highlighting infrastructure needs</div></a>
-      <a class="photo" href="#lb-14"><img src="14.png" alt="Citizens take action"><div class="caption">Working with residents</div></a>
-      <a class="photo" href="#lb-15"><img src="15.png" alt="Revenue vs service"><div class="caption">Putting people before revenue</div></a>
-      <a class="photo" href="#lb-16"><img src="16.png" alt="Neighborhoods"><div class="caption">Stronger neighborhoods</div></a>
+    <!-- Gallery Filters -->
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">All Photos</button>
+      <button class="filter-btn" data-filter="campaign">Campaign Events</button>
+      <button class="filter-btn" data-filter="community">Community</button>
+      <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+    </div>
 
-      <!-- Lightbox targets -->
-      <div id="lb-11" class="lightbox"><a href="#" class="close">×</a><img src="11.png" alt="Campaign moment"></div>
-      <div id="lb-12" class="lightbox"><a href="#" class="close">×</a><img src="12.png" alt="Community meeting"></div>
-      <div id="lb-13" class="lightbox"><a href="#" class="close">×</a><img src="13.png" alt="Infrastructure focus"></div>
-      <div id="lb-14" class="lightbox"><a href="#" class="close">×</a><img src="14.png" alt="Citizens take action"></div>
-      <div id="lb-15" class="lightbox"><a href="#" class="close">×</a><img src="15.png" alt="Revenue vs service"></div>
-      <div id="lb-16" class="lightbox"><a href="#" class="close">×</a><img src="16.png" alt="Neighborhoods"></div>
+    <!-- Photo Grid -->
+    <div class="photo-grid">
+      <a class="photo-card" href="#lb-11" data-category="campaign">
+        <div class="photo-date">Aug 2025</div>
+        <img src="11.png" alt="Campaign moment">
+        <div class="photo-overlay">
+          <div class="photo-title">City Hall Outreach</div>
+          <div class="photo-description">Meeting with city officials to discuss infrastructure improvements and community needs.</div>
+        </div>
+      </a>
+
+      <a class="photo-card" href="#lb-12" data-category="community">
+        <div class="photo-date">Aug 2025</div>
+        <img src="12.png" alt="Community meeting">
+        <div class="photo-overlay">
+          <div class="photo-title">Neighborhood Listening Session</div>
+          <div class="photo-description">Engaging directly with residents to understand their concerns and priorities.</div>
+        </div>
+      </a>
+
+      <a class="photo-card" href="#lb-13" data-category="infrastructure">
+        <div class="photo-date">Aug 2025</div>
+        <img src="13.png" alt="Infrastructure focus">
+        <div class="photo-overlay">
+          <div class="photo-title">Infrastructure Assessment</div>
+          <div class="photo-description">Documenting the critical infrastructure needs across New Orleans neighborhoods.</div>
+        </div>
+      </a>
+
+      <a class="photo-card" href="#lb-14" data-category="community">
+        <div class="photo-date">Aug 2025</div>
+        <img src="14.png" alt="Citizens take action">
+        <div class="photo-overlay">
+          <div class="photo-title">Working with Residents</div>
+          <div class="photo-description">Collaborating with community members on solutions for local challenges.</div>
+        </div>
+      </a>
+
+      <a class="photo-card" href="#lb-15" data-category="campaign">
+        <div class="photo-date">Aug 2025</div>
+        <img src="15.png" alt="Revenue vs service">
+        <div class="photo-overlay">
+          <div class="photo-title">People Before Revenue</div>
+          <div class="photo-description">Advocating for policies that prioritize residents over revenue generation.</div>
+        </div>
+      </a>
+
+      <a class="photo-card" href="#lb-16" data-category="community">
+        <div class="photo-date">Aug 2025</div>
+        <img src="16.png" alt="Neighborhoods">
+        <div class="photo-overlay">
+          <div class="photo-title">Stronger Neighborhoods</div>
+          <div class="photo-description">Building connections and support systems within local communities.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Modern Lightbox -->
+    <div id="lb-11" class="lightbox">
+      <div class="lightbox-content">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="11.png" alt="Campaign moment">
+        <div class="lightbox-info">
+          <h3>City Hall Outreach</h3>
+          <p>Meeting with city officials to discuss infrastructure improvements and community needs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="lb-12" class="lightbox">
+      <div class="lightbox-content">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="12.png" alt="Community meeting">
+        <div class="lightbox-info">
+          <h3>Neighborhood Listening Session</h3>
+          <p>Engaging directly with residents to understand their concerns and priorities.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="lb-13" class="lightbox">
+      <div class="lightbox-content">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="13.png" alt="Infrastructure focus">
+        <div class="lightbox-info">
+          <h3>Infrastructure Assessment</h3>
+          <p>Documenting the critical infrastructure needs across New Orleans neighborhoods.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="lb-14" class="lightbox">
+      <div class="lightbox-content">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="14.png" alt="Citizens take action">
+        <div class="lightbox-info">
+          <h3>Working with Residents</h3>
+          <p>Collaborating with community members on solutions for local challenges.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="lb-15" class="lightbox">
+      <div class="lightbox-content">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="15.png" alt="Revenue vs service">
+        <div class="lightbox-info">
+          <h3>People Before Revenue</h3>
+          <p>Advocating for policies that prioritize residents over revenue generation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="lb-16" class="lightbox">
+      <div class="lightbox-content">
+        <a href="#" class="lightbox-close">×</a>
+        <img src="16.png" alt="Neighborhoods">
+        <div class="lightbox-info">
+          <h3>Stronger Neighborhoods</h3>
+          <p>Building connections and support systems within local communities.</p>
+        </div>
+      </div>
     </div>
   </main>
 
   <footer>
     <div class="container">
-      <p>&copy; 2025 Frank Scurlock for Mayor • <a href="events.html">Events</a> • <a href="donate.html">Donate</a> • <a href="videos.html">Videos</a></p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Campaign</h4>
+          <a href="about.html">About Frank</a>
+          <a href="issues.html">Issues</a>
+          <a href="#vision">Vision</a>
+          <a href="events.html">Events</a>
+        </div>
+        <div class="footer-section">
+          <h4>Get Involved</h4>
+          <a href="#volunteer">Volunteer</a>
+          <a href="donate.html">Donate</a>
+          <a href="yard-signs.html">Yard Signs</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-section">
+          <h4>Media</h4>
+          <a href="press.html">Press Releases</a>
+          <a href="photos.html">Photos</a>
+          <a href="videos.html">Videos</a>
+          <a href="#news">In The News</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Frank Scurlock for Mayor. All rights reserved. | Paid for by Frank Scurlock</p>
+      </div>
     </div>
   </footer>
+
+  <script>
+    // Modern photo gallery filtering
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const photoCards = document.querySelectorAll('.photo-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterBtns.forEach(b => b.classList.remove('active'));
+          // Add active class to clicked button
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+
+          photoCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = 'block';
+              card.style.animation = 'fadeIn 0.5s ease';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
