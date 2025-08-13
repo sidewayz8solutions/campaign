@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photos - Frank Scurlock for Mayor</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --mardi-gras-purple:#1a0f3d; --deep-purple:#2d1b69; --mardi-gras-gold:#ffd700; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Montserrat,system-ui,-apple-system,Arial,sans-serif;background:#f7f8fb;color:#1b1b1b}
+    header{position:sticky;top:0;z-index:10;background:rgba(26,15,61,.96);color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+    .container{max-width:1100px;margin:0 auto;padding:1rem 1.25rem}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .logo{color:var(--mardi-gras-gold);font-weight:700;text-decoration:none;display:flex;align-items:center;gap:.5rem}
+    .logo .icon{font-size:1.25rem}
+    .nav a{color:#fff;text-decoration:none}
+    .hero{background:linear-gradient(135deg,var(--mardi-gras-purple),var(--deep-purple));color:#fff;padding:3rem 0;text-align:center}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:2.6rem;margin:0 0 .5rem}
+    .hero p{margin:0;opacity:.9}
+    .section{padding:2rem 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .photo{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06);background:#fff;cursor:pointer}
+    .photo img{display:block;width:100%;height:220px;object-fit:cover}
+    .caption{padding:.5rem .75rem;font-size:.95rem}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:1000}
+    .lightbox img{max-width:90vw;max-height:85vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+    .lightbox:target{display:flex}
+    .lightbox a.close{position:absolute;top:1rem;right:1rem;color:#fff;font-size:2rem;text-decoration:none}
+    footer{padding:2rem 0;color:#fff;background:#111;text-align:center}
+    footer a{color:var(--mardi-gras-gold);text-decoration:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html"><span class="icon">⚜️</span> SCURLOCK 2025</a>
+      <nav style="display:flex; gap:1rem; align-items:center">
+        <a href="index.html">Home</a>
+        <a href="issues.html">Issues</a>
+        <a href="videos.html">Videos</a>
+        <a href="donate.html" style="color:var(--mardi-gras-gold);font-weight:700">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Photos</h1>
+      <p>Scenes from the campaign trail and across New Orleans.</p>
+    </div>
+  </section>
+
+  <main class="container section">
+    <div class="grid">
+      <!-- Example photos (replace with your actual filenames) -->
+      <a class="photo" href="#lb-11"><img src="11.png" alt="Campaign moment"><div class="caption">City Hall outreach</div></a>
+      <a class="photo" href="#lb-12"><img src="12.png" alt="Community meeting"><div class="caption">Neighborhood listening session</div></a>
+      <a class="photo" href="#lb-13"><img src="13.png" alt="Infrastructure focus"><div class="caption">Highlighting infrastructure needs</div></a>
+      <a class="photo" href="#lb-14"><img src="14.png" alt="Citizens take action"><div class="caption">Working with residents</div></a>
+      <a class="photo" href="#lb-15"><img src="15.png" alt="Revenue vs service"><div class="caption">Putting people before revenue</div></a>
+      <a class="photo" href="#lb-16"><img src="16.png" alt="Neighborhoods"><div class="caption">Stronger neighborhoods</div></a>
+
+      <!-- Lightbox targets -->
+      <div id="lb-11" class="lightbox"><a href="#" class="close">×</a><img src="11.png" alt="Campaign moment"></div>
+      <div id="lb-12" class="lightbox"><a href="#" class="close">×</a><img src="12.png" alt="Community meeting"></div>
+      <div id="lb-13" class="lightbox"><a href="#" class="close">×</a><img src="13.png" alt="Infrastructure focus"></div>
+      <div id="lb-14" class="lightbox"><a href="#" class="close">×</a><img src="14.png" alt="Citizens take action"></div>
+      <div id="lb-15" class="lightbox"><a href="#" class="close">×</a><img src="15.png" alt="Revenue vs service"></div>
+      <div id="lb-16" class="lightbox"><a href="#" class="close">×</a><img src="16.png" alt="Neighborhoods"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Frank Scurlock for Mayor • <a href="events.html">Events</a> • <a href="donate.html">Donate</a> • <a href="videos.html">Videos</a></p>
+    </div>
+  </footer>
+</body>
+</html>
