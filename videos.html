@@ -299,6 +299,29 @@
             .container {
                 padding: 0 1rem;
             }
+
+            /* Son of NOLA Hero Section Mobile */
+            .page-header + section {
+                padding: 2rem 1rem !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .page-header + section h2 {
+                font-size: 2rem !important;
+            }
+
+            .page-header + section p {
+                font-size: 1rem !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .page-header + section > div {
+                padding: 1rem !important;
+            }
+
+            .page-header + section video {
+                border-radius: 10px !important;
+            }
         }
     </style>
 </head>
@@ -330,26 +353,28 @@
                 <p>Watch Frank Scurlock's vision for New Orleans in action</p>
             </div>
 
+            <!-- Hero Featured Video Section -->
+            <section style="background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%); padding: 4rem 2rem; margin-bottom: 4rem; border-radius: 20px; color: white; text-align: center;">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem; color: var(--mardi-gras-gold); text-shadow: 0 2px 10px rgba(0,0,0,0.3);">🎬 SON OF NOLA</h2>
+                <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">Frank Scurlock's personal story as a true son of New Orleans and his deep connection to the city that shaped him.</p>
+
+                <div style="max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px);">
+                    <video controls style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);" poster="">
+                        <source src="sonofnola.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p style="margin-top: 1.5rem; font-size: 1.1rem; opacity: 0.8;">Discover Frank's journey from entrepreneur to mayoral candidate and his unwavering commitment to New Orleans.</p>
+                </div>
+            </section>
+
             <!-- Featured Videos Section -->
             <section class="video-section">
-                <h2 class="section-title">Featured Campaign Videos</h2>
+                <h2 class="section-title">Campaign Videos</h2>
                 <div class="video-grid" id="featuredVideos">
-                    <!-- Featured Son of NOLA video -->
-                    <div class="video-card">
-                        <div class="video-wrapper">
-                            <video controls poster="">
-                                <source src="sonofnola.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <div class="video-info">
-                            <h3 class="video-title">Son of NOLA</h3>
-                            <p class="video-description">Frank Scurlock's personal story as a true son of New Orleans and his deep connection to the city.</p>
-                            <span class="video-platform">🎬 Featured</span>
+                    <!-- Frank Scurlock Full Campaign Video -->
                         </div>
                     </div>
 
-                    <!-- Frank Scurlock Full Campaign Video -->
                     <div class="video-card">
                         <div class="video-wrapper">
                             <iframe src="https://www.youtube.com/embed/WclRFDaQfbc" title="Frank Scurlock Full Campaign Video" allowfullscreen></iframe>
