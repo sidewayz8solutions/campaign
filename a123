@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Frank Scurlock for Mayor</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --royal-purple: #5B2C6F;
+            --deep-purple: #2C003E;
+            --nola-gold: #FFD700;
+            --champagne-gold: #F7E7CE;
+            --emerald-green: #00897B;
+            --jazz-blue: #1E3A8A;
+            --crimson-accent: #DC143C;
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --shadow-dark: rgba(0, 0, 0, 0.15);
+            --shadow-light: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--nola-gold) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--royal-purple) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, var(--emerald-green) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            33% { transform: rotate(120deg) scale(1.1); }
+            66% { transform: rotate(240deg) scale(0.95); }
+        }
+
+        /* Floating Fleur-de-lis */
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .fleur {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.05;
+            animation: float-up 15s infinite linear;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.05;
+            }
+            90% {
+                opacity: 0.05;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        nav:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--nola-gold);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--nola-gold);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 0.75rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.3);
+            transition: width 0.5s, height 0.5s;
+            transform: translate(-50%, -50%);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--nola-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(91, 44, 111, 0.3) 0%, rgba(44, 0, 62, 0.3) 100%);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--nola-gold) 0%, var(--champagne-gold) 50%, var(--white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title img {
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .hero-title img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--champagne-gold);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Decorative Section */
+        .decorative-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .decorative-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--nola-gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon-card {
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .icon-card:hover {
+            transform: translateY(-15px) scale(1.05);
+        }
+
+        .icon-wrapper {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: inline-block;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            transition: width 0.4s, height 0.4s;
+            transform: translate(-50%, -50%);
+        }
+
+        .icon-card:hover .icon-wrapper::before {
+            width: 200%;
+            height: 200%;
+        }
+
+        .icon-wrapper img {
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+            transition: transform 0.4s ease;
+        }
+
+        .icon-card:hover .icon-wrapper img {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 10px 25px rgba(255, 215, 0, 0.5));
+        }
+
+        /* Payment Cards */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .payment-card:hover::before {
+            opacity: 1;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--nola-gold);
+            box-shadow: 0 30px 60px rgba(255, 215, 0, 0.2);
+        }
+
+        .payment-logo {
+            margin-bottom: 2rem;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-logo img {
+            max-height: 100%;
+            width: auto;
+            filter: brightness(1.1) contrast(1.1);
+            transition: all 0.3s ease;
+        }
+
+        .payment-card:hover .payment-logo img {
+            transform: scale(1.1);
+            filter: brightness(1.2) contrast(1.2) drop-shadow(0 5px 15px rgba(255, 215, 0, 0.5));
+        }
+
+        .payment-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--nola-gold);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-container::after {
+            content: '⚜️';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        .payment-handle {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--nola-gold);
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 50px;
+            display: inline-block;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .payment-info {
+            color: var(--champagne-gold);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .payment-info ul {
+            text-align: left;
+            max-width: 250px;
+            margin: 1.5rem auto;
+            list-style: none;
+        }
+
+        .payment-info li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .payment-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--nola-gold) 0%, var(--champagne-gold) 100%);
+            color: var(--deep-purple);
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .payment-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transition: width 0.6s, height 0.6s;
+            transform: translate(-50%, -50%);
+        }
+
+        .payment-btn:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .payment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--nola-gold);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem 0;
+                border-top: 1px solid rgba(255, 215, 0, 0.3);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-title img {
+                height: 60px;
+            }
+            
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .icons-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .icon-wrapper img {
+                height: 80px;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .payment-card {
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .payment-card:nth-child(1) { animation-delay: 0.1s; }
+        .payment-card:nth-child(2) { animation-delay: 0.2s; }
+        .payment-card:nth-child(3) { animation-delay: 0.3s; }
+        .payment-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Sparkle Effect */
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            animation: sparkle 1s ease-out;
+            color: var(--nola-gold);
+            font-size: 1.5rem;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation"></div>
+    
+    <!-- Floating Fleur-de-lis -->
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">⚜️</div>
+                <span>SCURLOCK 2025</span>
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="issues.html">Issues</a></li>
+                <li><a href="index.html#vision">Vision</a></li>
+                <li><a href="videos.html">Videos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-section fade-in">
+                <h1 class="hero-title">
+                    <img src="MNOGA.png" alt="MNOGA" style="height: 100px; width: auto;">
+                    Support Frank Scurlock
+                    <img src="FINAL12.png" alt="Campaign" style="height: 100px; width: auto;">
+                </h1>
+                <p class="hero-subtitle">
+                    Your donation helps us build a better New Orleans. Every contribution makes a difference in our fight for transparency, accountability, and real change.
+                </p>
+            </div>
+
+            <!-- New Orleans Icons Section -->
+            <div class="decorative-section">
+                <h2 class="section-title">Support New Orleans</h2>
+                <div class="icons-grid">
+                    <div class="icon-card">
+                        <div class="icon-wrapper">
+                            <img src="2.png" alt="New Orleans Heritage" style="height: 120px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-wrapper">
+                            <img src="3.png" alt="City Pride" style="height: 120px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-wrapper">
+                            <img src="1.png" alt="Jazz Culture" style="height: 120px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-wrapper">
+                            <img src="4.png" alt="Mardi Gras" style="height: 120px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-wrapper">
+                            <img src="pels.png" alt="Pelicans" style="height: 120px; width: auto;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-grid">
+                <!-- PayPal -->
+                <div class="payment-card">
+                    <div class="payment-logo">
+                        <img src="paypal.png" alt="PayPal">
+                    </div>
+                    <div class="qr-container">
+                        <div class="qr-code" id="paypal-qr">
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666;">
+                                Loading QR Code...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-info">
+                        <p>Scan the QR code above or click the button below</p>
+                    </div>
+                    <a href="https://www.paypal.com/qrcodes/p2pqrc/CNWMXS9ZRHTWC" class="payment-btn" target="_blank">
+                        Donate via PayPal
+                    </a>
+                </div>
+
+                <!-- Venmo -->
+                <div class="payment-card">
+                    <div class="payment-logo">
+                        <img src="venmo.png" alt="Venmo">
+                    </div>
+                    <div class="qr-container">
+                        <div class="qr-code" id="venmo-qr">
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666;">
+                                Loading QR Code...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-info">
+                        <div class="payment-handle">@Frank-Scurlock-2</div>
+                        <p>Scan the QR code above or search for the handle</p>
+                    </div>
+                    <a href="https://venmo.com/u/Frank-Scurlock-2" class="payment-btn" target="_blank">
+                        Open Venmo
+                    </a>
+                </div>
+
+                <!-- CashApp -->
+                <div class="payment-card">
+                    <div class="payment-logo">
+                        <img src="cashapp.png" alt="Cash App">
+                    </div>
+                    <div class="qr-container">
+                        <div class="qr-code" id="cashapp-qr">
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666;">
+                                Loading QR Code...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-info">
+                        <div class="payment-handle">$frankscurlock44</div>
+                        <p>Scan the QR code above or search for the handle</p>
+                    </div>
+                    <a href="https://cash.app/$frankscurlock44" class="payment-btn" target="_blank">
+                        Open Cash App
+                    </a>
+                </div>
+
+                <!-- Card & Digital Wallets -->
+                <div class="payment-card">
+                    <div class="payment-logo" style="height: auto;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            <span style="font-size: 3rem;">💳</span>
+                            <img src="googlepay.png" alt="Google Pay" style="height: 50px; width: auto;">
+                            <span style="font-size: 3rem;">🍎</span>
+                        </div>
+                    </div>
+                    <div class="payment-title">Card & Digital Wallets</div>
+                    <div class="payment-info">
+                        <p style="margin-bottom: 1.5rem;">Secure payment processing through our official payment portal</p>
+                        <ul>
+                            <li>💳 Debit & Credit Cards</li>
+                            <li>🍎 Apple Pay</li>
+                            <li>
+                                <img src="googlepay.png" alt="Google Pay" style="height: 20px; width: auto; vertical-align: middle;">
+                                Google Pay
+                            </li>
+                            <li>🔒 Secure & Encrypted</li>
+                        </ul>
+                    </div>
+                    <a href="https://c0b2d403-fd0c-48af-b20b-65dbb67528ae.paylinks.godaddy.com/d49ef5b3-f814-48fc-aaf5-31e" class="payment-btn" target="_blank" rel="noopener">
+                        Pay with Card or Wallet
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Generate floating fleur-de-lis
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const symbols = ['⚜️'];
+            
+            setInterval(() => {
+                const element = document.createElement('div');
+                element.className = 'fleur';
+                element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animationDuration = (15 + Math.random() * 10) + 's';
+                element.style.fontSize = (1.5 + Math.random() * 1) + 'rem';
+                container.appendChild(element);
+                
+                setTimeout(() => {
+                    element.remove();
+                }, 15000);
+            }, 3000);
+        }
+
+        // Generate QR codes
+        function generateQRCode(text, elementId) {
+            const qrElement = document.getElementById(elementId);
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}&bgcolor=FFFFFF&color=2C003E`;
+            qrElement.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">`;
+        }
+
+        // Create sparkle effect on hover
+        function createSparkle(e) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.textContent = '✨';
+            sparkle.style.left = e.pageX + 'px';
+            sparkle.style.top = e.pageY + 'px';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Generate QR codes
+            generateQRCode('https://www.paypal.com/qrcodes/p2pqrc/CNWMXS9ZRHTWC', 'paypal-qr');
+            generateQRCode('https://venmo.com/u/Frank-Scurlock-2', 'venmo-qr');
+            generateQRCode('https://cash.app/$frankscurlock44', 'cashapp-qr');
+            
+            // Start floating elements
+            createFloatingElements();
+            
+            // Add sparkle effects to buttons
+            const buttons = document.querySelectorAll('.payment-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', createSparkle);
+            });
+            
+            // Parallax effect on scroll
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.background-animation');
+                if (parallax) {
+                    parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+            
+            // Add interaction to icon cards
+            const iconCards = document.querySelectorAll('.icon-card');
+            iconCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    createSparkle(e);
+                    this.style.animation = 'pulse 0.5s ease';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                });
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(0, 0, 0, 0.8)';
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.3)';
+            }
+        });
+    </script>
+</body>
+</html>
