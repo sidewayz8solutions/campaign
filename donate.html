@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Frank Scurlock for Mayor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --mardi-gras-purple: #7B2D8E;
+            --mardi-gras-gold: #FFD700;
+            --mardi-gras-green: #00A651;
+            --deep-purple: #4A1A5C;
+            --cream: #FFF8DC;
+            --black: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--mardi-gras-gold) 0%, #E6C200 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .candidate-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--deep-purple);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .candidate-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 0.2em;
+        }
+
+        .website {
+            font-size: 0.9rem;
+            color: var(--deep-purple);
+            margin-top: 0.5rem;
+            text-decoration: underline;
+        }
+
+        .donation-form {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .amount-toggle {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: transparent;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: var(--deep-purple);
+            color: white;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .amount-btn {
+            padding: 1rem 0.5rem;
+            background: var(--mardi-gras-gold);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--deep-purple);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .amount-btn:hover {
+            background: #E6C200;
+            transform: translateY(-2px);
+        }
+
+        .amount-btn.selected {
+            background: var(--mardi-gras-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,166,81,0.3);
+        }
+
+        .amount-btn.popular::before {
+            content: "★ POPULAR";
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--mardi-gras-green);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .other-amount {
+            width: 100%;
+            padding: 1rem;
+            background: var(--mardi-gras-gold);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--deep-purple);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .other-amount:hover {
+            background: #E6C200;
+        }
+
+        .other-amount.selected {
+            background: var(--mardi-gras-green);
+            color: white;
+        }
+
+        .custom-amount-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--mardi-gras-green);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .custom-amount-input.show {
+            display: block;
+        }
+
+        .selected-amount-display {
+            background: var(--mardi-gras-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .selected-amount-display.show {
+            display: block;
+        }
+
+        .express-checkout {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .express-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .gpay-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #999;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sign-in-link {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .sign-in-link a {
+            color: var(--mardi-gras-purple);
+            text-decoration: none;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--mardi-gras-purple);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method.active {
+            background: var(--deep-purple);
+            color: white;
+            border-color: var(--deep-purple);
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+
+        .card-icon {
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .visa { background: #1a1f71; }
+        .mastercard { background: #eb001b; }
+        .amex { background: #006fcf; }
+
+        .donate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--mardi-gras-gold) 0%, #E6C200 100%);
+            color: var(--deep-purple);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .donate-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .donate-btn:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .processing {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .godaddy-redirect-info {
+            background: #e8f4fd;
+            border: 1px solid #2ea3f2;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #2ea3f2;
+        }
+
+        .security-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .terms {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            line-height: 1.4;
+        }
+
+        .terms a {
+            color: var(--mardi-gras-purple);
+            text-decoration: none;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--deep-purple);
+        }
+
+        .help-link {
+            color: var(--deep-purple);
+            text-decoration: underline;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .candidate-name {
+                font-size: 3rem;
+            }
+            
+            .candidate-title {
+                font-size: 2rem;
+            }
+            
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="candidate-name">Frank</div>
+        <div class="candidate-name" style="margin-top: -1rem;">Scurlock</div>
+        <div class="candidate-title">MAYOR</div>
+        <div class="website">www.FrankScurlockForMayor.com</div>
+    </div>
+
+    <div class="donation-form">
+        <div class="form-section">
+            <div class="section-title">Choose Amount</div>
+
+            <div class="amount-toggle">
+                <button class="toggle-btn active" data-type="one-time">One-time</button>
+                <button class="toggle-btn" data-type="monthly">Monthly</button>
+            </div>
+
+            <div class="amount-grid">
+                <button class="amount-btn popular" data-amount="25">$25</button>
+                <button class="amount-btn" data-amount="100">$100</button>
+                <button class="amount-btn" data-amount="250">$250</button>
+                <button class="amount-btn" data-amount="500">$500</button>
+                <button class="amount-btn" data-amount="1500">$1,500</button>
+                <button class="amount-btn" data-amount="3000">$3,000</button>
+                <button class="amount-btn" data-amount="6000">$6,000</button>
+                <button class="amount-btn" data-amount="12000">$12,000</button>
+            </div>
+
+            <button class="other-amount" id="other-btn">Other</button>
+            <input type="number" class="custom-amount-input" id="custom-amount" placeholder="Enter custom amount" min="1">
+
+            <div class="selected-amount-display" id="amount-display">
+                Selected: $<span id="selected-amount">0</span> <span id="donation-type">one-time</span>
+            </div>
+        </div>
+
+        <div class="express-checkout">
+            <div class="express-title">Express Checkout</div>
+            <button class="gpay-btn">
+                <span>G</span> Pay
+            </button>
+        </div>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <div class="sign-in-link">
+            Already have an account? <a href="#">Sign in</a>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Email <span class="required">*</span></label>
+            <input type="email" class="form-input" placeholder="Enter your email">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">First name <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="First name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Last name <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="Last name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Address <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Enter your address">
+        </div>
+
+        <div class="payment-methods">
+            <div class="payment-method active">
+                💳 Card
+            </div>
+            <div class="payment-method">
+                PayPal
+            </div>
+            <div class="payment-method">
+                🏦 Bank
+            </div>
+        </div>
+
+        <div class="godaddy-redirect-info">
+            💳 You'll be securely redirected to complete your payment with card, Apple Pay, or Google Pay
+        </div>
+
+        <button class="donate-btn" id="donate-btn" disabled>Select Amount to Donate</button>
+
+        <div class="security-note">
+            🔒 Your information is secure.
+        </div>
+
+        <div class="terms">
+            By accessing this form you agree to the<br>
+            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2025 Frank Scurlock for Our Future and Agenda Inc. All rights reserved.<br>
+        <a href="#" class="help-link">Have questions? Visit our Help Center</a>
+    </div>
+
+    <script>
+        // GoDaddy Payment Link Integration
+        const GODADDY_PAY_LINK_BASE = 'https://c0b2d403-fd0c-48af-b20b-65dbb67528ae.paylinks.godaddy.com/d49ef5b3-f814-48fc-aaf5-31e';
+
+        // Donation form functionality
+        let selectedAmount = 0;
+        let donationType = 'one-time';
+
+        // Get DOM elements
+        const amountButtons = document.querySelectorAll('.amount-btn');
+        const otherButton = document.getElementById('other-btn');
+        const customAmountInput = document.getElementById('custom-amount');
+        const amountDisplay = document.getElementById('amount-display');
+        const selectedAmountSpan = document.getElementById('selected-amount');
+        const donationTypeSpan = document.getElementById('donation-type');
+        const donateButton = document.getElementById('donate-btn');
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+        // Handle donation type toggle (One-time vs Monthly)
+        toggleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                toggleButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                donationType = btn.dataset.type;
+                donationTypeSpan.textContent = donationType;
+                updateDonateButton();
+            });
+        });
+
+        // Handle amount button clicks
+        amountButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove selected class from all buttons
+                amountButtons.forEach(b => b.classList.remove('selected'));
+                otherButton.classList.remove('selected');
+
+                // Add selected class to clicked button
+                btn.classList.add('selected');
+
+                // Set selected amount
+                selectedAmount = parseInt(btn.dataset.amount);
+
+                // Hide custom input
+                customAmountInput.classList.remove('show');
+
+                // Update display
+                updateAmountDisplay();
+                updateDonateButton();
+            });
+        });
+
+        // Handle "Other" button click
+        otherButton.addEventListener('click', () => {
+            // Remove selected class from amount buttons
+            amountButtons.forEach(b => b.classList.remove('selected'));
+
+            // Add selected class to other button
+            otherButton.classList.add('selected');
+
+            // Show custom input
+            customAmountInput.classList.add('show');
+            customAmountInput.focus();
+
+            // Clear selected amount until custom amount is entered
+            selectedAmount = 0;
+            updateAmountDisplay();
+            updateDonateButton();
+        });
+
+        // Handle custom amount input
+        customAmountInput.addEventListener('input', () => {
+            const customAmount = parseFloat(customAmountInput.value);
+            if (customAmount && customAmount > 0) {
+                selectedAmount = customAmount;
+                updateAmountDisplay();
+                updateDonateButton();
+            } else {
+                selectedAmount = 0;
+                updateDonateButton();
+            }
+        });
+
+        // Update amount display
+        function updateAmountDisplay() {
+            if (selectedAmount > 0) {
+                selectedAmountSpan.textContent = selectedAmount.toLocaleString();
+                amountDisplay.classList.add('show');
+            } else {
+                amountDisplay.classList.remove('show');
+            }
+        }
+
+        // Update donate button
+        function updateDonateButton() {
+            if (selectedAmount > 0) {
+                donateButton.disabled = false;
+                donateButton.textContent = `Donate $${selectedAmount.toLocaleString()} (${donationType})`;
+            } else {
+                donateButton.disabled = true;
+                donateButton.textContent = 'Select Amount to Donate';
+            }
+        }
+
+        // Handle donate button click
+        donateButton.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            if (selectedAmount > 0) {
+                // Validate form fields
+                const email = document.querySelector('input[type="email"]').value;
+                const firstName = document.querySelector('input[placeholder="First name"]').value;
+                const lastName = document.querySelector('input[placeholder="Last name"]').value;
+                const address = document.querySelector('input[placeholder="Enter your address"]').value;
+
+                if (!email || !firstName || !lastName || !address) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                // Show processing state briefly
+                donateButton.textContent = 'Redirecting to Payment...';
+                donateButton.disabled = true;
+
+                // Store donation info in localStorage for when user returns
+                localStorage.setItem('pendingDonation', JSON.stringify({
+                    amount: selectedAmount,
+                    type: donationType,
+                    donor: {
+                        email: email,
+                        firstName: firstName,
+                        lastName: lastName,
+                        address: address
+                    },
+                    timestamp: new Date().toISOString()
+                }));
+
+                // Redirect directly to GoDaddy payment page
+                setTimeout(() => {
+                    window.location.href = GODADDY_PAY_LINK_BASE;
+                }, 1000);
+            }
+        });
+
+        // Function to create GoDaddy payment URL with parameters
+        function createGoDaddyPaymentUrl(amount, donationType, donor) {
+            const params = new URLSearchParams();
+
+            // Add amount (GoDaddy might expect this in a specific format)
+            params.append('amount', amount);
+
+            // Add donor information
+            params.append('email', donor.email);
+            params.append('firstName', donor.firstName);
+            params.append('lastName', donor.lastName);
+            params.append('address', donor.address);
+
+            // Add donation type
+            params.append('donationType', donationType);
+
+            // Add campaign identifier
+            params.append('campaign', 'Frank Scurlock for Mayor');
+
+            // Return full URL
+            return `${GODADDY_PAY_LINK_BASE}?${params.toString()}`;
+        }
+
+        // Check for returning user after payment
+        window.addEventListener('load', () => {
+            const pendingDonation = localStorage.getItem('pendingDonation');
+            if (pendingDonation) {
+                const donation = JSON.parse(pendingDonation);
+
+                // Check if this is a recent return (within last 10 minutes)
+                const donationTime = new Date(donation.timestamp);
+                const now = new Date();
+                const timeDiff = (now - donationTime) / (1000 * 60); // minutes
+
+                if (timeDiff < 10) {
+                    // Show thank you message
+                    const thankYouMessage = document.createElement('div');
+                    thankYouMessage.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: var(--mardi-gras-green);
+                        color: white;
+                        padding: 1rem 2rem;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                        z-index: 10000;
+                        text-align: center;
+                        font-weight: 600;
+                    `;
+                    thankYouMessage.innerHTML = `
+                        ✅ Thank you for your $${donation.amount} ${donation.type} donation!<br>
+                        <small>You should receive a confirmation email shortly.</small>
+                    `;
+
+                    document.body.appendChild(thankYouMessage);
+
+                    // Remove message after 8 seconds
+                    setTimeout(() => {
+                        thankYouMessage.remove();
+                    }, 8000);
+                }
+
+                // Clear the stored donation info
+                localStorage.removeItem('pendingDonation');
+            }
+        });
+
+        // Initialize
+        updateDonateButton();
+    </script>
+</body>
+</html>
