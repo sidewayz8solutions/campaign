@@ -30,8 +30,9 @@
         body {
             font-family: 'Crimson Text', 'Libre Baskerville', Georgia, serif;
             line-height: 1.7;
-            color: var(--text-dark);
-            background: var(--background-light);
+            color: white;
+            background: linear-gradient(135deg, #2a2a2a, #4a4a5a, #3a3a4a);
+            min-height: 100vh;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -45,11 +46,11 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 27, 99, 0.95);
+            background: rgba(55, 65, 85, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
@@ -99,6 +100,7 @@
         .main-content {
             margin-top: 100px;
             padding: 2rem 0;
+            background-color: var(rgb(63, 63, 63));
         }
 
         .container {
