@@ -1571,12 +1571,84 @@ twq('config','qbkrn');
 
 
 
+      /* Image Popup Modal */
+      .image-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        backdrop-filter: blur(5px);
+      }
+
+      .image-popup-overlay.active {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .image-popup-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
+      }
+
+      .image-popup-content img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .image-popup-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .image-popup-close:hover {
+        background: rgba(0, 0, 0, 0.9);
+        transform: scale(1.1);
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
     </style>
   </head>
   <body>
     <!-- Loader -->
     <div class="loader" id="loader">
       <div class="loader-text">Loading New Orleans' Future...</div>
+    </div>
+
+    <!-- Image Popup Modal -->
+    <div class="image-popup-overlay" id="imagePopup">
+      <div class="image-popup-content">
+        <button class="image-popup-close" onclick="closeImagePopup()">&times;</button>
+        <img src="FINAL12.png" alt="Campaign Image" />
+      </div>
     </div>
 
     <!-- Navigation -->
@@ -1625,6 +1697,7 @@ twq('config','qbkrn');
         <div class="hero-buttons fade-in-up">
           <a href="#about" class="btn-primary">Meet Frank</a>
           <a href="issues.html" class="btn-secondary">View Platform</a>
+          <button onclick="openImagePopup()" class="btn-primary" style="margin-top: 1rem; border: none; cursor: pointer;">View Campaign Image</button>
         </div>
       </div>
     </section>
@@ -2286,6 +2359,33 @@ twq('config','qbkrn');
           });
         }
       }
+
+      // Image popup functionality
+      function openImagePopup() {
+        const popup = document.getElementById('imagePopup');
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      }
+
+      function closeImagePopup() {
+        const popup = document.getElementById('imagePopup');
+        popup.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+      }
+
+      // Close popup when clicking outside the image
+      document.getElementById('imagePopup').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeImagePopup();
+        }
+      });
+
+      // Close popup with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeImagePopup();
+        }
+      });
 
 
 
