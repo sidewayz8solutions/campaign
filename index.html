@@ -1607,6 +1607,36 @@ twq('config','qbkrn');
         display: block;
       }
 
+      .popup-text {
+        padding: 1.5rem;
+        text-align: center;
+        background: white;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-dark);
+      }
+
+      .popup-donate-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--mardi-gras-gold) 0%, #ffed4e 100%);
+        color: var(--mardi-gras-purple);
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      }
+
+      .popup-donate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        color: var(--mardi-gras-purple);
+        text-decoration: none;
+      }
+
       .image-popup-close {
         position: absolute;
         top: 15px;
@@ -1648,6 +1678,11 @@ twq('config','qbkrn');
       <div class="image-popup-content">
         <button class="image-popup-close" onclick="closeImagePopup()">&times;</button>
         <img src="FINAL12.png" alt="Campaign Image" />
+        <div class="popup-text">
+          Please donate to Frank as he runs for mayor as a N.O. Party Candidate!
+          <br>
+          <a href="https://scurlock2025.com/donate.html" target="_blank" rel="noopener" class="popup-donate-btn">Donate Now</a>
+        </div>
       </div>
     </div>
 
