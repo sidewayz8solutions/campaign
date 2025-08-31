@@ -1697,7 +1697,6 @@ twq('config','qbkrn');
         <div class="hero-buttons fade-in-up">
           <a href="#about" class="btn-primary">Meet Frank</a>
           <a href="issues.html" class="btn-secondary">View Platform</a>
-          <button onclick="openImagePopup()" class="btn-primary" style="margin-top: 1rem; border: none; cursor: pointer;">View Campaign Image</button>
         </div>
       </div>
     </section>
@@ -2361,10 +2360,15 @@ twq('config','qbkrn');
       }
 
       // Image popup functionality
+      let popupShown = false;
+
       function openImagePopup() {
+        if (popupShown) return; // Only show once per session
+
         const popup = document.getElementById('imagePopup');
         popup.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        popupShown = true;
       }
 
       function closeImagePopup() {
@@ -2372,6 +2376,15 @@ twq('config','qbkrn');
         popup.classList.remove('active');
         document.body.style.overflow = 'auto'; // Restore scrolling
       }
+
+      // Scroll-triggered popup
+      let scrollThreshold = 500; // Show popup after scrolling 500px
+
+      window.addEventListener('scroll', function() {
+        if (!popupShown && window.pageYOffset > scrollThreshold) {
+          openImagePopup();
+        }
+      });
 
       // Close popup when clicking outside the image
       document.getElementById('imagePopup').addEventListener('click', function(e) {
