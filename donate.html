@@ -551,6 +551,41 @@
             }
         }
 
+        /* New Orleans Box Floating Animation */
+        @keyframes nolaBoxFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+            25% {
+                transform: translate(50px, -30px) rotate(90deg) scale(1.1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translate(100px, 20px) rotate(180deg) scale(0.9);
+                opacity: 0.7;
+            }
+            75% {
+                transform: translate(30px, 50px) rotate(270deg) scale(1.05);
+                opacity: 0.85;
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg) scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        .nola-box-floating-element {
+            animation: nolaBoxFloat linear infinite;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+        }
+
+        .nola-box-floating-element:hover {
+            transform: scale(1.2) !important;
+            opacity: 1 !important;
+        }
+
     </style>
 </head>
 <body>
@@ -784,22 +819,22 @@
 
                 for (let i = 0; i < 10; i++) {
                     const element = document.createElement('div');
-                    element.className = 'floating-element';
+                    element.className = 'nola-box-floating-element';
                     element.style.position = 'absolute';
                     element.style.zIndex = '1';
 
                     const img = document.createElement('img');
                     img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
-                    img.style.width = '40px';
-                    img.style.height = '40px';
+                    img.style.width = '80px';
+                    img.style.height = '80px';
                     img.style.objectFit = 'contain';
                     element.appendChild(img);
 
                     // Random positions within the section
-                    element.style.left = Math.random() * 90 + '%';
-                    element.style.top = Math.random() * 90 + '%';
-                    element.style.animationDelay = Math.random() * 10 + 's';
-                    element.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                    element.style.left = Math.random() * 80 + '%';
+                    element.style.top = Math.random() * 80 + '%';
+                    element.style.animationDelay = Math.random() * 8 + 's';
+                    element.style.animationDuration = (Math.random() * 8 + 12) + 's';
 
                     section.appendChild(element);
                 }
