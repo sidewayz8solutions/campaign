@@ -31,7 +31,7 @@
             font-family: 'Crimson Text', 'Libre Baskerville', Georgia, serif;
             line-height: 1.7;
             color: white;
-            background: linear-gradient(135deg, #2a2a2a, #4a4a5a, #3a3a4a);
+            background: linear-gradient(135deg, #2a2a3a, #4a4a6a, #3a3a5a);
             min-height: 100vh;
         }
 
@@ -144,11 +144,13 @@
         .payment-card {
             background: white;
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 1.5rem;
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             text-align: center;
             border: 2px solid transparent;
+            max-width: 280px;
+            margin: 0 auto;
         }
 
         .payment-card:hover {
@@ -361,17 +363,42 @@
         /* Floating Elements */
         @keyframes float {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translate(0, 100vh) rotate(0deg);
                 opacity: 0;
             }
             10% {
-                opacity: 1;
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(50vw, 50vh) rotate(180deg);
+                opacity: 0.7;
             }
             90% {
-                opacity: 1;
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(-100px) rotate(360deg);
+                transform: translate(100vw, -100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatAlt {
+            0% {
+                transform: translate(100vw, 50vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(50vw, 20vh) rotate(180deg);
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-100px, 100vh) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -383,6 +410,10 @@
             animation: float linear infinite;
             z-index: 1;
             opacity: 0.7;
+        }
+
+        .floating-element:nth-child(odd) {
+            animation-name: floatAlt;
         }
 
         /* Enhanced Button Hover Effects */
@@ -458,6 +489,16 @@
             text-shadow: 0 0 10px var(--mardi-gras-gold);
         }
 
+        /* Glowing Text Animation */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700;
+            }
+            to {
+                text-shadow: 0 0 30px #FFD700, 0 0 50px #FFD700, 0 0 70px #FFD700;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -493,7 +534,7 @@
 
             <!-- New Orleans Decorative Icons -->
             <div class="decorative-icons-section">
-                <h2 style="color: var(--mardi-gras-purple); margin-bottom: 2rem; text-align: center;">Support New Orleans</h2>
+                <h2 style="color: #FFD700; margin-bottom: 2rem; text-align: center; text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700; animation: glow 2s ease-in-out infinite alternate;">Support New Orleans</h2>
                 <div class="decorative-icons-grid">
                     <div class="decorative-icon">
                         <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 120px; width: auto;"></div>
@@ -592,6 +633,30 @@
                 </div>
             </div>
         </div>
+
+        <!-- Duplicate Support New Orleans Section -->
+        <div class="decorative-icons-section" style="padding: 4rem 0;">
+            <div class="container">
+                <h2 style="color: #FFD700; margin-bottom: 2rem; text-align: center; text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700; animation: glow 2s ease-in-out infinite alternate;">Support New Orleans</h2>
+                <div class="decorative-icons-grid">
+                    <div class="decorative-icon">
+                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 120px; width: auto;"></div>
+                    </div>
+                    <div class="decorative-icon">
+                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 120px; width: auto;"></div>
+                    </div>
+                    <div class="decorative-icon">
+                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 120px; width: auto;"></div>
+                    </div>
+                    <div class="decorative-icon">
+                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 120px; width: auto;"></div>
+                    </div>
+                    <div class="decorative-icon">
+                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 120px; width: auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -626,20 +691,28 @@
         // Create floating elements
         function createFloatingElements() {
             const nolaImages = ['2.png', '3.png', '1.png', '4.png', 'pels.png'];
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 15; i++) {
                 const element = document.createElement('div');
                 element.className = 'floating-element';
 
                 const img = document.createElement('img');
                 img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
-                img.style.width = '40px';
-                img.style.height = '40px';
+                img.style.width = '35px';
+                img.style.height = '35px';
                 img.style.objectFit = 'contain';
                 element.appendChild(img);
 
-                element.style.left = Math.random() * 100 + '%';
-                element.style.animationDelay = Math.random() * 10 + 's';
-                element.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                // Random starting positions around the screen edges
+                if (Math.random() > 0.5) {
+                    element.style.left = Math.random() * 100 + '%';
+                    element.style.top = Math.random() > 0.5 ? '-50px' : '100vh';
+                } else {
+                    element.style.left = Math.random() > 0.5 ? '-50px' : '100vw';
+                    element.style.top = Math.random() * 100 + '%';
+                }
+
+                element.style.animationDelay = Math.random() * 15 + 's';
+                element.style.animationDuration = (Math.random() * 15 + 15) + 's';
                 document.body.appendChild(element);
             }
         }
