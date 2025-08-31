@@ -766,58 +766,8 @@
             generateQRCode('https://cash.app/$frankscurlock44', 'cashapp-qr');
         });
 
-        // Create sparkle effect on hover
-        function createSparkle(e) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.textContent = '✨';
-            sparkle.style.left = e.pageX + 'px';
-            sparkle.style.top = e.pageY + 'px';
-            document.body.appendChild(sparkle);
-
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1000);
-        }
-
-        // Create floating elements
-        function createFloatingElements() {
-            const nolaImages = ['2.png', '3.png', '1.png', '4.png', 'pels.png'];
-
-            // Background floating elements (fewer, bigger, bouncing)
-            for (let i = 0; i < 8; i++) {
-                const element = document.createElement('div');
-                element.className = 'floating-element';
-
-                const img = document.createElement('img');
-                img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
-                img.style.width = '90px';
-                img.style.height = '90px';
-                img.style.objectFit = 'contain';
-                img.style.borderRadius = '10px';
-                img.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1';
-                element.appendChild(img);
-
-                // Random starting positions around the screen edges
-                if (Math.random() > 0.5) {
-                    element.style.left = Math.random() * 50 + '%';
-                    element.style.top = Math.random() > 0.5 ? '-50px' : '100vh';
-                } else {
-                    element.style.left = Math.random() > 0.5 ? '-50px' : '100vw';
-                    element.style.top = Math.random() * 50 + '%';
-                }
-
-                // Use bounce animation for some elements
-                if (i % 2 === 0) {
-                    element.style.animationName = 'floatBounce';
-                }
-
-                element.style.animationDelay = Math.random() * 15 + 's';
-                element.style.animationDuration = (Math.random() * 15 + 20) + 's';
-                document.body.appendChild(element);
-            }
-
-            // Support NOLA boxes floating elements
+      
+             // Support NOLA boxes floating elements
             const supportSections = document.querySelectorAll('.decorative-icons-section');
             supportSections.forEach(section => {
                 // Make section relative positioned for floating elements
@@ -852,55 +802,6 @@
                     section.appendChild(element);
                 }
             });
-        }
 
-        // Initialize enhanced effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Start floating elements
-            createFloatingElements();
 
-            // Add sparkle effects to buttons
-            const buttons = document.querySelectorAll('.payment-btn, .btn, button');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', createSparkle);
-            });
-
-            // Enhanced parallax effect on scroll
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const parallax = document.querySelector('.background-animation');
-                if (parallax) {
-                    parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
-                }
-            });
-
-            // Add interaction to decorative icons and payment cards
-            const iconCards = document.querySelectorAll('.decorative-icon, .payment-card');
-            iconCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    createSparkle(e);
-                    this.style.animation = 'pulse 0.5s ease';
-                    setTimeout(() => {
-                        this.style.animation = '';
-                    }, 500);
-                });
-            });
-        });
-
-        // Enhanced navbar background on scroll
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (nav) {
-                if (window.scrollY > 50) {
-                    nav.style.background = 'rgba(0, 0, 0, 0.8)';
-                    nav.style.backdropFilter = 'blur(10px)';
-                } else {
-                    nav.style.background = 'rgba(0, 0, 0, 0.3)';
-                    nav.style.backdropFilter = 'blur(5px)';
-                }
-            }
-        });
-
-    </script>
-</body>
-</html>
+        
