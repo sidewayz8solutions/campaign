@@ -403,29 +403,31 @@
             }
         }
 
-        /* Section Floating Images */
-        @keyframes sectionFloat {
+        /* Decorative Icons Floating Animation */
+        @keyframes floatUp {
             0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.8;
-            }
-            25% {
-                transform: translate(100px, -50px) rotate(90deg);
-                opacity: 0.9;
+                transform: translateY(0) scale(1);
+                opacity: 1;
             }
             50% {
-                transform: translate(200px, 50px) rotate(180deg);
+                transform: translateY(-20px) scale(1.1);
                 opacity: 0.8;
-            }
-            75% {
-                transform: translate(100px, 100px) rotate(270deg);
-                opacity: 0.9;
             }
             100% {
-                transform: translate(0, 0) rotate(360deg);
-                opacity: 0.8;
+                transform: translateY(0) scale(1);
+                opacity: 1;
             }
         }
+
+        .decorative-icon {
+            animation: floatUp 3s ease-in-out infinite;
+        }
+
+        .decorative-icon:nth-child(1) { animation-delay: 0s; }
+        .decorative-icon:nth-child(2) { animation-delay: 0.5s; }
+        .decorative-icon:nth-child(3) { animation-delay: 2s; }
+        .decorative-icon:nth-child(4) { animation-delay: 2.5s; }
+        .decorative-icon:nth-child(5) { animation-delay: 3s; }
 
         .floating-element {
             position: fixed;
@@ -440,30 +442,30 @@
             animation-name: floatAlt;
         }
 
-        .section-floating-images {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .section-floating-element {
-            position: absolute;
-            animation: sectionFloat 8s ease-in-out infinite;
-            opacity: 0.8;
-            z-index: 1;
-        }
-
-        .section-floating-element:nth-child(2n) {
-            animation-direction: reverse;
-            animation-delay: 2s;
-        }
-
-        .section-floating-element:nth-child(3n) {
-            animation-delay: 4s;
+        /* Enhanced Background Floating with Bounce Effect */
+        @keyframes floatBounce {
+            0% {
+                transform: translate(0, 100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            30% {
+                transform: translate(30vw, 70vh) rotate(360deg);
+                opacity: 0.7;
+            }
+            60% {
+                transform: translate(70vw, 30vh) rotate(720deg);
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(100vw, -100px) rotate(1080deg);
+                opacity: 0;
+            }
         }
 
         /* Enhanced Button Hover Effects */
@@ -583,27 +585,25 @@
             </div>
 
             <!-- New Orleans Decorative Icons -->
-            <div class="decorative-icons-section" style="position: relative; overflow: hidden;">
+            <div class="decorative-icons-section">
                 <h2 style="color: #FFD700; margin-bottom: 2rem; text-align: center; text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700; animation: glow 2s ease-in-out infinite alternate;">Support New Orleans</h2>
                 <div class="decorative-icons-grid">
                     <div class="decorative-icon">
-                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 150px; width: auto;"></div>
                     </div>
                 </div>
-                <!-- Floating images inside this section -->
-                <div class="section-floating-images"></div>
             </div>
 
             <!-- Payment Methods -->
@@ -687,28 +687,26 @@
         </div>
 
         <!-- Duplicate Support New Orleans Section -->
-        <div class="decorative-icons-section" style="padding: 4rem 0; position: relative; overflow: hidden;">
+        <div class="decorative-icons-section" style="padding: 4rem 0;">
             <div class="container">
                 <h2 style="color: #FFD700; margin-bottom: 2rem; text-align: center; text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700; animation: glow 2s ease-in-out infinite alternate;">Support New Orleans</h2>
                 <div class="decorative-icons-grid">
                     <div class="decorative-icon">
-                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 150px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 120px; width: auto;"></div>
+                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 150px; width: auto;"></div>
                     </div>
                 </div>
-                <!-- Floating images inside this section -->
-                <div class="section-floating-images"></div>
             </div>
         </div>
     </div>
@@ -746,15 +744,15 @@
         function createFloatingElements() {
             const nolaImages = ['2.png', '3.png', '1.png', '4.png', 'pels.png'];
 
-            // Background floating elements (slower)
-            for (let i = 0; i < 12; i++) {
+            // Background floating elements (fewer, bigger, bouncing)
+            for (let i = 0; i < 8; i++) {
                 const element = document.createElement('div');
                 element.className = 'floating-element';
 
                 const img = document.createElement('img');
                 img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
-                img.style.width = '35px';
-                img.style.height = '35px';
+                img.style.width = '50px';
+                img.style.height = '50px';
                 img.style.objectFit = 'contain';
                 element.appendChild(img);
 
@@ -767,33 +765,15 @@
                     element.style.top = Math.random() * 100 + '%';
                 }
 
-                element.style.animationDelay = Math.random() * 20 + 's';
-                element.style.animationDuration = (Math.random() * 20 + 25) + 's';
+                // Use bounce animation for some elements
+                if (i % 2 === 0) {
+                    element.style.animationName = 'floatBounce';
+                }
+
+                element.style.animationDelay = Math.random() * 15 + 's';
+                element.style.animationDuration = (Math.random() * 15 + 20) + 's';
                 document.body.appendChild(element);
             }
-
-            // Section floating elements (larger and more prominent)
-            const sectionContainers = document.querySelectorAll('.section-floating-images');
-            sectionContainers.forEach(container => {
-                for (let i = 0; i < 6; i++) {
-                    const element = document.createElement('div');
-                    element.className = 'section-floating-element';
-
-                    const img = document.createElement('img');
-                    img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
-                    img.style.width = '60px';
-                    img.style.height = '60px';
-                    img.style.objectFit = 'contain';
-                    element.appendChild(img);
-
-                    // Random positions within the section
-                    element.style.left = Math.random() * 80 + '%';
-                    element.style.top = Math.random() * 80 + '%';
-                    element.style.animationDelay = Math.random() * 8 + 's';
-
-                    container.appendChild(element);
-                }
-            });
         }
 
         // Initialize enhanced effects
