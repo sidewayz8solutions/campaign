@@ -2603,11 +2603,18 @@ twq('config','qbkrn');
 
       // Create floating elements
       function createFloatingElements() {
-        const symbols = ['⚜️', '🎭', '🎷', '🎺', '🇺🇸'];
+        const nolaImages = ['2.png', '3.png', '1.png', '4.png', 'pels.png'];
         for (let i = 0; i < 10; i++) {
           const element = document.createElement('div');
           element.className = 'floating-element';
-          element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+          const img = document.createElement('img');
+          img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
+          img.style.width = '40px';
+          img.style.height = '40px';
+          img.style.objectFit = 'contain';
+          element.appendChild(img);
+
           element.style.left = Math.random() * 100 + '%';
           element.style.animationDelay = Math.random() * 10 + 's';
           element.style.animationDuration = (Math.random() * 10 + 10) + 's';
