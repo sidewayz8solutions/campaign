@@ -214,6 +214,26 @@
             box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
         }
 
+        /* Payment Logo Styling */
+        .payment-logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+        }
+
+        .payment-logo img {
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .payment-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .payment-card:hover .payment-logo img {
+            transform: scale(1.05);
+        }
+
         /* Suggested Amounts */
         .suggested-amounts {
             background: white;
@@ -234,19 +254,50 @@
         .amount-btn {
             background: linear-gradient(135deg, var(--mardi-gras-purple) 0%, var(--deep-purple) 100%);
             color: white;
-            padding: 1rem;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
+            padding: 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .amount-btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(123, 45, 142, 0.4);
             border-color: var(--mardi-gras-gold);
-            box-shadow: 0 8px 25px rgba(26, 15, 61, 0.3);
+        }
+
+        .amount-btn:hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .amount-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .amount-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--mardi-gras-gold);
+        }
+
+        .amount-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 500;
         }
 
         /* Mobile Responsive */
@@ -307,12 +358,36 @@
                 <h2 style="color: var(--mardi-gras-purple); margin-bottom: 1rem;">Suggested Donation Amounts</h2>
                 <p>Choose an amount that works for you, or enter a custom amount on your preferred platform.</p>
                 <div class="amount-grid">
-                    <div class="amount-btn">$25</div>
-                    <div class="amount-btn">$50</div>
-                    <div class="amount-btn">$100</div>
-                    <div class="amount-btn">$250</div>
-                    <div class="amount-btn">$500</div>
-                    <div class="amount-btn">Custom</div>
+                    <div class="amount-btn">
+                        <div class="amount-icon">🎷</div>
+                        <div class="amount-value">$25</div>
+                        <div class="amount-label">Jazz Fund</div>
+                    </div>
+                    <div class="amount-btn">
+                        <div class="amount-icon">⚜️</div>
+                        <div class="amount-value">$50</div>
+                        <div class="amount-label">Fleur-de-Lis</div>
+                    </div>
+                    <div class="amount-btn">
+                        <div class="amount-icon">🎭</div>
+                        <div class="amount-value">$100</div>
+                        <div class="amount-label">Mardi Gras</div>
+                    </div>
+                    <div class="amount-btn">
+                        <div class="amount-icon">🏛️</div>
+                        <div class="amount-value">$250</div>
+                        <div class="amount-label">French Quarter</div>
+                    </div>
+                    <div class="amount-btn">
+                        <div class="amount-icon">🌊</div>
+                        <div class="amount-value">$500</div>
+                        <div class="amount-label">Crescent City</div>
+                    </div>
+                    <div class="amount-btn">
+                        <div class="amount-icon">💰</div>
+                        <div class="amount-value">Custom</div>
+                        <div class="amount-label">Your Choice</div>
+                    </div>
                 </div>
             </div>
 
@@ -320,7 +395,9 @@
             <div class="payment-grid">
                 <!-- PayPal -->
                 <div class="payment-card">
-                    <h3 class="payment-title">💙 PayPal</h3>
+                    <div class="payment-logo">
+                        <img src="paypal.png" alt="PayPal" style="height: 40px; width: auto;">
+                    </div>
                     <div class="qr-container">
                         <div class="qr-code" id="paypal-qr">
                             PayPal QR Code will appear here
@@ -334,7 +411,9 @@
 
                 <!-- Venmo -->
                 <div class="payment-card">
-                    <h3 class="payment-title">💜 Venmo</h3>
+                    <div class="payment-logo">
+                        <img src="venmo.png" alt="Venmo" style="height: 40px; width: auto;">
+                    </div>
                     <div class="qr-container">
                         <div class="qr-code" id="venmo-qr">
                             Venmo QR Code will appear here
@@ -349,7 +428,9 @@
 
                 <!-- CashApp -->
                 <div class="payment-card">
-                    <h3 class="payment-title">💚 Cash App</h3>
+                    <div class="payment-logo">
+                        <img src="cashapp.png" alt="Cash App" style="height: 40px; width: auto;">
+                    </div>
                     <div class="qr-container">
                         <div class="qr-code" id="cashapp-qr">
                             Cash App QR Code will appear here
@@ -364,7 +445,12 @@
 
                 <!-- Debit Card / Apple Pay / Google Pay -->
                 <div class="payment-card">
-                    <h3 class="payment-title">💳 Card & Digital Payments</h3>
+                    <div class="payment-logo">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                            <span style="font-size: 2rem;">💳</span>
+                            <img src="googlepay.png" alt="Google Pay" style="height: 30px; width: auto;">
+                        </div>
+                    </div>
                     <div style="text-align: center; padding: 2rem 0;">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">💳 📱</div>
                         <p style="margin-bottom: 1.5rem;">Pay securely with your debit card, Apple Pay, or Google Pay</p>
@@ -374,7 +460,9 @@
                         <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
                             <li>💳 Debit & Credit Cards</li>
                             <li>🍎 Apple Pay</li>
-                            <li>🟢 Google Pay</li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <img src="googlepay.png" alt="Google Pay" style="height: 20px; width: auto;"> Google Pay
+                            </li>
                             <li>🔒 Secure & Encrypted</li>
                         </ul>
                     </div>
