@@ -331,6 +331,131 @@
                 height: 150px;
             }
         }
+
+        /* Enhanced Interactive Effects */
+
+        /* Sparkle Effect */
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            animation: sparkle 1s ease-out;
+            color: var(--mardi-gras-gold);
+            font-size: 1.5rem;
+            z-index: 9999;
+            text-shadow: 0 0 10px var(--mardi-gras-gold);
+        }
+
+        /* Floating Elements */
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-element {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: float linear infinite;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        /* Enhanced Button Hover Effects */
+        .payment-btn:hover, .btn:hover, button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Pulse Animation for Interactive Elements */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Enhanced Fade In Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .payment-card, .decorative-icon {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .payment-card:nth-child(1), .decorative-icon:nth-child(1) { animation-delay: 0.1s; }
+        .payment-card:nth-child(2), .decorative-icon:nth-child(2) { animation-delay: 0.2s; }
+        .payment-card:nth-child(3), .decorative-icon:nth-child(3) { animation-delay: 0.3s; }
+        .payment-card:nth-child(4), .decorative-icon:nth-child(4) { animation-delay: 0.4s; }
+        .payment-card:nth-child(5), .decorative-icon:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Enhanced Navigation Hover Effects */
+        .nav-links a {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            background: linear-gradient(45deg, var(--mardi-gras-purple), var(--mardi-gras-gold));
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--mardi-gras-gold);
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--mardi-gras-gold);
+        }
+
     </style>
 </head>
 <body>
@@ -481,6 +606,89 @@
             generateQRCode('https://venmo.com/u/Frank-Scurlock-2', 'venmo-qr');
             generateQRCode('https://cash.app/$frankscurlock44', 'cashapp-qr');
         });
+
+        // Create sparkle effect on hover
+        function createSparkle(e) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.textContent = '✨';
+            sparkle.style.left = e.pageX + 'px';
+            sparkle.style.top = e.pageY + 'px';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        // Create floating elements
+        function createFloatingElements() {
+            const nolaImages = ['2.png', '3.png', '1.png', '4.png', 'pels.png'];
+            for (let i = 0; i < 10; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+
+                const img = document.createElement('img');
+                img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
+                img.style.width = '40px';
+                img.style.height = '40px';
+                img.style.objectFit = 'contain';
+                element.appendChild(img);
+
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 10 + 's';
+                element.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                document.body.appendChild(element);
+            }
+        }
+
+        // Initialize enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start floating elements
+            createFloatingElements();
+
+            // Add sparkle effects to buttons
+            const buttons = document.querySelectorAll('.payment-btn, .btn, button');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', createSparkle);
+            });
+
+            // Enhanced parallax effect on scroll
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.background-animation');
+                if (parallax) {
+                    parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Add interaction to decorative icons and payment cards
+            const iconCards = document.querySelectorAll('.decorative-icon, .payment-card');
+            iconCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    createSparkle(e);
+                    this.style.animation = 'pulse 0.5s ease';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                });
+            });
+        });
+
+        // Enhanced navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(0, 0, 0, 0.8)';
+                    nav.style.backdropFilter = 'blur(10px)';
+                } else {
+                    nav.style.background = 'rgba(0, 0, 0, 0.3)';
+                    nav.style.backdropFilter = 'blur(5px)';
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
