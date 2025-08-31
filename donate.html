@@ -286,7 +286,8 @@
             margin-bottom: 0.5rem;
             display: block;
             filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
-            animation: float 6s ease-in-out infinite;
+            /* Use the contained up/down float so icons remain inside their container */
+            animation: floatUp 6s ease-in-out infinite;
         }
 
         .decorative-icon .icon img {
@@ -361,7 +362,10 @@
         }
 
         /* Floating Elements */
-        @keyframes float {
+        /* Large, full-viewport float animations used for background floating elements.
+           Renamed to avoid colliding with the small contained 'floatUp' animation used
+           by decorative icons so those images stay inside their container. */
+        @keyframes floatAcross {
             0% {
                 transform: translate(0, 100vh) rotate(0deg);
                 opacity: 0;
@@ -382,7 +386,7 @@
             }
         }
 
-        @keyframes floatAlt {
+        @keyframes floatAcrossAlt {
             0% {
                 transform: translate(100vw, 50vh) rotate(0deg);
                 opacity: 0;
@@ -433,13 +437,14 @@
             position: fixed;
             font-size: 2rem;
             pointer-events: none;
-            animation: float linear infinite;
+            /* Use the renamed full-viewport animations for background elements */
+            animation: floatAcross linear infinite;
             z-index: 1;
             opacity: 0.7;
         }
 
         .floating-element:nth-child(odd) {
-            animation-name: floatAlt;
+            animation-name: floatAcrossAlt;
         }
 
         /* Enhanced Background Floating with Bounce Effect */
@@ -624,19 +629,19 @@
                 <h2 style="color: #FFD700; margin-bottom: 2rem; text-align: center; text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700; animation: glow 2s ease-in-out infinite alternate;">Support New Orleans</h2>
                 <div class="decorative-icons-grid">
                     <div class="decorative-icon">
-                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 120px; width: auto;"></div>
                     </div>
                 </div>
             </div>
@@ -727,19 +732,19 @@
                 <h2 style="color: #FFD700; margin-bottom: 2rem; text-align: center; text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700; animation: glow 2s ease-in-out infinite alternate;">Support New Orleans</h2>
                 <div class="decorative-icons-grid">
                     <div class="decorative-icon">
-                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="2.png" alt="New Orleans Heritage" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="3.png" alt="City Pride" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="1.png" alt="Jazz Culture" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="4.png" alt="Mardi Gras" style="height: 120px; width: auto;"></div>
                     </div>
                     <div class="decorative-icon">
-                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 300px; width: auto;"></div>
+                        <div class="icon"><img src="pels.png" alt="French Quarter" style="height: 120px; width: auto;"></div>
                     </div>
                 </div>
             </div>
@@ -786,18 +791,20 @@
 
                 const img = document.createElement('img');
                 img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
-                img.style.width = '50px';
-                img.style.height = '50px';
+                img.style.width = '90px';
+                img.style.height = '90px';
                 img.style.objectFit = 'contain';
+                img.style.borderRadius = '10px';
+                img.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)
                 element.appendChild(img);
 
                 // Random starting positions around the screen edges
                 if (Math.random() > 0.5) {
-                    element.style.left = Math.random() * 100 + '%';
+                    element.style.left = Math.random() * 50 + '%';
                     element.style.top = Math.random() > 0.5 ? '-50px' : '100vh';
                 } else {
                     element.style.left = Math.random() > 0.5 ? '-50px' : '100vw';
-                    element.style.top = Math.random() * 100 + '%';
+                    element.style.top = Math.random() * 50 + '%';
                 }
 
                 // Use bounce animation for some elements
@@ -816,18 +823,24 @@
                 // Make section relative positioned for floating elements
                 section.style.position = 'relative';
                 section.style.overflow = 'hidden';
+                section.style.borderRadius = '25px';
 
                 for (let i = 0; i < 10; i++) {
                     const element = document.createElement('div');
                     element.className = 'nola-box-floating-element';
                     element.style.position = 'absolute';
                     element.style.zIndex = '1';
+                    element.style.cursor = 'pointer';
+                    element.addEventListener('click', createSparkle);
+
 
                     const img = document.createElement('img');
                     img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
-                    img.style.width = '80px';
-                    img.style.height = '80px';
+                    img.style.width = '120px';
+                    img.style.height = '120px';
                     img.style.objectFit = 'contain';
+                    img.style.borderRadius = '10px';
+                    img.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
                     element.appendChild(img);
 
                     // Random positions within the section
