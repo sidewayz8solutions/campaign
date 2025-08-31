@@ -774,6 +774,36 @@
                 element.style.animationDuration = (Math.random() * 15 + 20) + 's';
                 document.body.appendChild(element);
             }
+
+            // Support NOLA boxes floating elements
+            const supportSections = document.querySelectorAll('.decorative-icons-section');
+            supportSections.forEach(section => {
+                // Make section relative positioned for floating elements
+                section.style.position = 'relative';
+                section.style.overflow = 'hidden';
+
+                for (let i = 0; i < 10; i++) {
+                    const element = document.createElement('div');
+                    element.className = 'floating-element';
+                    element.style.position = 'absolute';
+                    element.style.zIndex = '1';
+
+                    const img = document.createElement('img');
+                    img.src = nolaImages[Math.floor(Math.random() * nolaImages.length)];
+                    img.style.width = '40px';
+                    img.style.height = '40px';
+                    img.style.objectFit = 'contain';
+                    element.appendChild(img);
+
+                    // Random positions within the section
+                    element.style.left = Math.random() * 90 + '%';
+                    element.style.top = Math.random() * 90 + '%';
+                    element.style.animationDelay = Math.random() * 10 + 's';
+                    element.style.animationDuration = (Math.random() * 10 + 15) + 's';
+
+                    section.appendChild(element);
+                }
+            });
         }
 
         // Initialize enhanced effects
