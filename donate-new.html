@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Frank Scurlock for Mayor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mardi-gras-purple: #7B2D8E;
+            --mardi-gras-gold: #FFD700;
+            --mardi-gras-green: #00A651;
+            --deep-purple: #4A1A5C;
+            --cream: #FFF8DC;
+            --black: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--mardi-gras-gold) 0%, #E6C200 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .candidate-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--deep-purple);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .candidate-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 0.2em;
+        }
+
+        .website {
+            font-size: 0.9rem;
+            color: var(--deep-purple);
+            margin-top: 0.5rem;
+            text-decoration: underline;
+        }
+
+        .donation-form {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .amount-toggle {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 0.75rem;
+            background: transparent;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: var(--deep-purple);
+            color: white;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .amount-btn {
+            padding: 1rem 0.5rem;
+            background: var(--mardi-gras-gold);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--deep-purple);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .amount-btn:hover {
+            background: #E6C200;
+            transform: translateY(-2px);
+        }
+
+        .amount-btn.popular::before {
+            content: "★ POPULAR";
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--mardi-gras-green);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .other-amount {
+            width: 100%;
+            padding: 1rem;
+            background: var(--mardi-gras-gold);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--deep-purple);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .other-amount:hover {
+            background: #E6C200;
+        }
+
+        .express-checkout {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .express-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .gpay-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #999;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sign-in-link {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .sign-in-link a {
+            color: var(--mardi-gras-purple);
+            text-decoration: none;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--mardi-gras-purple);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method.active {
+            background: var(--deep-purple);
+            color: white;
+            border-color: var(--deep-purple);
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+
+        .card-icon {
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .visa { background: #1a1f71; }
+        .mastercard { background: #eb001b; }
+        .amex { background: #006fcf; }
+
+        .donate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--mardi-gras-gold) 0%, #E6C200 100%);
+            color: var(--deep-purple);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .security-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .terms {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            line-height: 1.4;
+        }
+
+        .terms a {
+            color: var(--mardi-gras-purple);
+            text-decoration: none;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--deep-purple);
+        }
+
+        .help-link {
+            color: var(--deep-purple);
+            text-decoration: underline;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .candidate-name {
+                font-size: 3rem;
+            }
+            
+            .candidate-title {
+                font-size: 2rem;
+            }
+            
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="candidate-name">Frank</div>
+        <div class="candidate-name" style="margin-top: -1rem;">Scurlock</div>
+        <div class="candidate-title">MAYOR</div>
+        <div class="website">www.FrankScurlockForMayor.com</div>
+    </div>
+
+    <div class="donation-form">
+        <div class="form-section">
+            <div class="section-title">Choose Amount</div>
+            
+            <div class="amount-toggle">
+                <button class="toggle-btn active">One-time</button>
+                <button class="toggle-btn">Monthly</button>
+            </div>
+
+            <div class="amount-grid">
+                <button class="amount-btn popular">$25</button>
+                <button class="amount-btn">$100</button>
+                <button class="amount-btn">$250</button>
+                <button class="amount-btn">$500</button>
+                <button class="amount-btn">$1,500</button>
+                <button class="amount-btn">$3,000</button>
+                <button class="amount-btn">$6,000</button>
+                <button class="amount-btn">$12,000</button>
+            </div>
+
+            <button class="other-amount">Other</button>
+        </div>
+
+        <div class="express-checkout">
+            <div class="express-title">Express Checkout</div>
+            <button class="gpay-btn">
+                <span>G</span> Pay
+            </button>
+        </div>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <div class="sign-in-link">
+            Already have an account? <a href="#">Sign in</a>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Email <span class="required">*</span></label>
+            <input type="email" class="form-input" placeholder="Enter your email">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">First name <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="First name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Last name <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="Last name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Address <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Enter your address">
+        </div>
+
+        <div class="payment-methods">
+            <div class="payment-method active">
+                💳 Card
+            </div>
+            <div class="payment-method">
+                PayPal
+            </div>
+            <div class="payment-method">
+                🏦 Bank
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Card Number <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="1234 5678 9012 3456">
+            <div class="card-icons">
+                <div class="card-icon visa">VISA</div>
+                <div class="card-icon mastercard">MC</div>
+                <div class="card-icon amex">AMEX</div>
+            </div>
+        </div>
+
+        <button class="donate-btn">Donate</button>
+
+        <div class="security-note">
+            🔒 Your information is secure.
+        </div>
+
+        <div class="terms">
+            By accessing this form you agree to the<br>
+            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2025 Frank Scurlock for Our Future and Agenda Inc. All rights reserved.<br>
+        <a href="#" class="help-link">Have questions? Visit our Help Center</a>
+    </div>
+</body>
+</html>
