@@ -232,25 +232,7 @@ twq('config','qbkrn');
         gap: 1.5rem;
       }
 
-      .phone-number {
-        color: var(--mardi-gras-gold);
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        border: 1px solid rgba(255, 215, 0, 0.3);
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        background: rgba(255, 215, 0, 0.1);
-        font-family: "Montserrat", sans-serif;
-      }
 
-      .phone-number:hover {
-        background: rgba(255, 215, 0, 0.2);
-        border-color: var(--mardi-gras-gold);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-      }
 
       /* Hero Section */
       .hero {
@@ -1104,16 +1086,40 @@ twq('config','qbkrn');
         }
 
         .donate-btn {
-          display: none;
+          display: block;
+          position: fixed;
+          top: 80px;
+          right: 15px;
+          z-index: 1002;
+          padding: 0.8rem 1.5rem;
+          font-size: 1rem;
+          font-weight: 700;
+          background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+          color: white;
+          border-radius: 25px;
+          text-decoration: none;
+          box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+          animation: mobileDonateGlow 2s ease-in-out infinite alternate;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .donate-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+        }
+
+        @keyframes mobileDonateGlow {
+          from {
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+          }
+          to {
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.8),
+                        0 0 20px rgba(220, 38, 38, 0.3);
+          }
         }
 
         .nav-right {
           gap: 1rem;
-        }
-
-        .phone-number {
-          font-size: 0.9rem;
-          padding: 0.4rem 0.8rem;
         }
 
         /* Featured Video Section Mobile */
@@ -1851,7 +1857,6 @@ twq('config','qbkrn');
 
         </ul>
         <div class="nav-right">
-          <a href="tel:5045142553" class="phone-number">(504) 514-2553</a>
           <a
             href="donate.html"
             class="donate-btn"
