@@ -799,9 +799,20 @@
                     timestamp: new Date().toISOString()
                 }));
 
-                // Redirect directly to GoDaddy payment page
+                // Create GoDaddy payment URL with amount and donor info
+                const paymentUrl = createGoDaddyPaymentUrl(selectedAmount, donationType, {
+                    email: email,
+                    firstName: firstName,
+                    lastName: lastName,
+                    address: address
+                });
+
+                // Debug log (remove in production)
+                console.log('Redirecting to:', paymentUrl);
+
+                // Redirect to GoDaddy payment page with parameters
                 setTimeout(() => {
-                    window.location.href = GODADDY_PAY_LINK_BASE;
+                    window.location.href = paymentUrl;
                 }, 1000);
             }
         });
