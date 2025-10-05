@@ -1383,8 +1383,8 @@ twq('config','qbkrn');
       .crisis-banner {
         background: linear-gradient(135deg, #8f0011 0%, #a91b47 100%);
         color: white;
-        padding: 3rem 0;
-        text-align: center;
+        padding: 3rem 2rem;
+        text-align: left;
         position: relative;
         overflow: hidden;
         border-top: 5px solid var(--mardi-gras-gold);
@@ -1405,17 +1405,31 @@ twq('config','qbkrn');
       .crisis-content {
         position: relative;
         z-index: 2;
-        max-width: 800px;
+        max-width: 1000px;
         margin: 0 auto;
         padding: 0 2rem;
       }
 
       .crisis-title {
-        font-size: 4rem;
+        font-size: 2rem;
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        letter-spacing: 2px;
+        letter-spacing: 1px;
+        text-align: center;
+        line-height: 1.3;
+      }
+
+      .press-release-content {
+        text-align: left;
+        margin-bottom: 2rem;
+      }
+
+      .press-release-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
       }
 
       .crisis-subtitle {
@@ -2278,12 +2292,18 @@ twq('config','qbkrn');
       </div>
     </section>
 
-    <!-- Crisis Banner -->
+    <!-- Press Release Banner -->
     <section class="crisis-banner">
       <div class="crisis-content">
-        <h2 class="crisis-title">🚨 We Have a Crisis!</h2>
-        <p class="crisis-subtitle">And Frank Can Fix It</p>
-        <a href="issues.html?playAudio=true" class="crisis-btn" onclick="playCrisisAudio()">See The Issues</a>
+        <h2 class="crisis-title">MAYORAL CANDIDATE FRANK SCURLOCK CHALLENGES OTHER CANDIDATES TO DONATE TO FUNERAL FUND FOR CHEF CARL MORGAN</h2>
+        <div class="press-release-content">
+          <p>Mayoral candidate Frank Scurlock today donated $200 toward the funeral expenses for 36-year old husband and father Carl Morgan, a sous chef at Brennan's Restaurant. Morgan was killed Tuesday during a carjacking incident when Morgan was picking up his son from a mid-city nursery.</p>
+
+          <p>"Like many New Orleanians I am deeply saddened by the untimely death of a talented young man like Carl Morgan. The least I could do was contribute to Morgan's funeral expenses. I urge all the other candidates vying for election on October 11 to make similar contributions," said Scurlock.</p>
+
+          <p>"New Orleans is in the midst of a crime wave that must be stopped. Too many of our young people - black and white - are dying needlessly. While I appreciate the herculean efforts of the NOPD, I believe we need extra help like the services that the Louisiana National Guard could provide. Let's hope the Guard can work seamlessly with our other law enforcement agencies to get this epidemic under control quickly," Scurlock concluded.</p>
+        </div>
+        <a href="donate.html" class="crisis-btn">Support Frank's Campaign</a>
       </div>
     </section>
        <!-- Footer -->
